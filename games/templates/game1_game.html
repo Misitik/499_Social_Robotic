@@ -7,61 +7,103 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            margin-top: 50px;
+          
             background-color: lightgrey;
         }
 
-        .maze {
-            position: relative; /* Important */
-            width: 500px;
-            height: 500px;
-            margin: 0 auto;
+        .playscreen {
+            position:absolute; /* Important */
+            width: 100%;
+            height: 80%;
+            top: 0px;
+            left: 0px;
             background-color: #FF0000;
-            border: 2px groove #000000;
+          
         }
 
-        .ball {
-            position: absolute; /* Important */
+        .panel{
+            position:fixed;
+            width:100%;
+            height:20%;
+            background-color: beige;
+            border:2px groove;
+            top:80%;
+            left: 0;
+        }
+
+        #ship {
+            position: fixed; /* Important */
             width: 50px;
             height: 50px;
             background-color: white; /* Circular shape */
             border-radius: 50%;
-            left: {{ x }}px;
-            top: {{ y }}px;
+            left: 420px;
+            top: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>>>>Use Arrow Keys to move the Ball<<<</h1>
 
-    <div class="maze">
-        <div class="ball"></div>
+    <div class="playscreen" >
+        <div id="ship"></div>
     </div>
-
-    <!-- JS Logic -->
-    <script>
-        // Using eventListener to detect if a KEY is PRESSED
-        document.addEventListener('keydown', // keyup
-            function(event) {
-                let direction = null;
-
-                if (event.key === 'ArrowUp') direction = 'up';
-                if (event.key === 'ArrowDown') direction = 'down';
-                if (event.key === 'ArrowLeft') direction = 'left';
-                if (event.key === 'ArrowRight') direction = 'right';
-
-                // Only updates the coordinates if direction is TRUTHY
-                if (direction) { // Similar to (direction != null)
-                    const x = {{ x }};
-                    const y = {{ y }};
-                    window.location.href = `?direction=${direction}&x=${x}&y=${y}`; // Reloading the page with UPDATED coordinates
-            }
-        });
-    </script>
-
-<!--    Reverse URL Lookup-->
+    
+    <div class="panel"> 
+        <!--    Reverse URL Lookup-->
     <a href="{% url 'home'%}" style="font-size: 2rem;margin-top: 50px; display: block">
         Home Screen
     </a>
+    </div>
+
+
+    <!-- JS Logic -->
+    <script>
+
+        // Using eventListener to detect if a KEY is PRESSED
+        document.addEventListener('mousedown', (event) => {
+      // Get the mouse position relative to the viewport
+
+      ship = document.getElementById('ship')
+      ship.style.left = '220px'
+      ship.style.top = '220px'
+      console.log(ship.style)
+      if(event.button === 0)
+      {
+      ship = document.getElementById('ship')
+      // let ship = document.getElementsByClassName('ship')[0];
+      
+       // console.log(ship.style)
+       //get mouse x y
+        const target_x = event.clientX;
+        const target_y = event.clientY;
+
+        //get ship x y
+        const x_pos = Number(ship.style.left.slice(0,-2))
+        const y_pos = Number(ship.style.top.slice(0,-2))
+
+        //get the difference
+        const x_difference = target_x - x_pos
+        const y_difference = target_y - y_pos
+
+        const tan = Math.tan(y_difference, x_difference) 
+        const angle = Math.atan(tan) * 180 / Math.PI
+
+        //calculate the change needed to move the coordinate in x & y direction
+        const x_move = Math.cos(angle)*10
+        const y_move = Math.sin(angle)*10
+        console.log(target_x, x_pos)
+        console.log(angle, x_move, y_move)
+
+
+        //update ship position
+        //ship.style.left = (x_move + x_pos).toString() + 'px';
+       // ship.style.top = (y_move + y_pos).toString() + 'px';
+
+
+    }
+    });
+    </script>
+
+
 </body>
 </html>

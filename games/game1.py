@@ -19,25 +19,6 @@ def game1_start(request):
 
 def move_ship(request):
     # Fetch the current coordinates(x, y) from query parameters in the URL
-    x = int(request.GET.get('x', 220)) # X-coordinate of BALL (Default = 220)
-    y = int(request.GET.get('y', 220)) # Y-coordinate of BALL (Default = 220)
 
-    # Checks if direction is passed by the USER through the clicks of ARROW BUTTONS
-    if 'direction' in request.GET:
-        direction = request.GET.get('direction')
 
-        if direction == 'up':
-            y = max(y - 10, 0)  # Lower Bound = 0px (TOP)
-        elif direction == 'down':
-            y = min(y + 10, 450)  # Upped Bound = 450px (BOTTOM))
-        elif direction == 'left':
-            x = max(x - 10, 0)  # Lower Bound = 0px (LEFT)
-        elif direction == 'right':
-            x = min(x + 10, 450)  # Upper Bound = 450px (RIGHT)
-
-    context = {
-        'x': x,
-        'y': y
-    }
-
-    return render(request, 'game1_game.html', context)
+    return render(request, 'game1_game.html')
