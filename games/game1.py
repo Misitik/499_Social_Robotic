@@ -8,7 +8,7 @@ def game1_menu(request):
     :return: an HttpResponse object
     '''
     return render(request, 'game1_start_menu.html', context={
-        'name': 'John', # The variable 'name' will be passed to the template
+        'name': 'Mahinder, Ruiji and Gurneet', # The variable 'name' will be passed to the template
         'course': 'CPSC 499' # The variable 'course' will be passed to the template
     })
 
