@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Sets the title of webpage -->
+    <title>My First Webpage using Django</title>
+
+    <style>
+        body{
+            background-color: cyan;
+        }
+
+        h1 {
+            font-family: "Arial", sans-serif;
+            font-size: 5rem; /* Sets the font-size of h1 = 5 * (font-size of root (<html>)) */
+            color: #FF0000;
+        }
+
+        p {
+            margin-top: 50px;
+            font-size: 2rem;
+        }
+    </style>
+
+</head>
+<body>
+  <h1>Game1 Starting Menu</h1>
+  <button type="button" onclick = "window.location.href= '{% url 'game1_start' %}';"  >Start Game</button>
+</body>
+</html>

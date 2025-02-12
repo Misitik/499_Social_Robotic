@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Space Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: lightgrey;
+        }
+
+        .maze {
+            position: relative; /* Important */
+            width: 500px;
+            height: 500px;
+            margin: 0 auto;
+            background-color: #FF0000;
+            border: 2px groove #000000;
+        }
+
+        .ball {
+            position: absolute; /* Important */
+            width: 50px;
+            height: 50px;
+            background-color: white; /* Circular shape */
+            border-radius: 50%;
+            left: {{ x }}px;
+            top: {{ y }}px;
+        }
+    </style>
+</head>
+<body>
+    <h1>>>>Use Arrow Keys to move the Ball<<<</h1>
+
+    <div class="maze">
+        <div class="ball"></div>
+    </div>
+
+    <!-- JS Logic -->
+    <script>
+        // Using eventListener to detect if a KEY is PRESSED
+        document.addEventListener('keydown', // keyup
+            function(event) {
+                let direction = null;
+
+                if (event.key === 'ArrowUp') direction = 'up';
+                if (event.key === 'ArrowDown') direction = 'down';
+                if (event.key === 'ArrowLeft') direction = 'left';
+                if (event.key === 'ArrowRight') direction = 'right';
+
+                // Only updates the coordinates if direction is TRUTHY
+                if (direction) { // Similar to (direction != null)
+                    const x = {{ x }};
+                    const y = {{ y }};
+                    window.location.href = `?direction=${direction}&x=${x}&y=${y}`; // Reloading the page with UPDATED coordinates
+            }
+        });
+    </script>
+
+<!--    Reverse URL Lookup-->
+    <a href="{% url 'home'%}" style="font-size: 2rem;margin-top: 50px; display: block">
+        Home Screen
+    </a>
+</body>
+</html>
