@@ -1,4 +1,8 @@
 from django.shortcuts import render
+
+def start(request):
+
+    return home(request)
 def home(request):
     '''
     Renders the "index.html" template using the variables defined in the "context" dictionary
