@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,25 +9,34 @@
 
     <style>
         body{
-            background-color: cyan;
+            
+            text-align: center;
+            background-image: url("{% static 'images/backgroundleaves.png' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
         h1 {
             font-family: "Arial", sans-serif;
             font-size: 5rem; /* Sets the font-size of h1 = 5 * (font-size of root (<html>)) */
-            color: #FF0000;
+            color: white;
+            background-color: green; 
+
         }
 
         p {
             margin-top: 50px;
             font-size: 2rem;
+            background-color: green; 
+            color: grey;
         }
     </style>
 
 </head>
 <body>
-  <h1>Hello, World!</h1>
-  <p>I am {{ name }}, and I'm taking {{ course }} this semester</p>
+  <h1>Welcome</h1>
+  <p> A short collection of stellar games</p>
   <button type="button" onclick = "window.location.href= '{% url 'game1_menu' %}';"  >Game 1</button>
   <button type="button" onclick = "window.location.href= '{% url 'game2_menu' %}';" >Game 2</button>
   <button type="button" onclick = "window.location.href= '{% url 'game3_menu' %}';" >Game 3</button>
