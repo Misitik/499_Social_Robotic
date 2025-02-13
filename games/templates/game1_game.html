@@ -1,0 +1,234 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Space Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url("{% static 'images/Space.jpeg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+
+        }
+
+        .sun {
+            width: 400px;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 89%;
+            transform: translate(-50%, -50%);
+        }
+
+                 .mercury {
+            width: 45px;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 75%;
+            transform: translate(-50%, -50%);
+        }
+                       .earth {
+            width: 120px;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 60%;
+            transform: translate(-50%, -50%);
+        }
+                       .venus {
+            width: 90px;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 68%;
+            transform: translate(-50%, -50%);
+        }
+                       .mars {
+            width: 100px;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+                       .jupiter {
+            width: 150px;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 40%;
+            transform: translate(-50%, -50%);
+        }
+                       .saturn {
+            width: 250px;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 27%;
+            transform: translate(-50%, -50%);
+        }
+
+                       .uranus {
+            width: 100px;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 15%;
+            transform: translate(-50%, -50%);
+        }
+                       .neptune {
+            width: 100px;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 8%;
+            transform: translate(-50%, -50%);
+        }
+
+        .playscreen {
+            position:absolute; /* Important */
+            width: 100%;
+            height: 80%;
+            top: 0px;
+            left: 0px;
+            background-image: url("{% static 'images/Space.jpeg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+       
+            margin: 0;
+            padding: 0;
+          
+        }
+
+        .panel{
+            position:fixed;
+            width:100%;
+            height:20%;
+            background-color: black;
+            border:2px groove;
+            top:80%;
+            left: 0;
+        }
+
+        #ship {
+            position: fixed; /* Important */
+            width: 50px;
+            height: 50px;
+            background-color: white; /* Circular shape */
+            border-radius: 50%;
+            left: 420px;
+            top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="playscreen" >
+  
+
+        <div id = "planets">
+          <h1 style="color: white; font-size: 48px;">Space Game</h1>
+          <img src="{% static 'images/sun.png'%}" class="sun">
+          <img src="{% static 'images/mercury.png'%}" class="mercury">
+          <img src="{% static 'images/venus.png'%}" class="venus">
+          <img src="{% static 'images/Earth.png'%}" class="earth">
+          <img src="{% static 'images/mars.png'%}" class="mars">
+          <img src="{% static 'images/jupiter.png'%}" class="jupiter">
+          <img src="{% static 'images/saturn.png'%}" class="saturn">
+          <img src="{% static 'images/uranus.png'%}" class="uranus">
+          <img src="{% static 'images/neptune.png'%}" class="neptune">
+        </div>
+        <div id="ship"></div>
+    </div>
+    
+    <div class="panel"> 
+        <!--    Reverse URL Lookup-->
+    <a href="{% url 'home'%}" style="font-size: 2rem;margin-top: 50px; display: block">
+        Home Screen
+    </a>
+    </div>
+
+
+    <!-- JS Logic -->
+    <script>
+      ship.style.left = '220px'
+      ship.style.top = '220px'
+      console.log(ship.style)
+        // Using eventListener to detect if a KEY is PRESSED
+        document.addEventListener('mousedown', (event) => {
+      // Get the mouse position relative to the viewport
+
+      ship = document.getElementById('ship')
+
+      if(event.button === 0)
+      {
+   
+    moving = setInterval(function () 
+    {
+        ship = document.getElementById('ship')
+      // let ship = document.getElementsByClassName('ship')[0];
+      
+       // console.log(ship.style)
+       //get mouse x y
+        const target_x = event.clientX;
+        const target_y = event.clientY;
+
+        //get ship x y
+        const x_pos = Number(ship.style.left.slice(0,-2))
+        const y_pos = Number(ship.style.top.slice(0,-2))
+
+
+        //get the difference
+        const x_difference = target_x - x_pos
+        const y_difference = target_y - y_pos
+        
+        //get the direction based on whether its positive or negative
+        const x_dir = Math.sign(x_difference)
+        const y_dir = Math.sign(y_difference)
+
+        //get the absolute value of difference for later use
+        const x_abs_difference = Math.abs(x_difference)
+        const y_abs_difference = Math.abs(y_difference)
+
+
+  
+        const angle = Math.atan(y_abs_difference, x_abs_difference) * 180 / Math.PI
+
+        //calculate the change needed to move the coordinate in x & y direction
+        const x_move = Math.cos(angle)*10 * x_dir
+        const y_move = Math.sin(angle)*10 * y_dir
+       // console.log([target_x, x_pos, x_difference], [target_y, y_pos, y_difference])
+        console.log(angle,'X_dir' + x_dir, 'Y_dir' + y_dir)
+
+
+         for(let i = 0; i < 5; i++)
+         {
+        //update ship position
+        ship.style.left = (x_move + x_pos).toString() + 'px';
+       ship.style.top = (y_move + y_pos).toString() + 'px';
+    }
+    document.addEventListener('mouseleave mouseup', (event) => {
+            clearInterval(moving);
+    });
+    }, 50);
+
+
+    }
+    });
+
+
+    </script>
+
+
+</body>
+</html>
