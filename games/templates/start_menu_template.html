@@ -1,5 +1,5 @@
-{% load static %}
 
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +11,7 @@
         body{
             background-color: black;
             text-align: center;
-            background-image: url("{% static 'images/Space.jpeg' %}");
+    
             background-repeat: no-repeat;
             background-size: cover;
         }
@@ -31,12 +31,30 @@
 
 </head>
 <body>
-  <h1>Journey Among Stars</h1>
-<a href='{% url 'game1_start' %}' >
-    <button class="GFG">
-        Start Game
-    </button>
-</a>
 
+
+
+    <h1>{%block menutitle %}menutitle{%endblock%}</h1>
+
+
+  
+ 
+  {%block content %}
+  {% endblock %}
+
+    {%block ref%}<a href='{% url 'game1_start' %}' >
+        <button class="GFG">
+            Click Here
+        </button>
+    </a>
+    {%endblock%}
+
+    <script>
+
+    {%block style %} 
+    document.getElementsByTagName("body")[0].style = "background-color: yellow;";
+    
+    {%endblock%}
+    </script>
 </body>
 </html>

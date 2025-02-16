@@ -1,0 +1,45 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'game3.css' %}" type = "text/css">
+    <title>Story</title>
+
+</head>
+<body>
+    <div id="game-container">
+        <div id="buddha"></div>
+    </div>
+    <script>
+        let player = document.getElementById("buddha");
+
+        console.log(player)
+        let posX = (window.innerWidth / 2 )
+        let posY = (window.innerHeight / 2 )
+        console.log(posX, posY)
+        player.style.left = `${posX}px`;
+        player.style.top = `${posY}px`;
+        document.addEventListener("keydown", function(event) {
+            switch (event.key) {
+                case "ArrowUp":
+                    posY -= 10;
+                    break;
+                case "ArrowDown":
+                    posY += 10;
+                    break;
+                case "ArrowLeft":
+                    posX -=10;
+                    break;
+                case "ArrowRight":
+                    posX += 10;
+                    break;
+            }
+            player.style.left = `${posX}px`;
+            player.style.top = `${posY}px`;
+        });
+    </script>
+</body>
+</html>

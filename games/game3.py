@@ -1,12 +1,8 @@
 from django.shortcuts import render
 def game3_menu(request):
-    '''
-    Renders the "index.html" template using the variables defined in the "context" dictionary
 
-    :param request: an HTTP request object
-    :return: an HttpResponse object
-    '''
-    return render(request, 'game3.html', context={
-        'name': 'John', # The variable 'name' will be passed to the template
-        'course': 'CPSC 499' # The variable 'course' will be passed to the template
-    })
+    return render(request, 'game3_start_menu.html')
+
+def game3_game(request):
+
+    return render(request, 'game3_game.html')

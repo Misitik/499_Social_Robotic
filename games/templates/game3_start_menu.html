@@ -1,0 +1,20 @@
+{%extends "start_menu_template.html"%}
+
+
+{%block menutitle%} Story Game {%endblock%}
+
+{%block style%}
+
+document.getElementsByTagName("body")[0].style = "background-image: url('static/images/Space.jpeg');"
+{%endblock%}
+{%block content%} 
+
+{%endblock%}
+
+{%block ref %}
+<a href='{% url 'game3_play' %}' >
+    <button class="GFG">
+        Start Game
+    </button>
+</a> 
+{%endblock%}
