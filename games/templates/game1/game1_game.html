@@ -1,0 +1,77 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="{% static 'css/game1.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title >Space Game</title>
+    <style></style>
+    
+</head>
+<body>
+
+
+
+        <div id = "solar_planets">
+          <h1 style="color: white; font-size: 48px;">Space Game</h1>
+           <div class = "star">      <img src="{% static 'images/sun.png'%}" class="sun"></div> 
+           <div class = "star">      <img src="{% static 'images/mercury.png'%}" class="mercury"></div> 
+           <div class = "star">      <img src="{% static 'images/venus.png'%}" class="venus"></div> 
+           <div class = "star">      <img src="{% static 'images/Earth.png'%}" class="earth"></div> 
+           <div class = "star">      <img src="{% static 'images/mars.png'%}" class="mars"></div> 
+           <div class = "star">       <img src="{% static 'images/jupiter.png'%}" class="jupiter"></div> 
+           <div class = "star">      <img src="{% static 'images/saturn.png'%}" class="saturn"></div> 
+           <div class = "star">      <img src="{% static 'images/uranus.png'%}" class="uranus"></div> 
+           <div class = "star">      <img src="{% static 'images/neptune.png'%}" class="neptune"></div> 
+        </div>
+
+        <div>
+            <img src = "{% static 'images/waypoint.png' %}" id = "waypoint">
+            <img src ="{% static 'images/ship.png'%}" id="ship" > 
+            <div id = "description">
+              
+    <div>
+        <ul>
+        {% for x in planets%} 
+        <li> {{x.info}}</li>
+        {%endfor%}
+        </ul>
+    </div>
+                <div id = "planet_info">
+ 
+                </div>
+            </div>
+            <div id = "win_window">
+                <div id = "winning_text">
+                    Congratulation! You have won!
+                </div>
+                <a href='{% url 'home' %}' >
+                    <button class="GFG">
+                        Return to Homepage
+                    </button>
+                </a>
+            </div>
+            
+        </div>
+        
+    </div>
+    <!--bind the data to the div, for it to get accessed later in game1.js -->
+   <div id = 'gg' value = "{{planets}}"></div>
+
+    <script src = "{% static 'js/game1.js'%}">
+    </script>
+    <div class="playscreen" >
+
+    
+    <div class="panel"> 
+        <!--    Reverse URL Lookup-->
+    <a href="{% url 'home'%}" style="font-size: 2rem;margin-top: 50px; display: block">
+        Home Screen
+    </a>
+    </div>
+
+
+</body>
+</html>

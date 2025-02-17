@@ -1,13 +1,19 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <!-- Sets the title of webpage -->
-    <title>My First Webpage using Django</title>
+
 
     <style>
         body{
-            background-color: cyan;
+            background-color: black;
+            text-align: center;
+            background-image: url("{% static 'images/Space.jpeg' %}");
+            background-repeat: no-repeat;
+            background-size: cover;
         }
 
         h1 {
@@ -20,11 +26,18 @@
             margin-top: 50px;
             font-size: 2rem;
         }
+
     </style>
 
 </head>
 <body>
-  <h1>Game1</h1>
+    
+  <h1>Journey Among Stars</h1>
+<a href='{% url 'game1_start' %}' >
+    <button class="GFG">
+        Start Game
+    </button>
+</a>
 
 </body>
 </html>

@@ -1,0 +1,29 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/game3.css' %}" >
+ 
+
+</head>
+<body>
+    <div id="game-container">
+        <div id="buddha"></div>
+    </div>
+
+    <div>
+        <ul>
+        {% for x in planets%} 
+        <li> {{x.info}}</li>
+        {%endfor%}
+        </ul>
+    </div>
+
+    <script src = "{% static 'js/game3.js'%}">
+
+    </script>
+</body>
+</html>

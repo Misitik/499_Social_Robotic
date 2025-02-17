@@ -5,7 +5,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #1a202c;
+    background-color: #a3b5d8;
 }
 #game-container {
     position: relative;
@@ -15,7 +15,7 @@ body {
 #buddha {
     width: 40px;
     height: 40px;
-    background-color: blue;
+    background-color: rgb(164, 180, 48);
     border-radius: 50%;
     position: absolute;
     top: 50%;
