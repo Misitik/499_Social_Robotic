@@ -28,11 +28,12 @@ function get_info(name)
     return info
 
 }
+console.log(get_info('Earth'))
 
 function change_planet_name(name)
 {
-   name_display =  document.getElementsByClassName("name")
-   name_display.innerHTML = `<p>${name} </p> `;
+   name_display =  document.getElementById(name)
+   name_display.innerHTML = `<p style =  "color: white; background-color: black; border-radius: 10px"  >${name} </p> `;
    
 }
 
@@ -49,6 +50,62 @@ stars.forEach(star =>{
 
 
 })
+
+
+
+
+
+document.addEventListener("keydown", function(event) {
+    if (
+        (event.ctrlKey === true || event.metaKey === true) &&
+        (event.key === "+" || event.key === "-" || event.key === "0")
+    ) {
+        event.preventDefault();
+    }
+});
+
+document.addEventListener("wheel", function(event) {
+    if (event.ctrlKey) {
+        event.preventDefault();
+    }
+}, { passive: false });
+
+function to_number(px_value)
+{
+    return Number(px_value.slice(0,-2))
+}
+
+function collision(x, y)
+{
+    description = document.getElementById("description")
+    description.style.visibility = 'hidden'
+    stars.forEach(star =>
+        {
+
+            this_star= window.getComputedStyle(document.getElementById(star.id))
+            x_l = to_number(this_star.left)
+            y_t = to_number(this_star.top)
+            x_r = to_number(this_star.width) 
+            y_d = to_number(this_star.height) 
+                    
+           // console.log(star.id, [x, x_l, x_r], [y, y_t, y_d])
+
+            if(x >x_l - x_r && x < x_l && y > y_t - y_d && y < y_t)
+            {
+                console.log(star.id)
+                description = document.getElementById("description")
+                description.style.left = '10%'
+                description.style.top = '10%'
+                description.style.width = '100px'
+                description.style.height = '100px'
+                description.style.visibility = 'visible'
+                info = get_info(star.id)
+                console.log(info)
+                description.innerHTML = `<p>${info}</p>`
+            }
+        })
+}
+
 
 
   // Using eventListener to detect if a KEY is PRESSED
@@ -87,6 +144,8 @@ const moving = setInterval(function ()
   //get ship x y
   const x_pos = Number(ship.style.left.slice(0,-2))
   const y_pos = Number(ship.style.top.slice(0,-2))
+
+  collision(x_pos, y_pos)
 
   //get the difference
   const x_difference = target_x - x_pos
