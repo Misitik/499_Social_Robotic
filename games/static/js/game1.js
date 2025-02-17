@@ -29,9 +29,26 @@ function get_info(name)
 
 }
 
+function change_planet_name(name)
+{
+   name_display =  document.getElementsByClassName("name")
+   name_display.innerHTML = `<p>${name} </p> `;
+   
+}
+
+const stars = document.querySelectorAll('.star');
+
+stars.forEach(star =>{
+    star.addEventListener("mouseover", (event)=>{
+        console.log(star.id)
+
+        star_name = star.id;
+        change_planet_name(star_name);
+
+});
 
 
-//console.log(JSON.parse(f))
+})
 
 
   // Using eventListener to detect if a KEY is PRESSED
@@ -44,9 +61,6 @@ ship = document.getElementById('ship')
 
 if(event.button === 0)
 {
-
-
-    
 const moving = setInterval(function () 
 {
 

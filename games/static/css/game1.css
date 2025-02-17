@@ -4,11 +4,14 @@ body {
     text-align: center;
     background-image: url("/static/images/Space.jpeg");
     background-size: cover;
-    background-position: center;
+    background-position: absolute;
     background-repeat: no-repeat;
-    height: 100vh;
+    height: 100%;
     margin: 0;
-    padding: 0;
+
+
+    overflow-y: hidden;
+    overflow-x: hidden;
 
 }
 
@@ -16,21 +19,27 @@ title {
     display: none;
 }
 
-.star{
-   
-    opacity: 0.7
+#name{
+    padding: 2%;
+    border-radius: 10px;
+    width: 5%;
+    height: 5%;
+    background-color: white;
+    content: 'sayonara';
+    color: black;
+    left: 80%;
+    top: center;
+    text-align: center;
+}
 
+.star{
+    opacity: 0;
 }
 
 .star:hover {
 
-    opacity: 1;
-    transform: scale(1.5);
-}
-
-.sun:hover {
-
-    opacity: 1;
+    opacity: 0.7;
+    padding: 2%;
 }
 
 .sun {
@@ -108,21 +117,117 @@ title {
     transform: translate(-50%, -50%);
 }
 
+
+.sun_b {
+    width: 295px;
+    height: 290px;
+    position: absolute;
+    top: 50%;
+    left: 89%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: rgba(181, 179, 179, 0.42);
+}
+
+         .mercury_b {
+    width: 42px;
+    height: 42px;
+    position: absolute;
+    top: 50%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: rgba(181, 179, 179, 0.42);
+}
+               .earth_b {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: rgba(181, 179, 179, 0.42);
+}
+               .venus_b {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    top: 50%;
+    left: 68%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: rgba(181, 179, 179, 0.42);
+}
+               .mars_b {
+    width: 97px;
+    height: 97px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: rgba(181, 179, 179, 0.42);
+}
+               .jupiter_b {
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: rgba(181, 179, 179, 0.42);
+}
+               .saturn_b {
+    width: 93px;
+    height: 93px;
+    position: absolute;
+    top: 50%;
+    left: 27%;
+    transform: translate(-45%, -50%);
+    border-radius: 50%;
+    background-color: rgba(181, 179, 179, 0.42);
+}
+
+               .uranus_b {
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    top: 50%;
+    left: 15%;
+    transform: translate(-50%, -57%);
+    border-radius: 50%;
+    background-color: rgba(181, 179, 179, 0.42);
+}
+               .neptune_b {
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    top: 50%;
+    left: 8%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: rgba(181, 179, 179, 0.42);
+}
+
 .playscreen {
     position:absolute; /* Important */
     width: 100%;
     height: 80%;
     top: 0px;
     left: 0px;
-    background-image: url("{% static 'images/Space.jpeg' %}");
+
     background-size: cover;
-    background-position: center;
+    background-position: fixed;
     background-repeat: no-repeat;
 
     margin: 0;
     padding: 0;
   
 }
+
+
 
 .panel{
     position:fixed;
