@@ -33,7 +33,7 @@ console.log(get_info('Earth'))
 function change_planet_name(name)
 {
    name_display =  document.getElementById(name)
-   name_display.innerHTML = `<p style =  "color: white; background-color: black; border-radius: 10px"  >${name} </p> `;
+   name_display.innerHTML = `<p style =  "color: black; background-color: black; border-radius: 10px"  >${name} </p> `;
    
 }
 
@@ -44,7 +44,8 @@ stars.forEach(star =>{
         console.log(star.id)
 
         star_name = star.id;
-        change_planet_name(star_name);
+        //change_planet_name(star_name);
+        document.getElementById('heading').textContent = star_name.toString();
 
 });
 
@@ -90,6 +91,7 @@ function collision(x, y)
                     
            // console.log(star.id, [x, x_l, x_r], [y, y_t, y_d])
 
+           //if there is a collision
             if(x >x_l - x_r && x < x_l && y > y_t - y_d && y < y_t)
             {
                 console.log(star.id)
@@ -208,12 +210,6 @@ const moving = setInterval(function ()
 
 }
 
-if(event.button === 2)
-{
-    description = document.getElementById("description")
-    description.style.left = `${event.clientX}px`
-    description.style.top = `${event.clientY}px`
-    description.style.visibility = 'visible'
-}
+
 });
 
