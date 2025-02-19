@@ -1,4 +1,33 @@
 
+
+///////////////////////////DON'T MATTER///////////////////////////////////////////////////
+
+
+//prevent from using keyboard to zooming in and out
+document.addEventListener("keydown", function(event) {
+    if (
+        (event.ctrlKey === true || event.metaKey === true) &&
+        (event.key === "+" || event.key === "-" || event.key === "0")
+    ) {
+        event.preventDefault();
+    }
+});
+
+//prevent use mouse wheel to zoom in and out
+document.addEventListener("wheel", function(event) {
+    if (event.ctrlKey) {
+        event.preventDefault();
+    }
+}, { passive: false });
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+////////////////////////Initialize/////////////////////////////////////////////////////////////////////////////////////////
+// Variable and functions to intialize before game for other function to use
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ship.style.left = '220px'
 ship.style.top = '220px'
 ship.style.width = '50px'
@@ -7,12 +36,18 @@ waypoint.style.width = '20px'
 waypoint.style.height= '20px'
 waypoint.style.opacity = '0'
 
+
+function to_number(px_value)
+{
+    return Number(px_value.slice(0,-2))
+}
+
 //get the information of the planets into a json file for access
 let string_table = JSON.parse(document.getElementById("gg").getAttribute('value'))
 table= JSON.parse(string_table)
 
-
-
+//use the table value above
+//return the planet info
 function get_info(name)
 {
     info = ""
@@ -28,23 +63,26 @@ function get_info(name)
     return info
 
 }
-console.log(get_info('Earth'))
 
-function change_planet_name(name)
-{
-   name_display =  document.getElementById(name)
-   name_display.innerHTML = `<p style =  "color: black; background-color: black; border-radius: 10px"  >${name} </p> `;
-   
-}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+///////////////////////////TEXT MANIPULATION/////////////////////////////////////////////////////////////////////////////////
+// the function that manipulate text in game
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//change display name on top of the game
 
 const stars = document.querySelectorAll('.star');
 
 stars.forEach(star =>{
     star.addEventListener("mouseover", (event)=>{
-        console.log(star.id)
+       // console.log(star.id)
 
         star_name = star.id;
-        //change_planet_name(star_name);
         document.getElementById('heading').textContent = star_name.toString();
 
 });
@@ -53,69 +91,171 @@ stars.forEach(star =>{
 })
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-document.addEventListener("keydown", function(event) {
-    if (
-        (event.ctrlKey === true || event.metaKey === true) &&
-        (event.key === "+" || event.key === "-" || event.key === "0")
-    ) {
-        event.preventDefault();
-    }
-});
 
-document.addEventListener("wheel", function(event) {
-    if (event.ctrlKey) {
-        event.preventDefault();
-    }
-}, { passive: false });
+//change the text displayed when collide with another planet
 
-function to_number(px_value)
+function change_description_position(mouse_movement_event)
 {
-    return Number(px_value.slice(0,-2))
+    description = window.getComputedStyle(document.getElementById("description"))
+    mouse_x = event.clientX;
+    mouse_y = event.clientY;
+
+    window_width = window.screen.width;
+    window_height =window.screen.height;
+
+
+    description_width = to_number(description.width)
+    description_height = to_number(description.height)
+
+    des = document.getElementById("description").style
+
+    if(window_width - mouse_x < description_width * 2) 
+    {
+        des.left = (mouse_x - description_width * 1.2).toString() + 'px'
+
+    }else
+    {
+       des.left = (mouse_x + description_width *0.2).toString() + 'px'
+      
+    }
 }
+
+//make description to change its x & y movement whenever it moves
+document.addEventListener('mousemove', (event)=>
+    {
+
+        change_description_position(event)
+ 
+    })
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+///////////////////COLLISION///////////////////////////////////////////////////////////////////////////////////
+//Regarding when the ship come in contact with a planet
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function planet_visited_index(planet_name)
+{
+    planet_index = 0;
+
+
+    switch(planet_name.toString())
+    {
+        case 'Sun':
+            planet_index = 0;
+            break;
+ 
+        case 'Mercury':
+            planet_index = 1;
+            break;
+
+        case 'Venus':
+            planet_index = 2;
+            break;
+
+        case 'Earth':
+            planet_index = 3;
+            break;
+
+        case 'Mars':
+            planet_index = 4;
+            break;
+
+        case 'Jupiter':
+            planet_index = 5;
+            break;
+
+        case 'Saturn':
+            planet_index = 6;
+            break;
+
+        case 'Uranus':
+            planet_index = 7;
+            break;
+
+        case 'Neptune':
+            planet_index = 8;
+            break;
+    
+
+    }
+
+    return planet_index
+}
+
+planet_visited = [0,0,0,0,0,0,0,0,0]
+all_visited =    [1,1,1,1,1,1,1,1,1]
+
 
 function collision(x, y)
 {
     description = document.getElementById("description")
     description.style.visibility = 'hidden'
+    ship_element = window.getComputedStyle(document.getElementById('ship'))
+    ship_x = to_number(ship_element.left)
+    ship_y = to_number(ship_element.top)
+    ship_width = to_number(ship_element.width)
+    ship_height = to_number(ship_element.height)
     stars.forEach(star =>
         {
 
             this_star= window.getComputedStyle(document.getElementById(star.id))
-            x_l = to_number(this_star.left)
-            y_t = to_number(this_star.top)
-            x_r = to_number(this_star.width) 
-            y_d = to_number(this_star.height) 
-                    
+            x_width = to_number(this_star.width) 
+            y_height = to_number(this_star.height) 
+            x_l = to_number(this_star.left ) - x_width/2 - ship_width/2
+            y_t = to_number(this_star.top) - y_height/2 - ship_height/2
+            x_r = x_l + x_width
+            y_d = y_t + y_height
+                   
+       
            // console.log(star.id, [x, x_l, x_r], [y, y_t, y_d])
 
            //if there is a collision
-            if(x >x_l - x_r && x < x_l && y > y_t - y_d && y < y_t)
+            if(ship_x >x_l && ship_x <  x_r && ship_y > y_t && ship_y <  y_d)
             {
-                console.log(star.id)
+
+              
+                
                 description = document.getElementById("description")
-                description.style.left = '10%'
-                description.style.top = '10%'
-                description.style.width = '100px'
-                description.style.height = '100px'
                 description.style.visibility = 'visible'
+                planet_num = planet_visited_index(star.id)
+                //console.log(star.id, planet_num)
+                planet_visited[planet_num] = 1
+                console.log(planet_visited)
+
                 info = get_info(star.id)
-                console.log(info)
                 description.innerHTML = `<p>${info}</p>`
+                
+                if(planet_visited === all_visited )
+                {
+                    document.getElementById('win_window').style.visibility = 'visible'
+                }
+                
+
             }
         })
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////MOVEMENT//////////////////////////////////////////////////////////////////////////
+// Ship movement
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+ship = document.getElementById('ship')
+waypoint = document.getElementById('waypoint')
 
 
   // Using eventListener to detect if a KEY is PRESSED
   document.addEventListener('mousedown', (event) => {
-// Get the mouse position relative to the viewport
-
-ship = document.getElementById('ship')
-
 
 
 if(event.button === 0)
@@ -123,8 +263,7 @@ if(event.button === 0)
 const moving = setInterval(function () 
 {
 
- ship = document.getElementById('ship')
- waypoint = document.getElementById('waypoint')
+
 
  //make way point visible
  waypoint.style.opacity = '1'

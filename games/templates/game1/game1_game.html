@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <link rel="stylesheet" href="{% static 'css/game1.css' %}">
+
 <head>
     <meta charset="UTF-8">
     <title ></title>
@@ -34,27 +35,26 @@
         <div class = "saturn_b star"id = Saturn></div>
         <div class = "uranus_b star"id = Uranus></div>
         <div class = "neptune_b star"id = Neptune></div>
+        <div id = "description">yamete yamete yamete </div>
       
+        <div id = "win_window">
+            <div id = "winning_text">
+                Congratulation! You have won!
+            </div>
+            <a href='{% url 'home' %}' >
+                <button class="GFG">
+                    Return to Homepage
+                </button>
+            </a>
+        </div>
+
+
         <div>
             <img src = "{% static 'images/waypoint.png' %}" id = "waypoint">
             <img src ="{% static 'images/ship.png'%}" id="ship" > 
-            <div id = "description">
-              
-                <div id = "planet_info">
- 
-                </div>
-            </div>
+   
 
-            <div id = "win_window">
-                <div id = "winning_text">
-                    Congratulation! You have won!
-                </div>
-                <a href='{% url 'home' %}' >
-                    <button class="GFG">
-                        Return to Homepage
-                    </button>
-                </a>
-            </div>
+
             
         </div>
 
@@ -66,19 +66,22 @@
     <script src = "{% static 'js/game1.js'%}"></script>
 
 
+
     
     <div class="panel"> 
 
-        <div id = "name">sdfsdf</div>
+   
         <!--    Reverse URL Lookup-->
 
+        <div id = 'home_button'>
+        <a href='{% url 'home' %}' style = 'left: 0px' >
+            <button  style = 'left: 0px'>
+                Home Screen
+            </button>
+        </a>
+        </div>
 
-    <a href='{% url 'home' %}' >
-        <button class="GFG">
-            Home Screen
-        </button>
-    </a>
- 
+     
     </div>
 
 
