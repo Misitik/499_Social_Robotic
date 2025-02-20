@@ -12,6 +12,8 @@
     
 </head>
 <body>
+
+
  <div class = "playscreen">
         <div id = "solar_planets">
           <h1 id = "heading"style="color: red; font-size: 48px; background-color: black; border-radius: 30px; width: 20%; left: 40%; position: relative;">Space Game</h1>
@@ -37,16 +39,7 @@
         <div class = "neptune_b star"id = Neptune></div>
         <div id = "description">yamete yamete yamete </div>
       
-        <div id = "win_window">
-            <div id = "winning_text">
-                Congratulation! You have won!
-            </div>
-            <a href='{% url 'home' %}' >
-                <button class="GFG">
-                    Return to Homepage
-                </button>
-            </a>
-        </div>
+  
 
 
         <div>
@@ -72,18 +65,43 @@
 
    
         <!--    Reverse URL Lookup-->
+        <div id = 'buttons'>
+            <a href='{% url 'home' %}' style = 'left: 0px' >
+                <button  style = 'left: 0px'>
+                    Home Screen
+                </button>
+            </a>
+            </div>
 
-        <div id = 'home_button'>
-        <a href='{% url 'home' %}' style = 'left: 0px' >
-            <button  style = 'left: 0px'>
-                Home Screen
-            </button>
-        </a>
+            <a href='{% url 'game1_start' %}' style = 'left: 0px' >
+                <button  style = 'left: 0px'>
+                    Restart
+                </button>
+            </a>
+            </div>
+
+            <a href='{% url 'game1_start' %}' style = 'left: 0px' >
+                <button  style = 'left: 0px'>
+                    Restart
+                </button>
+            </a>
+            </div>
+
         </div>
+        <div id = 'planets_visited_display'></div>
+        <div id = 'questions'> </div>
+        <div id = 'home_button'>
+     
 
      
     </div>
 
+    <div id="win_window" style="visibility: hidden;">
+        <img src="{% static 'images/Victory_Screen.jpg' %}" alt="Winner Image" id="win_image">
+        <a href='{% url "home" %}'>
+            <button id="win_button">Return to Homepage</button>
+        </a>
+    </div>
 
 </body>
 </html>

@@ -232,9 +232,9 @@ function collision(x, y)
                 info = get_info(star.id)
                 description.innerHTML = `<p>${info}</p>`
                 
-                if(planet_visited === all_visited )
-                {
-                    document.getElementById('win_window').style.visibility = 'visible'
+                if (planet_visited.every((value, index) => value === all_visited[index])) {
+                    console.log("All planets visited! Showing win window.");
+                    document.getElementById('win_window').style.visibility = 'visible';
                 }
                 
 
