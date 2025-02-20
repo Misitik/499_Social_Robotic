@@ -4,3 +4,5 @@ from django.db import models
 class planet_info(models.Model):
     name = models.CharField(max_length = 10)
     info = models.TextField()
+    question = models.TextField()
+    answer = models.CharField(max_length = 10)

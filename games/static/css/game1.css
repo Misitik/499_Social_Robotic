@@ -125,11 +125,26 @@ title {
     height:100%;
 }
 
-#planets_visited_display{
-    background-color: purple;
-    width: 10%;
-    height:100%;
+#display_title{
+    font-size: 20;
+    color: red;
+    font-weight: bold;
+    background-color: blue;
+}
 
+#visited_display{
+    background-color: white;
+    width: 10%;
+    height:90%;
+    padding: 3px;
+    line-height: 2.0 ;
+    
+}
+
+#display_text{
+
+    background-color: grey;
+    position: relative;
 }
 
 #planet_info{

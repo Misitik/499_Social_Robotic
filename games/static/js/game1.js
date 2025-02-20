@@ -52,16 +52,20 @@ table= JSON.parse(string_table)
 function get_info(name)
 {
     info = ""
+    question = ""
+    answer = ""
     for(x = 0; x < table.length; x++)
         {
             element = table[x].fields;
             if(element.name === name)
             {
                 info = element.info
+                question = element.question
+                answer = element.answer
             }
         }
     
-    return info
+    return [info, question, answer]
 
 }
 
@@ -192,7 +196,7 @@ function planet_visited_index(planet_name)
 
 planet_visited = [0,0,0,0,0,0,0,0,0]
 all_visited =    [1,1,1,1,1,1,1,1,1]
-
+planet_visited_name = []
 
 
 function collision(x, y)
@@ -226,10 +230,32 @@ function collision(x, y)
                 planet_num = planet_visited_index(star.id)
                 //console.log(star.id, planet_num)
                 planet_visited[planet_num] = 1
-                console.log(planet_visited)
+                //console.log(planet_visited)
 
-                info = get_info(star.id)
-                description.innerHTML = `<p>${info}</p>`
+                //add planet name to the visited planet name array
+                if(!(planet_visited_name.includes(star.id)))
+                {
+                    planet_visited_name.push(star.id)
+                    planet_visited_display = document.getElementById("display_text")
+                    planet_visited_display.innerHTML =    planet_visited_display.innerHTML + `${star.id} <br> `
+                }
+
+       
+              
+                //output the name in the visited_display panel
+       
+   
+                
+
+            
+                //return info, question, answer in an array of [info, question, answer]
+                info_array= get_info(star.id)
+
+
+                description.innerHTML = `<p>${info_array[0]}</p>`
+                question = document.getElementById('question')
+                question.innerHTML = `${info_array[1]}`
+
                 
                 if (planet_visited.every((value, index) => value === all_visited[index])) {
                     console.log("All planets visited! Showing win window.");
@@ -350,5 +376,3 @@ const moving = setInterval(function ()
 
 
 });
-fff= document.getElementById("planets_visited_display")
-console.log(fff.style)
