@@ -37,16 +37,11 @@
         <div class = "saturn_b star"id = Saturn></div>
         <div class = "uranus_b star"id = Uranus></div>
         <div class = "neptune_b star"id = Neptune></div>
-        <div id = "description">yamete yamete yamete </div>
+ 
       
-  
-
-
         <div>
             <img src = "{% static 'images/waypoint.png' %}" id = "waypoint">
             <img src ="{% static 'images/ship.png'%}" id="ship" > 
-   
-
 
             
         </div>
@@ -66,35 +61,31 @@
    
         <!--    Reverse URL Lookup-->
         <div id = 'buttons'>
-            <a href='{% url 'home' %}' style = 'left: 0px' >
-                <button  style = 'left: 0px'>
-                    Home Screen
+            <a href='{% url 'home' %}' class = 'panel_button' >
+                <button >
+                    Home
                 </button>
             </a>
-            </div>
-
-            <a href='{% url 'game1_start' %}' style = 'left: 0px' >
-                <button  style = 'left: 0px'>
+       
+            <a href='{% url 'game1_start' %}' class = 'panel_button' >
+                <button style = 'width: 100%;' >
                     Restart
                 </button>
             </a>
-            </div>
+    
 
-            <a href='{% url 'game1_start' %}' style = 'left: 0px' >
-                <button  style = 'left: 0px'>
-                    Restart
+            <a href class = 'panel_button' >
+                <button >
+                    Instruction
                 </button>
             </a>
-            </div>
-
-        </div>
-        <div id = 'planets_visited_display'></div>
-        <div id = 'questions'> </div>
-        <div id = 'home_button'>
-     
-
-     
+         </div>
+         <div id = 'planets_visited_display'>ddddddd</div>
+         <div id = 'question'> sdfsdf</div>
+         <div id = "description">yamete yamete yamete </div>
     </div>
+
+    
 
     <div id="win_window" style="visibility: hidden;">
         <img src="{% static 'images/Victory_Screen.jpg' %}" alt="Winner Image" id="win_image">

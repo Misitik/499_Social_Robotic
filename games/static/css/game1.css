@@ -25,7 +25,7 @@ title {
 .playscreen {
     position:absolute; /* Important */
     width: 100%;
-    height: 80%;
+    height: 60%;
     top: 0px;
     left: 0px;
 
@@ -43,11 +43,15 @@ title {
 .panel{
     position:fixed;
     width:100%;
-    height:20%;
+    height:40%;
     background-color: black;
     border:2px groove;
-    top:80%;
+    top:60%;
     left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
 }
 
 /* id */
@@ -104,7 +108,29 @@ title {
     cursor: pointer;
 }
 
+#buttons{
 
+    background-color: red;
+    width: 5%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: top;
+    justify-content: top;
+
+}
+#question{
+    background-color: yellow;
+    width: 40%;
+    height:100%;
+}
+
+#planets_visited_display{
+    background-color: purple;
+    width: 10%;
+    height:100%;
+
+}
 
 #planet_info{
     width: 80%;
@@ -112,19 +138,15 @@ title {
 
 }
 
-#home_button{
-    left: 0px;
-   
-    position: relative;
-}
 
 #description{
 
-    width: 30%;
+    width: 45%;
+    height: 80%;
     /* background-color: rgba(0, 0, 0, 0.6); */
     background-color: rgb(231, 200, 200);
     backdrop-filter: blur(20px);
-    position: absolute;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -133,18 +155,21 @@ title {
     flex-wrap: wrap;
     row-gap: 10px;
     border-radius: 30px;
-    position: absolute;
-    z-index: 1;
+
+
     opacity: 0.8;
     font-size: 20;
     color: black;
     padding:30px;
-    visibility: hidden;
+    visibility: visible;
   
 }
 
 
+.panel_button{
+    width: 100%;
 
+}
 
 /*Circles */
 

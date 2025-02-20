@@ -2,6 +2,7 @@
 
 ///////////////////////////DON'T MATTER///////////////////////////////////////////////////
 
+//document.getElementById('planets_visited_display').innerHTML = '<p>sssfsdf &#10;&#13; sdfsdf</p>'
 
 //prevent from using keyboard to zooming in and out
 document.addEventListener("keydown", function(event) {
@@ -125,13 +126,13 @@ function change_description_position(mouse_movement_event)
 }
 
 //make description to change its x & y movement whenever it moves
-document.addEventListener('mousemove', (event)=>
+/* document.addEventListener('mousemove', (event)=>
     {
 
         change_description_position(event)
  
     })
-
+*/
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -193,10 +194,10 @@ planet_visited = [0,0,0,0,0,0,0,0,0]
 all_visited =    [1,1,1,1,1,1,1,1,1]
 
 
+
 function collision(x, y)
 {
-    description = document.getElementById("description")
-    description.style.visibility = 'hidden'
+
     ship_element = window.getComputedStyle(document.getElementById('ship'))
     ship_x = to_number(ship_element.left)
     ship_y = to_number(ship_element.top)
@@ -220,10 +221,8 @@ function collision(x, y)
             if(ship_x >x_l && ship_x <  x_r && ship_y > y_t && ship_y <  y_d)
             {
 
-              
-                
                 description = document.getElementById("description")
-                description.style.visibility = 'visible'
+
                 planet_num = planet_visited_index(star.id)
                 //console.log(star.id, planet_num)
                 planet_visited[planet_num] = 1
@@ -351,4 +350,5 @@ const moving = setInterval(function ()
 
 
 });
-
+fff= document.getElementById("planets_visited_display")
+console.log(fff.style)
