@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <title ></title>
-    <style></style>
+
     
 </head>
 <body >
@@ -41,7 +41,7 @@
       
         <div>
             <img src = "{% static 'images/waypoint.png' %}" id = "waypoint">
-            <img src ="{% static 'images/ship.png'%}" id="ship" > 
+            <img src ="{% static 'images/ship.png'%}" id="ship"  > 
 
             
         </div>
@@ -56,40 +56,41 @@
 
 
     
-    <div class="panel"> 
+
 
    
         <!--    Reverse URL Lookup-->
-        <div id = buttons>
+        <div id = 'left_panel'> 
+        <div id = 'buttons'>
             <a href='{% url 'home' %}' class = 'panel_button' >
-                <button >
+                <button class = 'button_s' >
                     Home
                 </button>
             </a>
        
             <a href='{% url 'game1_start' %}' class = 'panel_button' >
-                <button style = 'width: 100%;' >
+                <button class = 'button_s' >
                     Restart
                 </button>
             </a>
     
 
-            <a href class = 'panel_button' >
-                <button >
-                    Guide
-                </button>
-            </a>
          </div>
+
          <div id = 'visited_display'>
 
             <div id = 'display_title'>Planets Visited</div>
             <div id = 'display_text'></div>
          </div>
+        </div><!--end of left panel -->
+        <div id = 'description'> 
+            <div class = feature> </div>
+            <div class = feature> </div>
+            <div class = feature> </div>
 
-         <div id = 'question'> sdfsdf</div>
-         <div id = 'description'>yamete yamete yamete </div>
+        </div>
     
-    </div>
+        <div id = 'question' style = 'opacity:0;'> </div>
 
     
 

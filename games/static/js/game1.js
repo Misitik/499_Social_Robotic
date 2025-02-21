@@ -29,13 +29,14 @@ document.addEventListener("wheel", function(event) {
 ////////////////////////Initialize/////////////////////////////////////////////////////////////////////////////////////////
 // Variable and functions to intialize before game for other function to use
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-ship.style.left = '220px'
-ship.style.top = '220px'
-ship.style.width = '50px'
-ship.style.height= '50px'
+ship.style.left = '700px'
+ship.style.top = '700px'
+ship.style.width = '80px'
+ship.style.height= '100px'
 waypoint.style.width = '20px'
 waypoint.style.height= '20px'
 waypoint.style.opacity = '0'
+
 
 
 function to_number(px_value)
@@ -203,12 +204,15 @@ function collision(x, y)
 {
 
     ship_element = window.getComputedStyle(document.getElementById('ship'))
+    description = document.getElementById("description")
+    description.style.visibility = "hidden"
     ship_x = to_number(ship_element.left)
     ship_y = to_number(ship_element.top)
     ship_width = to_number(ship_element.width)
     ship_height = to_number(ship_element.height)
     stars.forEach(star =>
         {
+         
 
             this_star= window.getComputedStyle(document.getElementById(star.id))
             x_width = to_number(this_star.width) 
@@ -220,13 +224,14 @@ function collision(x, y)
                    
        
            // console.log(star.id, [x, x_l, x_r], [y, y_t, y_d])
-
+       
+       
            //if there is a collision
             if(ship_x >x_l && ship_x <  x_r && ship_y > y_t && ship_y <  y_d)
             {
 
-                description = document.getElementById("description")
-
+               
+                description.style.visibility = "visible"
                 planet_num = planet_visited_index(star.id)
                 //console.log(star.id, planet_num)
                 planet_visited[planet_num] = 1
@@ -239,28 +244,7 @@ function collision(x, y)
                     planet_visited_display = document.getElementById("display_text")
                     planet_visited_display.innerHTML =    planet_visited_display.innerHTML + `${star.id} <br> `
                 }
-
-
-                
-               /*
-               
-
-               var lines = inf.split("\n");
-               this_line  = document.createElement("div")
-               this_line.id = star.id + 
-
-               description.appendChild(this_line)
-               */
-              
-                //output the name in the visited_display panel
-       
-   
-                
-
-            
-                //return info, question, answer in an array of [info, question, answer]
-         
-        
+     
                 //remove everything from description
                 description.innerHTML = ""
                 info_array= get_info(star.id)

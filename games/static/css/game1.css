@@ -40,26 +40,26 @@ title {
 
 
 
-.panel{
+#left_panel{
     position:fixed;
-    width:100%;
-    height:40%;
+    width:10%;
+    height:35%;
     background-color: black;
     border:2px groove;
-    top:60%;
+    top:65%;
     left: 0;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: left;
     align-items: center;
+    opacity: 0.7;
 }
 
 /* id */
 #ship {
     position: fixed; /* Important */
-    width: 300px;
-    height: 300px;
-
+    width: 50px;
+    height: 50x;
     border-radius: 50%;
     left: 420px;
     top: 20px;
@@ -111,33 +111,32 @@ title {
 #buttons{
 
     background-color: red;
-    width: 5%;
-    height:100%;
+    width: 100%;
+    height:14%;
     display: flex;
     flex-direction: column;
     align-items: top;
     justify-content: top;
+    border-color: yellow;
 
 }
-#question{
-    background-color: yellow;
-    width: 40%;
-    height:100%;
-}
+
 
 #display_title{
     font-size: 20;
     color: red;
     font-weight: bold;
-    background-color: blue;
+    background-color: black;
 }
 
 #visited_display{
     background-color: white;
-    width: 10%;
+    width: 100%;
     height:90%;
     padding: 3px;
     line-height: 1.5 ;
+    left: 0%;
+
     
 }
 
@@ -157,11 +156,13 @@ title {
 #description{
 
     width: 45%;
-    height: 80%;
+    height: 30%;
+    left: 52%;
+    top: 63%;
     /* background-color: rgba(0, 0, 0, 0.6); */
     background-color: rgb(231, 200, 200);
     backdrop-filter: blur(20px);
-    position: relative;
+    position: fixed;
     display: flex;
      /* changed the flex-direction to go down so it align nicely  */
     flex-direction:column;
@@ -175,7 +176,9 @@ title {
     font-size: 20;
     color: black;
     padding:30px;
-    visibility: visible;
+    visibility: hidden;
+    padding: 20px;
+    opacity: 0.4;
   
 }
 
@@ -199,10 +202,7 @@ title {
 
 }
 
-.panel_button{
-    width: 100%;
 
-}
 
 /*Circles */
 
@@ -386,4 +386,17 @@ title {
     top: 50%;
     left: 8%;
     transform: translate(-50%, -50%);
+}
+
+.button_s{
+    width: 100%;
+    color: white;
+    background-color: blue;
+
+
+}
+.button_s:hover{
+    color: red;
+    font-size: 15;
+    background-color: purple;
 }

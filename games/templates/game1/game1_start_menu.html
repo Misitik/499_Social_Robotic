@@ -4,40 +4,75 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Sets the title of webpage -->
-
+    <title>Journey Among Stars</title>
 
     <style>
-        body{
+        body {
             background-color: black;
             text-align: center;
-            background-image: url("{% static 'images/Space.jpeg' %}");
+            background-image: url("{% static 'images/Instruction_bg.jpg' %}");
             background-repeat: no-repeat;
             background-size: cover;
         }
 
         h1 {
             font-family: "Arial", sans-serif;
-            font-size: 5rem; /* Sets the font-size of h1 = 5 * (font-size of root (<html>)) */
-            color: #FF0000;
+            font-size: 4rem; /* Sets the font-size of h1 = 5 * (font-size of root <html>) */
+            color: #00ff77;
+            text-shadow: 4px 4px 4px black;
         }
 
         p {
-            margin-top: 50px;
-            font-size: 2rem;
+            font-family: "Arial Black", sans-serif;
+            margin-top: 20px;
+            font-size: 2.2rem;
+            color: black;
+            text-shadow: 3px 3px 4px white;
+
+        }
+
+        .GFG {
+            font-size: 1.5rem;
+            padding: 15px 30px;
+
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        .GFG:hover {
+            background-color: darkgreen;
+        }
+        #text_background{
+            background-color: rgba(234,234,234,0.7);
+            padding: 10px;
+            border-radius: 40px;
+            margin: 50px;
         }
 
     </style>
 
 </head>
 <body>
-    
-  <h1>Journey Among Stars</h1>
-<a href='{% url 'game1_start' %}' >
-    <button class="GFG">
-        Start Game
-    </button>
-</a>
+
+    <h1>Instructions to start your journey of Solar System</h1>
+<div id = 'text_background'> 
+    <p> Welcome to the game! </p>
+    <p>• Your mission is to explore the solar system.</p>
+    <p>• Click anywhere to move your spaceship.</p>
+    <p>• Visit all the planets and the Sun.</p>
+    <p>• When you reach a planet, a fun fact will appear.</p>
+    <p>• Keep exploring until you've visited them all!</p>
+</div>
+
+    <a href="{% url 'game1_start' %}">
+        <button class="GFG">
+            Start Game
+        </button>
+    </a>
+
 
 </body>
 </html>
