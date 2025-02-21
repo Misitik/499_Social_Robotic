@@ -240,7 +240,17 @@ function collision(x, y)
                     planet_visited_display.innerHTML =    planet_visited_display.innerHTML + `${star.id} <br> `
                 }
 
-       
+
+                
+               /*
+               
+
+               var lines = inf.split("\n");
+               this_line  = document.createElement("div")
+               this_line.id = star.id + 
+
+               description.appendChild(this_line)
+               */
               
                 //output the name in the visited_display panel
        
@@ -249,10 +259,27 @@ function collision(x, y)
 
             
                 //return info, question, answer in an array of [info, question, answer]
+         
+        
+                //remove everything from description
+                description.innerHTML = ""
                 info_array= get_info(star.id)
 
+                lines = info_array[0].split("\n")
+          
+                lines.forEach(line => {
+                    this_line  = document.createElement("div")
+                    this_line.className = "feature"
 
-                description.innerHTML = `<p>${info_array[0]}</p>`
+                    text = document.createElement("div")
+                    text.className = "text"
+                    text.innerHTML = line
+                    this_line.appendChild(text)
+                    description.appendChild(this_line)
+                    console.log(this_line)
+                    console.log(description)
+                })
+               // description.innerHTML = `<p>${info_array[0]}</p>`
                 question = document.getElementById('question')
                 question.innerHTML = `${info_array[1]}`
 
