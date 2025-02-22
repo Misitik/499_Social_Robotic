@@ -60,7 +60,10 @@
 
    
         <!--    Reverse URL Lookup-->
+        
+   
         <div id = 'left_panel'> 
+  
         <div id = 'buttons'>
             <a href='{% url 'home' %}' class = 'panel_button' >
                 <button class = 'button_s' >
@@ -76,6 +79,7 @@
     
 
          </div>
+         
 
          <div id = 'visited_display'>
 
@@ -83,12 +87,15 @@
             <div id = 'display_text'></div>
          </div>
         </div><!--end of left panel -->
+        <img src="{% static 'images/left_panel_overlay.png'%}" id = 'left_panel_overlay'> 
+
         <div id = 'description'> 
             <div class = feature> </div>
             <div class = feature> </div>
             <div class = feature> </div>
-
         </div>
+
+        <img src="{% static 'images/description_overlay.png'%}" id = 'description_overlay'>
     
         <div id = 'question' style = 'opacity:0;'> </div>
 

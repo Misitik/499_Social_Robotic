@@ -206,6 +206,11 @@ function collision(x, y)
     ship_element = window.getComputedStyle(document.getElementById('ship'))
     description = document.getElementById("description")
     description.style.visibility = "hidden"
+    description_overlay = document.getElementById("description_overlay")
+    console.log(description_overlay)
+    description_overlay.style.visibility = "hidden"
+
+
     ship_x = to_number(ship_element.left)
     ship_y = to_number(ship_element.top)
     ship_width = to_number(ship_element.width)
@@ -229,6 +234,9 @@ function collision(x, y)
            //if there is a collision
             if(ship_x >x_l && ship_x <  x_r && ship_y > y_t && ship_y <  y_d)
             {
+
+
+                description_overlay.style.visibility = "visible"
 
                
                 description.style.visibility = "visible"
@@ -260,8 +268,8 @@ function collision(x, y)
                     text.innerHTML = line
                     this_line.appendChild(text)
                     description.appendChild(this_line)
-                    console.log(this_line)
-                    console.log(description)
+                    //console.log(this_line)
+                    //console.log(description)
                 })
                // description.innerHTML = `<p>${info_array[0]}</p>`
                 question = document.getElementById('question')
@@ -269,7 +277,7 @@ function collision(x, y)
 
                 
                 if (planet_visited.every((value, index) => value === all_visited[index])) {
-                    console.log("All planets visited! Showing win window.");
+                    //console.log("All planets visited! Showing win window.");
                     document.getElementById('win_window').style.visibility = 'visible';
                 }
                 
