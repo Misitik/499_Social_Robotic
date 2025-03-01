@@ -1,13 +1,40 @@
+{%load static%}
 <!DOCTYPE html>
 
 
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/game2.css' %}" >
+     
+    
+</head>
 
-<link rel="stylesheet" href="{% static 'css/game2.css' %}">
 <body>
 
-<h1>My First Heading</h1>
-<p>My first paragraph.</p>
+    <img src = "{% static 'images/character.png' %}" id = 'character'>
+    <div id = 'dialogue_box'><div class = 'text_pos' style = 'position: absolute;'>Hello, I'm your Teacher</div></div>
+    <button id = 'character_name'>Shigami </button>
+    <div id = 'choice_box'> 
+        <div class = 'choice' id = 'a'><div class = 'text_pos'>Shadafuck up</div></div>
+        <div class = 'choice' id = 'b'><div class = 'text_pos'>Go kill yourself</div> </div>
+        <div class = 'choice' id = 'c'><div class = 'text_pos'>Thank You</div></div>
+    </div>
+
+    <div style = "position: relative; left: 90%; width: 10%;"> 
+        <a href='{% url "home" %}'>
+            <button class = 'buttons'>Homepage</button>
+        </a>
+        <a href='{% url "game2_play" %}'>
+            <button class = 'buttons'>Restart</button>
+        </a>
+    </div>
+
+    <div> </div>
+
+
+
 
 <script src = "{% static 'js/game2.js' %}"></script>
 </body>
