@@ -1,29 +1,52 @@
 {%load static%}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/game3.css' %}" >
- 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sliding Puzzle Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
 
+    .puzzle-container {
+      display: grid;
+      grid-template-columns: repeat(4, 100px);
+      grid-template-rows: repeat(4, 100px);
+      gap: 2px;
+      border: 2px solid #333;
+      position: relative;
+    }
+
+    .puzzle-piece {
+      width: 100px;
+      height: 100px;
+      background-size: 400px 400px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .empty {
+      background-color: #fff;
+    }
+
+    .puzzle-container img {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-    <div id="game-container">
-        <div id="buddha"></div>
-    </div>
+    
+  <img src ="{% static 'images/ship.png'%}" id="ship"  > 
+  <div class="puzzle-container" id="puzzle-container"></div>
 
-    <div>
-        <ul>
-        {% for x in planets%} 
-        <li> {{x.info}}</li>
-        {%endfor%}
-        </ul>
-    </div>
-
-    <script src = "{% static 'js/game3.js'%}">
-
-    </script>
+  <script src="{% static 'js/game1.js'%}"></script>
 </body>
 </html>
