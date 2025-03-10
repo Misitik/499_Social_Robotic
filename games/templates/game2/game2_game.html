@@ -13,13 +13,15 @@
 
 <body>
 
+    <div id = dialogue value = "{{dialogue}}"></div>
+
     <img src = "{% static 'images/character.png' %}" id = 'character'>
-    <div id = 'dialogue_box'><div class = 'text_pos' style = 'position: absolute;'>Hello, I'm your Teacher</div></div>
+    <div id = 'dialogue_box'><div class = 'text_pos' style = 'position: absolute; font-size: 30px;' id = 'dialogue_text'>Hello, I'm your Teacher</div></div>
     <button id = 'character_name'>Shigami </button>
     <div id = 'choice_box'> 
-        <div class = 'choice' id = 'a'><div class = 'text_pos'>Shadafuck up</div></div>
-        <div class = 'choice' id = 'b'><div class = 'text_pos'>Go kill yourself</div> </div>
-        <div class = 'choice' id = 'c'><div class = 'text_pos'>Thank You</div></div>
+        <div class = 'choice' id = '1' ><div class = 'text_pos' id = 'option_1_text'>Shadafuck up</div></div>
+        <div class = 'choice' id = '2'><div class = 'text_pos' id = 'option_2_text'>Go kill yourself</div> </div>
+        <div class = 'choice' id = '3'><div class = 'text_pos' id = 'option_3_text'>Thank You</div></div>
     </div>
 
     <div style = "position: relative; left: 90%; width: 10%;"> 
@@ -34,6 +36,51 @@
     <div> </div>
 
 
+    <div id = 'win'  class = 'screen'>
+        <h1 style = 'color:yellow;'>~ Win ~</h1>        
+        <p id = 'win_message' class = 'ending_message'></p>
+        <p class = 'ending_text' style = 'color:green;' >Congratulation, you know how to act properly</p>
+        <a href='{% url "home" %}'>
+            <button class = 'buttons'>Homepage</button>
+        </a>
+        <a href='{% url "game2_play" %}'>
+            <button class = 'buttons'>Restart</button>
+         </a></div>
+
+    <div id = 'lose' class = 'screen'>
+        <h1>~ Lost ~</h1>
+        <p id = 'lose_message' class = 'ending_message'></p>
+        <p class = 'ending_text' style = 'color:red;'>Try to come up with more appropriate answer next time</p>
+        <a href='{% url "home" %}'>
+            <button class = 'buttons'>Homepage</button>
+        </a>
+        <a href='{% url "game2_play" %}'>
+            <button class = 'buttons'>Restart</button>
+        </a></div>
+
+    <audio id = 'hover'>
+        <source src = "{% static 'sound/hover.mp3' %}" type="audio/mpeg">
+    </audio>
+
+    <audio id = 'click'>
+        <source src = "{% static 'sound/click.mp3' %}" type="audio/mpeg">
+    </audio>
+
+    <audio id = 'option_click'>
+        <source src = "{% static 'sound/option_click.mp3' %}" type="audio/mpeg">
+    </audio>
+
+    <audio id = 'classroom'>
+        <source src = "{% static 'sound/classroom.mp3' %}" type="audio/mpeg">
+    </audio>
+
+    <audio id = 'happy'>
+        <source src = "{% static 'sound/happy.mp3' %}" type="audio/mpeg">
+    </audio>
+
+    <audio id = 'sad'>
+        <source src = "{% static 'sound/sad.mp3' %}" type="audio/mpeg">
+    </audio>
 
 
 <script src = "{% static 'js/game2.js' %}"></script>
