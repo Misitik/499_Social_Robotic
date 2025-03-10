@@ -50,7 +50,7 @@ body {
     border-radius: 30px;
     background-color: yellow;
     flex-direction: column;
-    visibility: visible;
+    visibility: hidden;
     opacity: 0.8;
 
 }
@@ -111,4 +111,74 @@ body {
     box-shadow: 0px 0px 15px rgba(255, 204, 0, 0.8);
 }
 
+.screen{
+    width: 70%;
+    height: 80%;
+    left: 15%;
+    top: 10%;
+    border-radius: 30px;
+    background-color: rgb(219, 206, 206);
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    opacity:0.9;
+}
+
+.screen h1{
+    color: red;
+    font-size: 140px;
+    background-color:rgba(82, 81, 78, 0.559);
+    width: 80%;
+    border-radius: 30px;
+    top: 5%;
+    margin: 1%;
+
+}
+
+.screen .ending_message{
+    font-size:30px;
+    width: 60%;
+    color: white;
+    background-color:black;
+    border-radius: 30px;
+    padding: 20px;
+    margin: 1%;
+
+
+}
+
+.screen .ending_text{
+    font-size: 35px;
+    width: 60%;
+    margin: 1%;
+    margin-bottom:5%;
+}
+
+.screen a{
+    width: 30%;
+    height: 10%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+
+}
+
+.screen button{
+    background-color: blue;
+    color: white;
+    border-radius: 30px;
+    width: 100%;
+    height:100%;
+
+}
+
+.screen button:hover{
+    background: linear-gradient(to right, #2a5298, #1e3c72);
+    transform: scale(1.1);
+    border-color: #ffcc00; /* Yellow glow effect */
+    box-shadow: 0px 0px 15px rgba(255, 204, 0, 0.8);
+}
 
