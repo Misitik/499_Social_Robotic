@@ -77,9 +77,9 @@ body {
 }
 
 #character{
-    width:50%;
-    height: 100%;
-    left: -20%;
+    width:30%;
+    height: 150%;
+    left: 10%;
     top: 10%;
     position: fixed;
 }
@@ -141,7 +141,7 @@ body {
 
 .screen .ending_message{
     font-size:30px;
-    width: 60%;
+    width: 90%;
     color: white;
     background-color:black;
     border-radius: 30px;
@@ -153,7 +153,7 @@ body {
 
 .screen .ending_text{
     font-size: 35px;
-    width: 60%;
+    width: 90%;
     margin: 1%;
     margin-bottom:5%;
 }

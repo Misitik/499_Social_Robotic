@@ -126,7 +126,7 @@ choices = document.querySelectorAll('.choice')
 
 choices.forEach(choice => {
     choice.addEventListener('mouseenter', choice_hover)
-
+    
 })
 
 
@@ -275,7 +275,3 @@ document.addEventListener('mousedown', (event) => {
 
 console.log('before_get_branch')
 get_branching_info()
-
-
-   
-
