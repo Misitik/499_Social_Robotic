@@ -76,25 +76,37 @@ body {
     box-shadow: 0px 0px 15px rgba(255, 204, 0, 0.8);
 }
 
-#character{
-    width:50%;
-    height: 100%;
-    left: -20%;
+#Teresa{
+    width:30%;
+    height: 150%;
+    left: 10%;
     top: 10%;
     position: fixed;
+    visibility: hidden;
 }
+
+#Jim{
+    width:20%;
+    height: 150%;
+    left: 60%;
+    top: 10%;
+    position: fixed;
+    visibility: hidden;
+}
+
 
 #character_name{
     position: fixed;
-    left: 0.5%;
-    top: 68%;
-    width: 10%;
-    height: 4%;
+    left: 40%;
+    top: 65.5%;
+    width: 20%;
+    height: 7%;
     border-radius: 20px;
     background-color: red;
     color: white;
-    font-size: 20px;
+    font-size: 40px;
     pointer-events: none;
+    visibility: hidden;
 }
 
 .buttons{
@@ -141,7 +153,7 @@ body {
 
 .screen .ending_message{
     font-size:30px;
-    width: 60%;
+    width: 90%;
     color: white;
     background-color:black;
     border-radius: 30px;
@@ -153,7 +165,7 @@ body {
 
 .screen .ending_text{
     font-size: 35px;
-    width: 60%;
+    width: 90%;
     margin: 1%;
     margin-bottom:5%;
 }

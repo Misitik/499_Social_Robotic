@@ -1,15 +1,70 @@
 {%extends "start_menu_template.html"%}
 
 
-{%block menutitle%} Fighting Game {%endblock%}
+{%block menutitle%} A Day in School {%endblock%}
 
-{%block style%}
+{% block style %}
 
-document.getElementsByTagName("body")[0].style = "background-image: url('static/images/Space.jpeg');"
+#instruction{
+    width: 35%;
+    height: 30%;
+    left: 5%;
+    top: 5%;
+    background-color: rgba(30,30,30, 0.4);
+    padding: 3%;
+    font-size: 20px;
+    color: white;
+}
+
+body{
+    background-color: black;
+    text-align: center;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h1 {
+    font-family: "Arial", sans-serif;
+    font-size: 5rem; /* Sets the font-size of h1 = 5 * (font-size of root (<html>)) */
+    color: #FF0000;
+    background-color: rgba(255, 255,255,0.6);
+    padding: 1%;
+    border-radius: 20px;
+    width: 70%;
+    left: 15%;
+    position: relative;
+}
+
+p {
+    margin-top: 50px;
+    font-size: 2rem;
+}
+{% endblock %}
+
+{%block script %}
+
+document.getElementsByTagName("body")[0].style = "background-image: url('static/images/elementary_school.jpg');"
+
+
 {%endblock%}
+
 {%block content%} 
+<div id = 'instruction'>
+    The game is a visual novel<br>
+    Basically a novel with graphics<br>
+    You advance the dialogue <br>
+    by clicking anywhere on the screen<br>
+    And you need to make decision on what to say <br>
+    Your choice will affect how the story goes <br>
+    So please pay attention to dialogue <br>
+    and choose what to say carefully <br>
+</div>
 
 {%endblock%}
+
+
+
 
 {%block ref %}
 <a href='{% url 'game2_play' %}' >

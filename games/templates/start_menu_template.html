@@ -8,6 +8,7 @@
 
 
     <style>
+        {% block style %}
         body{
             background-color: black;
             text-align: center;
@@ -26,6 +27,8 @@
             margin-top: 50px;
             font-size: 2rem;
         }
+
+        {% endblock %}
 
     </style>
 
@@ -51,9 +54,8 @@
 
     <script>
 
-    {%block style %} 
-    document.getElementsByTagName("body")[0].style = "background-color: yellow;";
-    
+    {%block script %} 
+   
     {%endblock%}
     </script>
 </body>

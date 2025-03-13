@@ -126,11 +126,87 @@ choices = document.querySelectorAll('.choice')
 
 choices.forEach(choice => {
     choice.addEventListener('mouseenter', choice_hover)
-
+    
 })
 
+/**
+ * function that advance the dialogue 
+ */
+
+function dialogue_advance()
+{
+    if(this_dialogue.length !== 0)
+        {
+
+            console.log(this_dialogue)
+            display_dialogue = this_dialogue[0]//get the 1 element in the dialogue array
+            this_dialogue = this_dialogue.splice(1)//remove the 1 element in the dialogue array
 
 
+            dialogue_text.innerHTML = display_dialogue[1]
+
+            //change the display of name 
+            name_text = display_dialogue[0]
+            if(name_text === 'Narrator')
+            {
+                c_name.style.visibility = 'hidden'
+            }else if (name_text === 'Player')
+            {
+                c_name.textContent = 'You'
+                c_name.style.visibility = 'visible'
+            }else{
+                c_name.textContent = name_text
+                c_name.style.visibility = 'visible'
+                c_pic = document.getElementById(name_text)
+ 
+                document.querySelectorAll('img').forEach(image => {
+                    image.style.opacity = '0.6'
+                })
+                c_pic.style.opacity = '1'
+                c_pic.style.visibility = 'visible'
+
+            }
+        
+        }else
+        {
+            option_box.style.visibility = 'visible'
+            
+            //when win or lose 
+            if(win === true)
+                {
+                 option_box.style.visibility = 'hidden'
+                 document.getElementById('win').style.visibility = 'visible'
+                 document.getElementById('win_message').innerHTML = ending_message
+                 if(play_ending_music === true)
+                    {
+                        play_sound(happy_sound)
+                        play_ending_music = false
+                        classroom_sound.pause()
+                    }
+                 console.log('game won')
+                }else if (lose === true)
+                {
+                 option_box.style.visibility = 'hidden'
+                 document.getElementById('lose').style.visibility = 'visible'
+                 document.getElementById('lose_message').innerHTML = ending_message
+                 if(play_ending_music === true)
+                    {
+                        play_sound(sad_sound)
+                        play_ending_music = false
+                        classroom_sound.pause()
+                    }
+                 console.log('game lost')
+                }
+        }
+}
+
+
+/**
+ * main function that runs the game ______________________________________________________________________________________
+ * _______________________________________________________________________________________________________________________
+ * _______________________________________________________________________________________________________________________
+ * _______________________________________________________________________________________________________________________
+ */
 function get_branching_info()
 {
 
@@ -139,6 +215,9 @@ function get_branching_info()
     dialogues.forEach(element => {
         if(element.fields.name === branch_name) dialogue_object = element
       })
+    
+
+
 
     //hide the choice box
     option_box.style.visibility = 'hidden'
@@ -149,6 +228,9 @@ function get_branching_info()
 
    //add the current dialogue to the dialogue
    this_dialogue = split_dialogue(dialogue_fields.dialogue)
+
+   //display the first line of dialogue
+    dialogue_advance()
 
    dialogue_option_1 = dialogue_fields.option_1
    dialogue_option_2 = dialogue_fields.option_2
@@ -222,51 +304,14 @@ if(win !== true && lose !== true)//if didn't win and didn't lose, meaning there 
 
 
 }
+
+
+
 document.addEventListener('mousedown', (event) => {
     if (event.button === 0)//left click
     {
         play_sound(click_sound)
-        if(this_dialogue.length !== 0)
-        {
-
-            console.log(this_dialogue)
-            display_dialogue = this_dialogue[0]//get the 1 element in the dialogue array
-            this_dialogue = this_dialogue.splice(1)//remove the 1 element in the dialogue array
-
-            c_name.textContent = display_dialogue[0]
-            dialogue_text.innerHTML = display_dialogue[1]
-        
-        }else
-        {
-            option_box.style.visibility = 'visible'
-            
-            //when win or lose 
-            if(win === true)
-                {
-                 option_box.style.visibility = 'hidden'
-                 document.getElementById('win').style.visibility = 'visible'
-                 document.getElementById('win_message').innerHTML = ending_message
-                 if(play_ending_music === true)
-                    {
-                        play_sound(happy_sound)
-                        play_ending_music = false
-                        classroom_sound.pause()
-                    }
-                 console.log('game won')
-                }else if (lose === true)
-                {
-                 option_box.style.visibility = 'hidden'
-                 document.getElementById('lose').style.visibility = 'visible'
-                 document.getElementById('lose_message').innerHTML = ending_message
-                 if(play_ending_music === true)
-                    {
-                        play_sound(sad_sound)
-                        play_ending_music = false
-                        classroom_sound.pause()
-                    }
-                 console.log('game lost')
-                }
-        }
+        dialogue_advance()
 
 
     }
@@ -275,7 +320,3 @@ document.addEventListener('mousedown', (event) => {
 
 console.log('before_get_branch')
 get_branching_info()
-
-
-   
-

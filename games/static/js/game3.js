@@ -15,6 +15,8 @@ function createPuzzlePieces(image) {
         piece.classList.add("puzzle-piece");
         const posX = col * 100;
         const posY = row * 100;
+
+        
         piece.style.backgroundImage = image//`url(${imageSrc})`;
         piece.style.backgroundPosition = `-${posX}px -${posY}px`;
   
