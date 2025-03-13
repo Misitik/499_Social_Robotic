@@ -1,5 +1,7 @@
 
 //get the dialogue passed from game1_py from the div element dialogue
+let username = document.getElementById('username').getAttribute('value')
+if(username === '') {username = 'Dante'}
 let dialogues = JSON.parse(document.getElementById("dialogue").getAttribute('value'))
 dialogues= JSON.parse(dialogues)
 
@@ -23,8 +25,6 @@ function play_sound(sound)
     sound.play()
 }
 
-
-play_sound(classroom_sound)
 
     buttons = document.querySelectorAll('button')
     buttons.forEach(button => {
@@ -152,13 +152,20 @@ function dialogue_advance()
                 c_name.style.visibility = 'hidden'
             }else if (name_text === 'Player')
             {
-                c_name.textContent = 'You'
+                c_name.textContent = username;
+                c_name.style.borderColor =  '#ffcc00'; /* Yellow glow effect */
+                c_name.style.boxShadow = '0px 0px 15px 15px rgba(255, 204, 0, 0.8)';
                 c_name.style.visibility = 'visible'
+                document.querySelectorAll('img').forEach(image => {
+                    image.style.opacity = '0.6'
+                })
+                
             }else{
                 c_name.textContent = name_text
                 c_name.style.visibility = 'visible'
                 c_pic = document.getElementById(name_text)
- 
+                c_name.style.boxShadow = '0px 0px 0px 0px rgba(255, 204, 0, 0.8)';
+                c_name.style.borderColor = 'black'
                 document.querySelectorAll('img').forEach(image => {
                     image.style.opacity = '0.6'
                 })

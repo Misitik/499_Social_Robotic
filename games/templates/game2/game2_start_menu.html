@@ -1,5 +1,5 @@
 {%extends "start_menu_template.html"%}
-
+{% load static %}
 
 {%block menutitle%} A Day in School {%endblock%}
 
@@ -10,25 +10,31 @@
     height: 30%;
     left: 5%;
     top: 5%;
-    background-color: rgba(30,30,30, 0.4);
+    background-color: rgba(30,30,30, 0.7);
     padding: 3%;
-    font-size: 20px;
+    font-size: 30px;
     color: white;
+    border-radius: 20px;
+    line-height: 1.5;
+    text-align: left;
+    border-style: solid;
+    border-width: 5px;
+    border-color: pink;
 }
 
 body{
-    background-color: black;
+    
     text-align: center;
-
     background-repeat: no-repeat;
     background-size: cover;
+    transition: background-color 2s ease-in-out, color 2s ease-in-out;
 }
 
 h1 {
     font-family: "Arial", sans-serif;
     font-size: 5rem; /* Sets the font-size of h1 = 5 * (font-size of root (<html>)) */
     color: #FF0000;
-    background-color: rgba(255, 255,255,0.6);
+    background: linear-gradient(to bottom, #e3d9e1, #e3e2e37c);
     padding: 1%;
     border-radius: 20px;
     width: 70%;
@@ -40,36 +46,127 @@ p {
     margin-top: 50px;
     font-size: 2rem;
 }
+
+#center_panel{
+
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 3%;
+}
+
+#qr_code{
+    width: 30%;
+    height: 30%;
+    background-color: black;
+}
+
+#name_input{
+    margin-left: 2%;
+    background-color: rgba(30,30,30, 0.7);
+    border-style: solid;
+    border-width: 5px;
+    border-color: pink;
+    border-radius: 20px;
+    color: white;
+
+    
+}
+
+/* Game Buttons */
+.game-button {
+    background: linear-gradient(to right, #e910c1, #e76ddc); /* Space-themed colors */
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: 2px solid white;
+    padding: 15px 40px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+    text-transform: uppercas
+ 
+}
+
+/* Button Hover Effect */
+.game-button:hover {
+    background: linear-gradient(to right, #e910c1, #e76ddc)
+    transform: scale(1.5);
+    border-color: #ffcc00; /* Yellow glow effect */
+    box-shadow: 0px 0px 15px rgba(255, 204, 0, 0.8);
+}
+
+/* Button Click Effect */
+.game-button:active {
+    transform: scale(0.95);
+}
+
+
+
+
 {% endblock %}
 
 {%block script %}
 
 document.getElementsByTagName("body")[0].style = "background-image: url('static/images/elementary_school.jpg');"
+document.getElementById('ref').onclick = function()
+{
+
+   window.location.href = "{% url 'game2_play' %}";
+}
 
 
 {%endblock%}
 
 {%block content%} 
-<div id = 'instruction'>
-    The game is a visual novel<br>
-    Basically a novel with graphics<br>
-    You advance the dialogue <br>
-    by clicking anywhere on the screen<br>
-    And you need to make decision on what to say <br>
-    Your choice will affect how the story goes <br>
-    So please pay attention to dialogue <br>
-    and choose what to say carefully <br>
+
+<div id = center_panel> 
+
+    <div id = 'instruction'>
+
+        <h2 style = 'background-color: white; color: red; border-radius: 10px; margin-top: -15%; text-align: center; border-style: solid; border-width: 4px; border-color: pink; '> Instruction</h2>
+        The game is a visual novel<br>
+        Basically a novel with graphics<br>
+        You advance the dialogue <br>
+        by clicking anywhere on the screen<br>
+        And you need to make decision on what to say <br>
+        Your choice will affect how the story goes <br>
+        So please pay attention to dialogue <br>
+        and choose what to say carefully <br>
+    </div>
+
+
+    <form action="{% url 'game2_play' %}" method = "GET" >
+    <div id = name_input>
+        <h2 style = 'background-color: white; color: red; border-radius: 10px; margin: 4%; text-align: center; border-style: solid; border-width: 4px; border-color: pink; '>Your Name</h2>
+        <input type = 'text' placeholder="Dante" name = 'userInput' style = 'margin: 5%; border-radius: 20px; padding: 2%; text-align: center;'>
+        <p style = 'font-size: 20px; margin-top: -2%; margin-left: 4%; margin-right: 4%;'>Enter your name. <br><br>You can either type or speak out your name <br></p>
+
+    </div>
+
+    <button class="game-button" id = 'ref' type = 'submit' style = 'margin-top: 20%;'>
+        Start Game
+    </button>
+    </form>
+
+
+    <div id = 'qr_code'>
+        sdfsdfsdf
+            </div>
+
 </div>
 
-{%endblock%}
+<audio autoplay loop id = 'storm'>
+    <source src = "{% static 'sound/storm.mp3' %}" type="audio/mpeg">
+</audio>
+
+
+{% endblock %}
 
 
 
 
 {%block ref %}
-<a href='{% url 'game2_play' %}' >
-    <button class="GFG">
-        Start Game
-    </button>
-</a> 
+
+
 {%endblock%}

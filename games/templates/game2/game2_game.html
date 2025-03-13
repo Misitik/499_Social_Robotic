@@ -14,6 +14,7 @@
 <body>
 
     <div id = dialogue value = "{{dialogue}}"></div>
+    <div id = username value = "{{username}}"></div>
 
     <img src = "{% static 'images/mikan.png' %}" id = 'Teresa'>
     <img src = "{% static 'images/rito.png' %}" id = 'Jim'> 
@@ -71,7 +72,7 @@
         <source src = "{% static 'sound/option_click.mp3' %}" type="audio/mpeg">
     </audio>
 
-    <audio id = 'classroom'>
+    <audio autoplay loop id = 'classroom'>
         <source src = "{% static 'sound/classroom.mp3' %}" type="audio/mpeg">
     </audio>
 
