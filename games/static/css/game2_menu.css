@@ -1,0 +1,104 @@
+
+#instruction{
+    width: 35%;
+    height: 30%;
+    left: 5%;
+    top: 5%;
+    background-color: rgba(30,30,30, 0.7);
+    padding: 3%;
+    font-size: 30px;
+    color: white;
+    border-radius: 20px;
+    line-height: 1.5;
+    text-align: left;
+    border-style: solid;
+    border-width: 5px;
+    border-color: pink;
+}
+
+body{
+    
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: background-color 2s ease-in-out, color 2s ease-in-out;
+}
+
+h1 {
+    font-family: "Arial", sans-serif;
+    font-size: 5rem; /* Sets the font-size of h1 = 5 * (font-size of root (<html>)) */
+    color: #FF0000;
+    background: linear-gradient(to bottom, #e3d9e1, #e3e2e37c);
+    padding: 1%;
+    border-radius: 20px;
+    width: 70%;
+    left: 15%;
+    position: relative;
+}
+
+p {
+    margin-top: 50px;
+    font-size: 2rem;
+}
+
+#center_panel{
+
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 3%;
+}
+
+#qr_code{
+    width: 30%;
+    height: 30%;
+    background-color: black;
+}
+
+#name_input{
+    margin-left: 2%;
+    background-color: rgba(30,30,30, 0.7);
+    border-style: solid;
+    border-width: 5px;
+    border-color: pink;
+    border-radius: 20px;
+    color: white;
+
+    
+}
+
+#mic-button{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 5%;
+    height: 2%;
+}
+
+/* Game Buttons */
+.game-button {
+    background: linear-gradient(to right, #e910c1, #e76ddc); /* Space-themed colors */
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: 2px solid white;
+    padding: 15px 40px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+    text-transform: uppercas
+ 
+}
+
+/* Button Hover Effect */
+.game-button:hover {
+    background: linear-gradient(to right, #e910c1, #e76ddc);
+    transform: scale(1.5);
+    border-color: #ffcc00; /* Yellow glow effect */
+    box-shadow: 0px 0px 15px rgba(255, 204, 0, 0.8);
+}
+
+/* Button Click Effect */
+.game-button:active {
+    transform: scale(0.95);
+}
