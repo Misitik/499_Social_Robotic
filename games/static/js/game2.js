@@ -128,6 +128,63 @@ choices.forEach(choice => {
     choice.addEventListener('mouseenter', choice_hover)
     
 })
+/**
+ * voices
+ */
+
+
+let voices = [];
+
+function loadVoices() {
+    voices = window.speechSynthesis.getVoices();
+    let voiceSelect = document.getElementById("voiceSelect");
+
+    voiceSelect.innerHTML = ''; // Clear previous options
+   
+    voices.forEach((voice, index) => {
+        let option = document.createElement("option");
+        option.value = index;
+        option.onclick = function(){console.log(option)}
+        option.textContent = voice.name;
+        voiceSelect.appendChild(option);
+    });
+
+    voiceSelect.onclick = function(){
+        e = document.getElementById('voiceSelect') 
+        console.log(e.options[e.selectedIndex].text)}
+}
+window.speechSynthesis.onvoiceschanged = loadVoices;
+window.addEventListener("load", loadVoices);
+
+function speakText(text) {
+   
+    console.log(text)
+    let speech = new SpeechSynthesisUtterance(text); // text="Hello World"
+    window.speechSynthesis.cancel()
+    let voiceSelect = document.getElementById("voiceSelect");
+
+    if (voices.length > 0) {
+        speech.voice = voices[185];
+        console.log(voiceSelect.value)
+    }
+
+    speech.lang = "en-US";
+    speech.rate = 1; // slow to fast
+    speech.pitch = 1; // deep to high
+    speech.volume = 1; // mute to loud
+
+   // let mouth = document.getElementById("robotMouth");
+
+    // Animate Mouth
+  //  mouth.classList.add("talking");
+
+   // speech.onend = function() {
+   //     mouth.classList.remove("talking");
+ //  };
+
+    window.speechSynthesis.speak(speech);
+}
+
 
 /**
  * function that advance the dialogue 
@@ -140,11 +197,14 @@ function dialogue_advance()
 
             console.log(this_dialogue)
             display_dialogue = this_dialogue[0]//get the 1 element in the dialogue array
+
+
             this_dialogue = this_dialogue.splice(1)//remove the 1 element in the dialogue array
 
 
+            //display the current dialogue
             dialogue_text.innerHTML = display_dialogue[1]
-
+            speakText(display_dialogue[1])
             //change the display of name 
             name_text = display_dialogue[0]
             if(name_text === 'Narrator')

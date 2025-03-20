@@ -24,6 +24,63 @@ document.addEventListener("wheel", function(event) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/////////////////////////VOICE OVER///////////////////////////////////////////////////////////////////////////////
+//get the voice over the txt
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+let voices = [];
+
+function loadVoices() {
+    voices = window.speechSynthesis.getVoices();
+    let voiceSelect = document.getElementById("voiceSelect");
+
+    voiceSelect.innerHTML = ''; // Clear previous options
+   
+    voices.forEach((voice, index) => {
+        let option = document.createElement("option");
+        option.value = index;
+        option.onclick = function(){console.log(option)}
+        option.textContent = voice.name;
+        voiceSelect.appendChild(option);
+    });
+
+    voiceSelect.onclick = function(){
+        e = document.getElementById('voiceSelect') 
+        console.log(e.options[e.selectedIndex].text)}
+}
+window.speechSynthesis.onvoiceschanged = loadVoices;
+window.addEventListener("load", loadVoices);
+
+function speakText(text) {
+   
+    console.log(text)
+    let speech = new SpeechSynthesisUtterance(text); // text="Hello World"
+    window.speechSynthesis.cancel()
+    let voiceSelect = document.getElementById("voiceSelect");
+
+    if (voices.length > 0) {
+        speech.voice = voices[185];
+        console.log(voices[185])
+    }
+
+    speech.lang = "en-US";
+    speech.rate = 1; // slow to fast
+    speech.pitch = 1; // deep to high
+    speech.volume = 1; // mute to loud
+
+   // let mouth = document.getElementById("robotMouth");
+
+    // Animate Mouth
+  //  mouth.classList.add("talking");
+
+   // speech.onend = function() {
+   //     mouth.classList.remove("talking");
+ //  };
+
+    window.speechSynthesis.speak(speech);
+}
+
+
 
 
 ////////////////////////Initialize/////////////////////////////////////////////////////////////////////////////////////////
@@ -234,7 +291,7 @@ function collision(x, y)
            //if there is a collision
             if(ship_x >x_l && ship_x <  x_r && ship_y > y_t && ship_y <  y_d)
             {
-
+ 
 
                 description_overlay.style.visibility = "visible"
 
@@ -256,6 +313,7 @@ function collision(x, y)
                 //remove everything from description
                 description.innerHTML = ""
                 info_array= get_info(star.id)
+                speakText(info_array[0])
 
                 lines = info_array[0].split("\n")
           

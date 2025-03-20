@@ -15,12 +15,12 @@ body {
     left: 2%;
     top: 70%;
     border-radius: 10px;
-    background-color: grey;
+    background-color: rgb(238, 211, 211);
     justify-content: center;
     align-items: center;
     opacity: 0.8;
     border-width: 10px;
-    border-color: black;
+    border-color:  rgb(231, 130, 221);
     border-style: solid;
 
     
@@ -48,7 +48,10 @@ body {
     left: 30%;
     top: 30%;
     border-radius: 30px;
-    background-color: yellow;
+    background-color: pink;
+    border-style:solid;
+    border-width: 5px;
+    border-color: white;
     flex-direction: column;
     visibility: hidden;
     opacity: 0.8;
@@ -59,16 +62,16 @@ body {
     width: 80%;
     height: 20%;
     border-radius: 10px;
-    background-color: orange;
+    background-color: rgb(231, 130, 221);
     margin: 10px;
 
 }
 
 .choice:hover{
-    color: red;
-    font-size: 25;
-    background-color: purple;
-    border-color:blue;
+    color: rgb(229, 36, 246);
+    font-size: 25px;
+    background-color: rgba(239, 203, 239, 0.796);
+    border-color:rgba(255, 240, 108, 0.622);
     border-style: solid;
     border-width: 4px;
     width: 85%;
@@ -103,9 +106,9 @@ body {
     width: 20%;
     height: 7%;
     border-radius: 20px;
-    
-    background-color: red;
-    color: white;
+    border-color:pink;
+    background-color: rgb(238, 211, 211);
+    color:  rgb(255, 11, 166);
     font-size: 40px;
     pointer-events: none;
     visibility: hidden;
