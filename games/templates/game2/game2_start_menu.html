@@ -11,6 +11,7 @@
 
 {%block script %}
 
+window.speechSynthesis.cancel()
 console.log(document.getElementById('instruction').innerHTML)
 function startListening() {
     if (!('webkitSpeechRecognition' in window)) {
@@ -99,8 +100,8 @@ function loadVoices() {
 window.speechSynthesis.onvoiceschanged = loadVoices;
 window.addEventListener("load", loadVoices);
 
-function speakText() {
-    let text = document.getElementById("instruction").innerText;
+function speakText(text) {
+    
     console.log(text)
     let speech = new SpeechSynthesisUtterance(text); // text="Hello World"
     window.speechSynthesis.cancel()
@@ -129,6 +130,13 @@ function speakText() {
 }
 
 
+instruction_text = document.getElementById("instruction_text").innerText;
+background_text = document.getElementById("background_text").innerText;
+instruction_button = document.getElementById('instruction_button')
+background_button = document.getElementById('instruction_button')
+
+instruction_button.onclick = function(){speakText(instruction_text)}
+background_button.onclick = function(){speakText(background_text)}
 {%endblock%}
 
 {%block content%} 
@@ -138,6 +146,7 @@ function speakText() {
     <div id = 'instruction'>
 
         <h2 style = 'background-color: white; color: red; border-radius: 10px; margin-top: -15%; text-align: center; border-style: solid; border-width: 4px; border-color: pink; '> Instruction</h2>
+        <div id = 'instruction_text'>
         The game is a visual novel<br>
         Basically a novel with graphics<br>
         You advance the dialogue <br>
@@ -146,43 +155,58 @@ function speakText() {
         Your choice will affect how the story goes <br>
         So please pay attention to dialogue <br>
         and choose what to say carefully <br>
+        </div>
+        <button id = 'instruction_button'>Read Instruction</button>
     </div>
 
-    <form action="{% url 'game2_play' %}" method = "GET" >
     <div id = name_input>
-        
+    <form action="{% url 'game2_play' %}" method = "GET" >
+ 
         <h2 style = 'background-color: white; color: red; border-radius: 10px; margin: 4%; text-align: center; border-style: solid; border-width: 4px; border-color: pink; '>Your Name</h2>
         <input type = 'text' id = input_box placeholder="Dante" name = 'userInput' style = 'margin: 5%; border-radius: 20px; padding: 2%; text-align: center;'>
-        <p style = 'font-size: 20px; margin-top: -2%; margin-left: 4%; margin-right: 4%;'>Enter your name. <br><br>You can either type or speak out your name <br></p>
+        <p style = 'font-size: 20px; margin-top: -2%; margin-left: 4%; margin-right: 4%;'>Enter your name. You can either type or speak out your name </p>
 
-    </div>
-    <p id="status">Press the button and say something...</p>
+
+    <p id="status">Press the start listening button and say name...</p>
     <p id = 'result'></p>
 
-
-    <button class="game-button" id = 'ref' type = 'submit' onclick =  'function () {sendData() window.location.href = "{% url 'game2_play' %}"}' style = 'margin-top: 20%;'>
+   
+    <button class="game-button" id = 'ref' type = 'submit' onclick =  'function () {  window.location.href = "{% url 'game2_play' %}"}' style = 'margin-top: 20%;'>
         Start Game
     </button>
     </form>
+    <button id="mic-button"  >Start Listening</button>
+    </div>
+
+    <div id = 'background'>
+        <h2 style = 'background-color: white; color: red; border-radius: 10px; margin-top: -15%; text-align: center; border-style: solid; border-width: 4px; border-color: pink; '> Background</h2>
+       <div id = background_text>
+        You are going to go to Sun Hill Elementary School. 
+        Today is a day just like any other weekdays. 
+        You went to school as usual, but communication is a real problem. 
+        Be careful with what you say, else you are gonna lose friends.
+       </div>
+       <button id = 'background_button'>Read Background</button>
+    </div>
 
 
-    <button class="mic-button" onclick="startListening()" >Start Listening</button>
 
-    <div id = 'qr_code'>
+
+    <!-- <div id = 'qr_code'>
         sdfsdfsdf
-    </div>
+    </div> -->
 
 
-    <div id="instructionBox">
-        <p id="instructionText">Welcome to the game! Move arrow keys to navigate through the maze.</p>
-        <label for="voiceSelect">Choose Voice:</label>
-        <select id="voiceSelect" style = 'visibility: hidden;'></select>
-        <button onclick="speakText()">Read Aloud</button>
-    </div>
-    
+
 </div>
 
 
+<div id="instructionBox">
+    <p id="instructionText">Welcome to the game! Move arrow keys to navigate through the maze.</p>
+
+    <select id="voiceSelect" style = 'visibility: hidden;'></select>
+ 
+</div>
 
 <audio autoplay loop id = 'storm'>
     <source src = "{% static 'sound/storm.mp3' %}" type="audio/mpeg">
