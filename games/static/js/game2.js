@@ -63,8 +63,6 @@ function split_dialogue(dialogue)
     return splited_dialogue
 }
 
-
-
 let this_dialogue = []    //this is for click to advance the dialogue
 branch_name = '1_introduction'   //initial branch
 let dialogue_object =  ""
@@ -76,8 +74,7 @@ dialogues.forEach(element => {
                             }
                
                      }) 
-
-
+                     
 //text displayed for each choice
 dialogue_option_1 = ''
 dialogue_option_2 = ''
@@ -373,7 +370,7 @@ if(win !== true && lose !== true)//if didn't win and didn't lose, meaning there 
 }
 
 
-
+window.speechSynthesis.cancel()
 document.addEventListener('mousedown', (event) => {
     if (event.button === 0)//left click
     {
