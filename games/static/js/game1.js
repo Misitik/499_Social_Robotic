@@ -3,7 +3,7 @@ function timer(){
   
     var timer = setInterval(function(){
     datalog.time +=1
-    //update_save_point(log_id)
+    update_save_point(log_id)
 
     }, 1000);
 }
@@ -38,6 +38,8 @@ function update_save_point(log_id)
     .then(datalog => console.log(datalog))
     .catch(error => console.error('Error:', error));
 }
+
+
 
 game_won = false
 //get the information of the planets into a json file for access
@@ -76,9 +78,9 @@ if(log_id === -1)
  
 }
 
-update_save_point(log_id)
+
 console.log(log_id)
-//update_save_point(log_id)
+
 
 
 ///////////////////////////DON'T MATTER///////////////////////////////////////////////////
@@ -629,3 +631,4 @@ function voiceOnVisit(planetName, visitedCount) {
         speakText("Mission complete! You have visited all the planets!");
     }
 }
+

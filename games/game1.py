@@ -14,6 +14,7 @@ from django.utils.decorators import method_decorator
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 import json 
+from django.views import View
 
 class update_log_serializer(serializers.ModelSerializer):
     class Meta:
@@ -41,35 +42,30 @@ def save_log(request):
     return JsonResponse({'status': 'failed'}, status=400)
 
 
-class savepoint_view(APIView):
-    def put(self, request, id, format=None):
-        try:
-            obj = savepoint.objects.get(id=id)  # Fetch object by ID
-            serializer = update_log_serializer(obj, data=request.data)  # Validate & update
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_200_OK)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        except savepoint.DoesNotExist:
-            return Response({"error": "Not found"}, status=status.HTTP_404_NOT_FOUND)
 
-@method_decorator(csrf_exempt, name='dispatch')
+
+@csrf_exempt
 def update_log(request, log_id):
    
     if request.method == 'PUT':
         try:
             log = savepoint.objects.get(pk=log_id)
-            serializer = update_log_serializer(log, data=request.body) 
-            if serializer.is_valid(): 
-                serializer.save() 
-            return JsonResponse(serializer.data, status=status.HTTP_200_OK) 
+            data = json.loads(request.body)
+            log.stars_visited=data['stars_visited']
+            log.past_x_position = data['past_x_position']
+            log.past_y_position=data['past_y_position']
+            log.time=data['time']
+            log.clicks=data['clicks']
+            log.x_pos=data['x_pos']
+            log.y_pos=data['y_pos']
+            log.game_won=data['game_won']
+            log.save()
+   
+            return JsonResponse({'status': 'success'})
 
         except savepoint.DoesNotExist:
             return JsonResponse({'message': 'the save point dont exist'},status=status.HTTP_404_NOT_FOUND )
-    
 
-    
-            return JsonResponse({'status': 'failed', 'message': 'log not found'}, status=404)
     return JsonResponse({'status': 'failed'}, status=400)
 
 
