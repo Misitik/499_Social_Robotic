@@ -1,29 +1,17 @@
-data_id = 0
-
-datalog = {
-    stars_visited: [0,0,0,0,0,0,0,0,0], 
-    past_x_position: [],
-    past_y_position: [],
-    time: 0,
-    clicks:0,
-    x_pos:0,
-    y_pos:0,
-    game_won:false
-}
-
+let datalog = {}
 function timer(){
   
     var timer = setInterval(function(){
     datalog.time +=1
+    //update_save_point(log_id)
 
     }, 1000);
 }
 
-timer()
 
-function update()
+function create_save_point()
 {
-    fetch('/api/save-log/', {
+    fetch(`/api/save-log/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -31,12 +19,69 @@ function update()
         body: JSON.stringify(datalog)
     })
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(datalog => console.log(datalog))
     .catch(error => console.error('Error:', error));
 }
-///////////////////////////DON'T MATTER///////////////////////////////////////////////////
 
-//document.getElementById('planets_visited_display').innerHTML = '<p>sssfsdf &#10;&#13; sdfsdf</p>'
+function update_save_point(log_id)
+{
+    console.log(JSON.stringify(datalog))
+    fetch(`/api/load-log/${log_id}/`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        
+        },
+        body: JSON.stringify(datalog)
+    })
+    .then(response => console.log(response))
+    .then(datalog => console.log(datalog))
+    .catch(error => console.error('Error:', error));
+}
+
+game_won = false
+//get the information of the planets into a json file for access
+let string_table = JSON.parse(document.getElementById("gg").getAttribute('value'))
+table= JSON.parse(string_table)
+
+let save_points = JSON.parse(document.getElementById("save").getAttribute('value'))
+//save_points = JSON.parse(save_points)
+console.log(save_points)
+
+let log_id = JSON.parse(document.getElementById("load_point").getAttribute('value'))
+console.log(load_point)
+
+
+
+
+if(log_id === -1)
+{//create a new data
+    datalog = {
+        stars_visited: [0,0,0,0,0,0,0,0,0], 
+        past_x_position: [1],
+        past_y_position: [1],
+        time: 0,
+        clicks:0,
+        x_pos:0,
+        y_pos:0,
+        game_won:false
+    }
+
+    log_id = save_points.length +1
+
+    create_save_point()
+    timer()
+
+}else{//get the save's data
+ 
+}
+
+update_save_point(log_id)
+console.log(log_id)
+//update_save_point(log_id)
+
+
+///////////////////////////DON'T MATTER///////////////////////////////////////////////////
 
 //prevent from using keyboard to zooming in and out
 document.addEventListener("keydown", function(event) {
@@ -73,28 +118,28 @@ function loadVoices() {
     voices.forEach((voice, index) => {
         let option = document.createElement("option");
         option.value = index;
-        option.onclick = function(){console.log(option)}
+
         option.textContent = voice.name;
         voiceSelect.appendChild(option);
     });
 
     voiceSelect.onclick = function(){
         e = document.getElementById('voiceSelect') 
-        console.log(e.options[e.selectedIndex].text)}
+  
+    }
 }
 window.speechSynthesis.onvoiceschanged = loadVoices;
 window.addEventListener("load", loadVoices);
 
 function speakText(text) {
    
-    console.log(text)
     let speech = new SpeechSynthesisUtterance(text); // text="Hello World"
     window.speechSynthesis.cancel()
     let voiceSelect = document.getElementById("voiceSelect");
 
     if (voices.length > 0) {
         speech.voice = voices[185];
-        console.log(voices[185])
+    //    console.log(voices[185])
     }
 
     speech.lang = "en-US";
@@ -135,10 +180,6 @@ function to_number(px_value)
     return Number(px_value.slice(0,-2))
 }
 
-//get the information of the planets into a json file for access
-let string_table = JSON.parse(document.getElementById("gg").getAttribute('value'))
-table= JSON.parse(string_table)
-
 //use the table value above
 //return the planet info
 function get_info(name)
@@ -177,7 +218,6 @@ const stars = document.querySelectorAll('.star');
 
 stars.forEach(star =>{
     star.addEventListener("mouseover", (event)=>{
-       // console.log(star.id)
 
         star_name = star.id;
         document.getElementById('heading').textContent = star_name.toString();
@@ -220,18 +260,7 @@ function change_description_position(mouse_movement_event)
       
     }
 }
-
-//make description to change its x & y movement whenever it moves
-/* document.addEventListener('mousemove', (event)=>
-    {
-
-        change_description_position(event)
- 
-    })
-*/
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 ///////////////////COLLISION///////////////////////////////////////////////////////////////////////////////////
 //Regarding when the ship come in contact with a planet
@@ -316,11 +345,7 @@ function collision(x, y)
             y_t = to_number(this_star.top) - y_height/2 - ship_height/2
             x_r = x_l + x_width
             y_d = y_t + y_height
-                   
-       
-           // console.log(star.id, [x, x_l, x_r], [y, y_t, y_d])
-       
-       
+
            //if there is a collision
             if(ship_x >x_l && ship_x <  x_r && ship_y > y_t && ship_y <  y_d)
             {
@@ -331,10 +356,9 @@ function collision(x, y)
                
                 description.style.visibility = "visible"
                 planet_num = planet_visited_index(star.id)
-                //console.log(star.id, planet_num)
                 planet_visited[planet_num] = 1
                 datalog.stars_visited = planet_visited
-                //console.log(planet_visited)
+               
 
                 //add planet name to the visited planet name array
                 if(!(planet_visited_name.includes(star.id)))
@@ -360,17 +384,18 @@ function collision(x, y)
                     text.innerHTML = line
                     this_line.appendChild(text)
                     description.appendChild(this_line)
-                    //console.log(this_line)
-                    //console.log(description)
                 })
                // description.innerHTML = `<p>${info_array[0]}</p>`
                 question = document.getElementById('question')
                 question.innerHTML = `${info_array[1]}`
 
                 
-                if (planet_visited.every((value, index) => value === all_visited[index])) {
-                    //console.log("All planets visited! Showing win window.");
+                if (planet_visited.every((value, index) => value === all_visited[index]) && game_won !== true) {
+                    game_won = true
                     datalog.game_won = true;
+                    update_save_point(log_id)
+                    console.log('won')
+
                     document.getElementById('win_window').style.visibility = 'visible';
                 }
                 
@@ -418,10 +443,9 @@ if(event.button === 0)
   datalog.clicks += 1
   datalog.past_x_position.push(target_x)
   datalog.past_y_position.push(target_y)
+  update_save_point(log_id)
 
-  console.log(datalog.past_x_position)
-  console.log(datalog.clicks)
-  
+
 const moving = setInterval(function () 
 {
 
@@ -436,10 +460,10 @@ const moving = setInterval(function ()
   //update the datalog
   datalog.x_pos = x_pos
   datalog.y_pos = y_pos
+  update_save_point(log_id)
 
 
- // console.log(datalog.x_pos)
- // console.log(datalog.y_pos)
+
 
 
   collision(x_pos, y_pos)
@@ -507,3 +531,101 @@ const moving = setInterval(function ()
 
 
 });
+
+
+//////////////////// Voice Recognition ///////////////////////////////////////
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+let recognition;
+
+if (SpeechRecognition) {
+    recognition = new SpeechRecognition();
+    recognition.continuous = true;
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onresult = (event) => {
+        const voiceCommand = event.results[event.results.length - 1][0].transcript.toLowerCase();
+        handleVoiceCommand(voiceCommand);
+    };
+
+    recognition.onerror = (event) => {
+        console.error("Speech recognition error:", event.error);
+        speakText("I couldn't understand you. Try again.");
+    };
+
+    recognition.onend = () => {
+        recognition.start();
+    };
+}
+
+function startListening() {
+    if (recognition) {
+        recognition.start();
+        speakText("I'm listening. Say a planet name to travel there.");
+    }
+}
+
+function stopListening() {
+    if (recognition) {
+        recognition.stop();
+        speakText("Stopped listening.");
+    }
+}
+
+function handleVoiceCommand(command) {
+    const planets = ["sun", "mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune"];
+    const match = planets.find(p => command.includes(p));
+    if (match) {
+        speakText(`Moving toward ${match}`);
+        simulateClickOnPlanet(match);
+    } else {
+        speakText("Sorry, I didn't catch any planet name.");
+    }
+}
+
+function simulateClickOnPlanet(planetName) {
+    const id = planetName.charAt(0).toUpperCase() + planetName.slice(1);
+    const planetDiv = document.getElementById(id);
+    if (!planetDiv) {
+        speakText(`Oops, ${planetName} is not available.`);
+        return;
+    }
+    const style = window.getComputedStyle(planetDiv);
+    const planetX = to_number(style.left);
+    const planetY = to_number(style.top);
+    target_planet = id;
+    last_triggered_planet = id;
+    simulatePlanetInteraction(id);
+    const simulatedEvent = new MouseEvent('mousedown', {
+        button: 0,
+        clientX: planetX,
+        clientY: planetY
+    });
+    document.dispatchEvent(simulatedEvent);
+}
+
+let target_planet = null;
+
+stars.forEach(star => {
+    star.addEventListener("click", () => {
+        target_planet = star.id;
+        last_triggered_planet = star.id;
+        simulatePlanetInteraction(star.id);
+    });
+});
+
+function simulatePlanetInteraction(planetName) {
+    speakText(`Moving toward ${planetName}`);
+    if (planet_visited_name.includes(planetName)) {
+        setTimeout(() => speakText(`You have already visited ${planetName}`), 2000);
+    }
+}
+
+function voiceOnVisit(planetName, visitedCount) {
+    const remaining = 9 - visitedCount;
+    speakText(`You discovered ${planetName}. ${remaining} planet${remaining !== 1 ? "s" : ""} left to explore.`);
+    if (planet_visited.every((v, i) => v === all_visited[i])) {
+        speakText("Mission complete! You have visited all the planets!");
+    }
+}
