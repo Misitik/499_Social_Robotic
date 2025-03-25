@@ -2,7 +2,29 @@ from django.shortcuts import render
 from .models import planet_info
 from django.http import JsonResponse
 from django.core.serializers import serialize
+from .models import savepoint
+from rest_framework import serializers
+from rest_framework import generics
+from django.views.decorators.csrf import csrf_exempt
 import json 
+
+@csrf_exempt
+def save_log(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        log = savepoint(stars_visited=data['stars_visited'], 
+                        past_x_position = data['past_x_position'],
+                        past_y_position=data['pas_y_position'],
+                        time=data['time'],
+                        clicks=data['clicks'],
+                        x_pos=data['x_pos'],
+                        y_pos=data['y_pos'],
+                        game_won=data['game_won'])
+        log.save()
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'status': 'failed'}, status=400)
+
+
 def game1_menu(request):
     '''
     Renders the "index.html" template using the variables defined in the "context" dictionary

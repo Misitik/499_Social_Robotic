@@ -25,5 +25,25 @@ class diagloue(models.Model):
     correct_option = models.IntegerField(default = 1)
     ending_message = models.TextField(null = True)
 
+class savepoint(models.Model):
+    stars_visited = models.JSONField(default=[0,0,0,0,0,0,0,0,0], blank=True)
+    past_x_position = models.JSONField(blank = True)
+    past_y_position = models.JSONField(blank = True)
+    time = models.IntegerField(default=0)
+    clicks = models.IntegerField(default=0)
+    x_pos = models.FloatField(default=0)
+    y_pos = models.FloatField(default=0)
+    game_won = models.BooleanField(default=False)
+
+    def get_clicks(self):
+        return self.clicks
     
+    def get_stars(self):
+        return self.stars_visited
+    
+    def get_time(self):
+        return self.time
+    
+
+
 

@@ -1,5 +1,39 @@
+data_id = 0
 
+datalog = {
+    stars_visited: [0,0,0,0,0,0,0,0,0], 
+    past_x_position: [],
+    past_y_position: [],
+    time: 0,
+    clicks:0,
+    x_pos:0,
+    y_pos:0,
+    game_won:false
+}
 
+function timer(){
+  
+    var timer = setInterval(function(){
+    datalog.time +=1
+
+    }, 1000);
+}
+
+timer()
+
+function update()
+{
+    fetch('/api/save-log/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datalog)
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+}
 ///////////////////////////DON'T MATTER///////////////////////////////////////////////////
 
 //document.getElementById('planets_visited_display').innerHTML = '<p>sssfsdf &#10;&#13; sdfsdf</p>'
@@ -264,7 +298,6 @@ function collision(x, y)
     description = document.getElementById("description")
     description.style.visibility = "hidden"
     description_overlay = document.getElementById("description_overlay")
-    console.log(description_overlay)
     description_overlay.style.visibility = "hidden"
 
 
@@ -300,6 +333,7 @@ function collision(x, y)
                 planet_num = planet_visited_index(star.id)
                 //console.log(star.id, planet_num)
                 planet_visited[planet_num] = 1
+                datalog.stars_visited = planet_visited
                 //console.log(planet_visited)
 
                 //add planet name to the visited planet name array
@@ -336,6 +370,7 @@ function collision(x, y)
                 
                 if (planet_visited.every((value, index) => value === all_visited[index])) {
                     //console.log("All planets visited! Showing win window.");
+                    datalog.game_won = true;
                     document.getElementById('win_window').style.visibility = 'visible';
                 }
                 
@@ -362,20 +397,15 @@ waypoint = document.getElementById('waypoint')
 
 if(event.button === 0)
 {
-const moving = setInterval(function () 
-{
 
-
-
- //make way point visible
- waypoint.style.opacity = '1'
- //get the offset of the ship
+    //get the offset of the ship
  const w = Number(ship.style.width.slice(0,-2))
  const h = Number(ship.style.height.slice(0,-2))
 
  //get mouse x y
   const target_x = event.clientX - w/2;
   const target_y = event.clientY - h/2;
+  
 
  //get the offset for the waypoint
  const w_w = Number(waypoint.style.width.slice(0,-2))
@@ -384,9 +414,33 @@ const moving = setInterval(function ()
   waypoint.style.left =(event.clientX - w_w/2).toString() + 'px'
   waypoint.style.top = (event.clientY - w_h).toString() + 'px'
 
+  
+  datalog.clicks += 1
+  datalog.past_x_position.push(target_x)
+  datalog.past_y_position.push(target_y)
+
+  console.log(datalog.past_x_position)
+  console.log(datalog.clicks)
+  
+const moving = setInterval(function () 
+{
+
+
+ //make way point visible
+ waypoint.style.opacity = '1'
+ 
   //get ship x y
   const x_pos = Number(ship.style.left.slice(0,-2))
   const y_pos = Number(ship.style.top.slice(0,-2))
+
+  //update the datalog
+  datalog.x_pos = x_pos
+  datalog.y_pos = y_pos
+
+
+ // console.log(datalog.x_pos)
+ // console.log(datalog.y_pos)
+
 
   collision(x_pos, y_pos)
 
