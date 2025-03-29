@@ -12,11 +12,12 @@ branch_name = '1_introduction'   //initial branch
 //Load and save functionalies
 ////////////////////////////////////////////////////////////////////////
 users_data = JSON.parse(document.getElementById('userdata').getAttribute('value'))
+let username = document.getElementById('userdata').getAttribute('value')
 //console.log(JSON.parse(users_data))
 
 //get the last element, which points to the save slot
 console.log(users_data)
-log_id = users_data.log_id
+log_id = Number(users_data.log_id)
 console.log(users_data.log_id)
 last_branch_name = ''
 saves = JSON.parse(document.getElementById('saves').getAttribute('value'))
@@ -51,7 +52,7 @@ function create_save_point()
 
 function update_save_point(log_id)
 {
-    console.log(JSON.stringify(datalog))
+    //console.log(JSON.stringify(datalog))
     fetch(`/api/load-log-manner/${log_id}/`, {
         method: 'PUT',
         headers: {
@@ -60,8 +61,8 @@ function update_save_point(log_id)
         },
         body: JSON.stringify(datalog)
     })
-    .then(response => console.log(response))
-    .then(datalog => console.log(datalog))
+    .then(response => console.log())
+    .then(datalog => console.log())
     .catch(error => console.error('Error:', error));
 }
 
@@ -79,6 +80,7 @@ function load_game()
 
 if(log_id === -1)
 {
+    if(username === '') {username = 'Anonymous'}
     branch_name = "1_introduction"
     log_id = saves.length +1
 
@@ -100,19 +102,23 @@ if(log_id === -1)
 
 }else{//if we are loading an existing save
 
-    //load the game
-    //load_game()
+    //load the saves 
+    save_spot = saves.find(obj => obj.pk === log_id).fields
 
-    //datalog = saves[log_id]
-   // time = datalog.time
-   // timer(time)
+    //update the variables for the game
+    username = users_data.fields.name
+    datalog = save_spot
+    scenarios = datalog.choosing_scenario
+    branch_name = scenarios[scenarios.length-1]
+    console.log( branch_name)
+    time = datalog.time
+    timer(time)
 
 }
 
 
 //get the dialogue passed from game1_py from the div element dialogue
-let username = document.getElementById('userdata').getAttribute('value')
-if(username === '') {username = 'Dante'}
+
 let dialogues = JSON.parse(document.getElementById("dialogue").getAttribute('value'))
 dialogues= JSON.parse(dialogues)
 

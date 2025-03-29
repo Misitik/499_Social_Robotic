@@ -127,11 +127,11 @@ function admit_user()
     //get the data
     console.log(document.getElementById('users').getAttribute('value'))
     users = JSON.parse(document.getElementById('users').getAttribute('value'))
-    saves_length = JSON.parse(document.getElementById('savepoints').getAttribute('value'))
-    console.log(JSON.parse(users), JSON.parse(saves_length).length)
+    saves = JSON.parse(document.getElementById('savepoints').getAttribute('value'))
+    console.log(JSON.parse(users), JSON.parse(saves).length)
 
-    new_save_index = JSON.parse(saves_length) + 1
-
+    new_save_index = JSON.parse(saves).length + 1
+    console.log(new_save_index)
     console.log(users)
     users = JSON.parse(users)
     users.forEach(user => {
@@ -204,7 +204,7 @@ function startListening() {
     recognition.onresult = function(event) {
         let command = event.results[0][0].transcript.trim();
         document.getElementById("status").innerText = "Recognition complete.";
-        document.getElementById('input_box').setAttribute('placeholder', command)
+        document.getElementById('input_box').value = command
 
 
     };
