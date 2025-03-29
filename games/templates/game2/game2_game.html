@@ -10,11 +10,11 @@
      
     
 </head>
-
 <body>
 
     <div id = dialogue value = "{{dialogue}}"></div>
-    <div id = username value = "{{username}}"></div>
+    <div id = userdata value = "{{user_data}}"></div>
+    <div id = saves value = "{{saves}}"></div>
 
     <img src = "{% static 'images/mikan.png' %}" id = 'Teresa'>
     <img src = "{% static 'images/rito.png' %}" id = 'Jim'> 
@@ -57,7 +57,7 @@
             <button class = 'buttons'>Homepage</button>
         </a>
         <a href='{% url "game2_play" %}'>
-            <button class = 'buttons'>Restart</button>
+            <button class = 'buttons'>Retry</button>
         </a></div>
 
     

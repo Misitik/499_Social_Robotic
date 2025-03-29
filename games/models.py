@@ -43,6 +43,20 @@ class savepoint(models.Model):
     
     def get_time(self):
         return self.time
+class space_users(models.Model):
+    name = models.CharField(max_length=30)
+    save_points=models.JSONField(blank=True)
+
+class manner_savepoints(models.Model):
+    time = models.IntegerField(default=0)
+    game_won = models.BooleanField(default=False)
+    options_choosen= models.JSONField(blank=True)
+    choosing_scenario= models.JSONField(blank=True)
+
+class manner_users(models.Model):
+    name = models.CharField(max_length=30)
+    save_points=models.JSONField(blank=True)
+
     
 
 

@@ -1,6 +1,117 @@
+//musics
+hover_sound = document.getElementById('hover')
+click_sound = document.getElementById('click')
+option_click_sound = document.getElementById('option_click')
+classroom_sound = document.getElementById('classroom')
+happy_sound = document.getElementById('happy')
+sad_sound = document.getElementById('sad')
+play_ending_music = true
+
+branch_name = '1_introduction'   //initial branch
+////////////////////////////////////////////////////////////////////////
+//Load and save functionalies
+////////////////////////////////////////////////////////////////////////
+users_data = JSON.parse(document.getElementById('userdata').getAttribute('value'))
+//console.log(JSON.parse(users_data))
+
+//get the last element, which points to the save slot
+console.log(users_data)
+log_id = users_data.log_id
+console.log(users_data.log_id)
+last_branch_name = ''
+saves = JSON.parse(document.getElementById('saves').getAttribute('value'))
+//log_id = JSON.parse(document.getElementById('logid').getAttribute('value'))
+//console.log(log_id)
+
+let datalog = {}
+let time = 0
+
+function timer(time){
+  
+    var timer = setInterval(function(){
+    datalog.time +=1
+    update_save_point(log_id)
+
+    }, 1000);
+}
+
+function create_save_point()
+{
+    fetch(`/api/save-log-manner/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datalog)
+    })
+    .then(response => response.json())
+    .then(datalog => console.log(datalog))
+    .catch(error => console.error('Error:', error));
+}
+
+function update_save_point(log_id)
+{
+    console.log(JSON.stringify(datalog))
+    fetch(`/api/load-log-manner/${log_id}/`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        
+        },
+        body: JSON.stringify(datalog)
+    })
+    .then(response => console.log(response))
+    .then(datalog => console.log(datalog))
+    .catch(error => console.error('Error:', error));
+}
+
+function load_game()
+{
+    console.log(last_branch_name)
+    //get the branch name
+    branch_name = last_branch_name
+
+    //load the branch
+    get_branching_info()
+
+    //update the log
+}
+
+if(log_id === -1)
+{
+    branch_name = "1_introduction"
+    log_id = saves.length +1
+
+    console.log(log_id)
+    //create a new data
+    datalog = {
+        time: 0,
+        game_won:false,
+        options_choosen:[],
+        choosing_scenario:[branch_name]
+    }
+
+
+   create_save_point()
+
+
+   //start the timer from 0
+   timer(0)
+
+}else{//if we are loading an existing save
+
+    //load the game
+    //load_game()
+
+    //datalog = saves[log_id]
+   // time = datalog.time
+   // timer(time)
+
+}
+
 
 //get the dialogue passed from game1_py from the div element dialogue
-let username = document.getElementById('username').getAttribute('value')
+let username = document.getElementById('userdata').getAttribute('value')
 if(username === '') {username = 'Dante'}
 let dialogues = JSON.parse(document.getElementById("dialogue").getAttribute('value'))
 dialogues= JSON.parse(dialogues)
@@ -11,13 +122,7 @@ option_box = document.getElementById('choice_box')
 c_name = document.getElementById('character_name')
 option_box.style.visibility = 'hidden'
 
-hover_sound = document.getElementById('hover')
-click_sound = document.getElementById('click')
-option_click_sound = document.getElementById('option_click')
-classroom_sound = document.getElementById('classroom')
-happy_sound = document.getElementById('happy')
-sad_sound = document.getElementById('sad')
-play_ending_music = true
+
 
 function play_sound(sound)
 {
@@ -64,7 +169,8 @@ function split_dialogue(dialogue)
 }
 
 let this_dialogue = []    //this is for click to advance the dialogue
-branch_name = '1_introduction'   //initial branch
+
+
 let dialogue_object =  ""
 dialogues.forEach(element => {
                           if(element.fields.name === branch_name) 
@@ -185,6 +291,7 @@ function speakText(text) {
 
 /**
  * function that advance the dialogue 
+ * also has the effect of
  */
 
 function dialogue_advance()
@@ -243,6 +350,8 @@ function dialogue_advance()
                  document.getElementById('win_message').innerHTML = ending_message
                  if(play_ending_music === true)
                     {
+                        datalog.game_won = true
+                        update_save_point(log_id)
                         play_sound(happy_sound)
                         play_ending_music = false
                         classroom_sound.pause()
@@ -329,7 +438,12 @@ if(win !== true && lose !== true)//if didn't win and didn't lose, meaning there 
         {
             choice_text.innerHTML = dialogue_option_1
             choice.onclick = function()
-            {   branch_name =dialogue_fields.option_1_branch
+            {   
+                last_branch_name = branch_name
+                branch_name =dialogue_fields.option_1_branch
+                datalog.choosing_scenario.push(branch_name)
+                datalog.options_choosen.push(1)
+                update_save_point(log_id)
                 play_sound(option_click_sound)
                 console.log('clicked')
                 get_branching_info()}
@@ -338,7 +452,12 @@ if(win !== true && lose !== true)//if didn't win and didn't lose, meaning there 
         {
             choice_text.innerHTML = dialogue_option_2
             choice.onclick = function()
-            {   branch_name = dialogue_fields.option_2_branch
+            {   
+                last_branch_name = branch_name
+                branch_name = dialogue_fields.option_2_branch
+                datalog.choosing_scenario.push(branch_name)
+                datalog.options_choosen.push(2)
+                update_save_point(log_id)
                 play_sound(option_click_sound)
                 console.log('clicked')
                 get_branching_info()}
@@ -346,7 +465,12 @@ if(win !== true && lose !== true)//if didn't win and didn't lose, meaning there 
         }else{
             choice_text.innerHTML = dialogue_option_3
             choice.onclick = function()
-            {   branch_name = dialogue_fields.option_3_branch
+            {   
+                last_branch_name = branch_name
+                branch_name = dialogue_fields.option_3_branch
+                datalog.choosing_scenario.push(branch_name)
+                datalog.options_choosen.push(3)
+                update_save_point(log_id)
                 play_sound(option_click_sound)
                 console.log('clicked')
                 get_branching_info()}

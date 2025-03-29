@@ -60,8 +60,8 @@ if(log_id === -1)
 {//create a new data
     datalog = {
         stars_visited: [0,0,0,0,0,0,0,0,0], 
-        past_x_position: [1],
-        past_y_position: [1],
+        past_x_position: [],
+        past_y_position: [],
         time: 0,
         clicks:0,
         x_pos:0,
