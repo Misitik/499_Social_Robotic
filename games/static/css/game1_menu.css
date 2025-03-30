@@ -1,0 +1,74 @@
+body {
+    background-color: black;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  h1 {
+    font-family: "Arial", sans-serif;
+    font-size: 4rem;
+    color: #00ff77;
+    text-shadow: 4px 4px 4px black;
+  }
+
+  p {
+    font-family: "Arial Black", sans-serif;
+    margin-top: 20px;
+    font-size: 2.2rem;
+    color: black;
+    text-shadow: 3px 3px 4px white;
+  }
+
+  .GFG {
+    font-size: 1.5rem;
+    padding: 15px 30px;
+    background-color: green;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+
+  .GFG:hover {
+    background-color: darkgreen;
+  }
+
+  #text_background {
+    background-color: rgba(234,234,234,0.7);
+    padding: 10px;
+    border-radius: 40px;
+    margin: 50px;
+  }
+
+  #load_panel{
+    position: absolute;
+    width:80%;
+    height:80%;
+    left:10%;
+    top:10%;
+    border-radius: 40px;
+    background-color: pink;
+    visibility: hidden;
+    flex-direction:column;
+    display: flex;
+}
+
+#black_screen{
+    position:absolute;
+    width:100%;
+    height:100%;
+    left:0%;
+    top:0%;
+    background-color:rgba(0, 0, 0, 0.647);
+    visibility: hidden;
+}
+
+.half_panel{
+    height:100%;
+
+}
+
+#save_select{
+    visibility: hidden;
+}

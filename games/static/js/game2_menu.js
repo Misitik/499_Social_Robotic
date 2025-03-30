@@ -6,6 +6,22 @@
 selected_user = ''
 log_ids = []
 the_log_id = 0
+
+function load_saves()
+{
+    //console.log(JSON.parse(document.getElementById('users').getAttribute('value')))
+    get_user_saves()
+    document.getElementById('black_screen').style.visibility='visible'
+    document.getElementById('load_panel').style.visibility = 'visible'
+}
+
+function close_saves()
+{
+    document.getElementById('black_screen').style.visibility='hidden'
+    document.getElementById('load_panel').style.visibility = 'hidden'
+}
+
+
 function get_user_saves()
 {
     users = JSON.parse(document.getElementById('users').getAttribute('value'))
@@ -32,30 +48,7 @@ function get_user_saves()
     })
 }
 
-
-function load_saves()
-{
-    //console.log(JSON.parse(document.getElementById('users').getAttribute('value')))
-    get_user_saves()
-    document.getElementById('black_screen').style.visibility='visible'
-    document.getElementById('load_panel').style.visibility = 'visible'
-}
-
-function close_saves()
-{
-    document.getElementById('black_screen').style.visibility='hidden'
-    document.getElementById('load_panel').style.visibility = 'hidden'
-}
-
-function get_saves()
-{
-
-
-}
-
 let users = []
-
-
 
 function create_user(new_user)
 {

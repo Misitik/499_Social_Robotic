@@ -50,8 +50,9 @@ let save_points = JSON.parse(document.getElementById("save").getAttribute('value
 //save_points = JSON.parse(save_points)
 console.log(save_points)
 
-let log_id = JSON.parse(document.getElementById("load_point").getAttribute('value'))
-console.log(load_point)
+let the_user = JSON.parse(document.getElementById("user_data").getAttribute('value'))
+console.log(user_data)
+let log_id = user_data.log_id
 
 
 
