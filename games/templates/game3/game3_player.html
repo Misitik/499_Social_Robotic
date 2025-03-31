@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Enter Player Name</title>
+    <link rel="stylesheet" href="{% static 'actualgame/player.css' %}">
+</head>
+<body>
+    <div class="player-container">
+        <h1>🎮 Welcome to the Canada Game!</h1>
+        <form method="GET" action="{% url 'game' %}">
+            <label for="name">Enter your name:</label>
+            <input type="text" id="name" name="player" required>
+            <button type="submit">Start Game</button>
+        </form>
+    </div>
+</body>
+</html>

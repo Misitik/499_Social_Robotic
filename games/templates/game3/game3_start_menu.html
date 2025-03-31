@@ -1,20 +1,108 @@
-{%extends "start_menu_template.html"%}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Explore Canada – Learn Before You Play</title>
+    <link rel="stylesheet" href="{% static 'css/game3_menu.css' %}">
+</head>
+<body>
 
+    <div class="overlay">
+        <div class="menu-container">
 
-{%block menutitle%} Story Game {%endblock%}
+            <!-- Name Input Section -->
+            <div id="name-section">
+                <h1>🍁 Ready to Explore Canada?</h1>
+                <p>Please enter your name to begin:</p>
+                <input type="text" id="player-name" placeholder="Your Name">
+                <button id="name-submit">Continue</button>
+            </div>
 
-{%block style%}
+            <!-- Learning + Start Section -->
+            <div id="content-section" style="display: none;">
+                <h2 id="welcome-text"></h2>
+                <p>Quickly learn where each place belongs before you begin the game!</p>
 
-document.getElementsByTagName("body")[0].style = "background-image: url('static/images/Space.jpeg');"
-{%endblock%}
-{%block content%} 
+                <!-- Instructions -->
+                <div class="instructions">
+                    <h3>🧭 How to Play</h3>
+                    <ul>
+                        <li>🎯 Drag each tourist place to the correct province on the map.</li>
+                        <li>✅ +10 points for correct answers.</li>
+                        <li>❌ −10 points for incorrect ones.</li>
+                        <li>📍 Use what you’ve learned here to win!</li>
+                    </ul>
+                </div>
 
-{%endblock%}
+                <!-- Learning Cards -->
+                <div class="places-grid">
+                    <div class="place">
+                        <img src="{% static 'images/Whistler.png' %}" alt="Whistler">
+                        <p><strong>Whistler</strong><br>BC's famous ski resort town.</p>
+                    </div>
+                    <div class="place">
+                        <img src="{% static 'images/Vancouver_Island.png' %}" alt="Vancouver Island">
+                        <p><strong>Vancouver Island</strong><br>Nature & culture near Victoria.</p>
+                    </div>
+                    <div class="place">
+                        <img src="{% static 'images/Niagara.webp' %}" alt="Niagara Falls">
+                        <p><strong>Niagara Falls</strong><br>Massive waterfalls in Ontario.</p>
+                    </div>
+                    <div class="place">
+                        <img src="{% static 'images/Thousand_Islands_National_Park.png' %}" alt="Thousand Islands">
+                        <p><strong>Thousand Islands</strong><br>Scenic boat tours in Ontario.</p>
+                    </div>
+                    <div class="place">
+                        <img src="{% static 'images/Lake_Loiuse.webp' %}" alt="Lake Louise">
+                        <p><strong>Lake Louise</strong><br>Turquoise lake in Alberta.</p>
+                    </div>
+                    <div class="place">
+                        <img src="{% static 'images/Banff.webp' %}" alt="Banff">
+                        <p><strong>Banff</strong><br>Mountain town in Alberta.</p>
+                    </div>
+                    <div class="place">
+                        <img src="{% static 'images/Jasper.webp' %}" alt="Jasper">
+                        <p><strong>Jasper</strong><br>Alberta’s scenic national park.</p>
+                    </div>
+                    <div class="place">
+                        <img src="{% static 'images/Prince_Albert_National_Park.png' %}" alt="Prince Albert">
+                        <p><strong>Prince Albert Park</strong><br>Located in Saskatchewan.</p>
+                    </div>
+                    <div class="place">
+                        <img src="{% static 'images/omega_park.png' %}" alt="Omega Park">
+                        <p><strong>Omega Park</strong><br>Wildlife park in Quebec.</p>
+                    </div>
+                    <div class="place">
+                        <img src="{% static 'images/Montmorency_Park.png' %}" alt="Montmorency Falls">
+                        <p><strong>Montmorency Falls</strong><br>Taller than Niagara, in Quebec.</p>
+                    </div>
+                </div>
 
-{%block ref %}
-<a href='{% url 'game3_play' %}' >
-    <button class="GFG">
-        Start Game
-    </button>
-</a> 
-{%endblock%}
+                <a id="start-link" class="start-button" href="#">🎮 Start Game</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const nameInput = document.getElementById("player-name");
+        const nameButton = document.getElementById("name-submit");
+        const nameSection = document.getElementById("name-section");
+        const contentSection = document.getElementById("content-section");
+        const welcomeText = document.getElementById("welcome-text");
+        const startLink = document.getElementById("start-link");
+
+        nameButton.addEventListener("click", () => {
+            const name = nameInput.value.trim();
+            if (!name) return alert("Please enter your name!");
+
+            sessionStorage.setItem("playerName", name);
+            welcomeText.textContent = `👋 Welcome, ${name}!`;
+            nameSection.style.display = "none";
+            contentSection.style.display = "block";
+            startLink.href = "{% url 'game3_play' %}";
+        });
+    </script>
+
+</body>
+</html>

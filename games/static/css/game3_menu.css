@@ -1,0 +1,198 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: url("/static/images/menu_background.png") no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* Overlay without white bar */
+.overlay {
+    width: 100%;
+    height: 100%;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Main Container */
+.menu-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Name Input Section */
+#name-section {
+    background: rgba(255, 255, 255, 0.85);
+    padding: 40px 30px;
+    border-radius: 16px;
+    text-align: center;
+    max-width: 500px;
+    margin: 80px auto;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1s ease-in-out;
+}
+
+#name-section h1 {
+    font-size: 36px;
+    margin-bottom: 15px;
+    color: #1a1a1a;
+}
+
+#name-section p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#player-name {
+    padding: 12px 18px;
+    font-size: 18px;
+    width: 70%;
+    border: 2px solid #0072ff;
+    border-radius: 8px;
+    margin-right: 12px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#player-name:focus {
+    border-color: #00c6ff;
+    box-shadow: 0 0 5px rgba(0, 114, 255, 0.5);
+}
+
+#name-submit {
+    padding: 12px 24px;
+    font-size: 18px;
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+#name-submit:hover {
+    background: linear-gradient(to right, #0072ff, #0057c2);
+}
+
+/* Welcome Section */
+#content-section h2 {
+    font-size: 28px;
+    margin-top: 30px;
+    color: #1a1a1a;
+}
+
+/* Instruction Box */
+.instructions {
+    margin-top: 20px;
+    text-align: left;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 15px 25px;
+    border-radius: 12px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.instructions h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #1a1a1a;
+}
+
+.instructions ul {
+    list-style: none;
+    padding-left: 0;
+    font-size: 20px;
+    color: #333;
+}
+
+.instructions li {
+    margin-bottom: 8px;
+}
+
+/* Tourist Places Grid */
+.places-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+    margin-top: 30px;
+    justify-items: center;
+    padding: 20px;
+}
+
+.place {
+    background: white;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+    max-width: 140px;
+    text-align: center;
+}
+
+.place:hover {
+    transform: translateY(-5px);
+}
+
+.place img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 8px;
+}
+
+.place p {
+    font-size: 13px;
+    color: #333;
+}
+
+/* Start Game Button */
+.start-button {
+    display: inline-block;
+    margin-top: 30px;
+    font-size: 18px;
+    padding: 12px 26px;
+    background: lightblue;
+    color: black;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.start-button:hover {
+    background: #0057c2;
+}
+.learning-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.start-container {
+    min-width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

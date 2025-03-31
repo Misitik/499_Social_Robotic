@@ -1,68 +1,81 @@
-const puzzleContainer = document.getElementById("puzzle-container");
-const rows = 4;
-const cols = 4;
-let puzzlePieces = [];
-let emptySpot = { row: rows - 1, col: cols - 1 };  // Starting position of empty spot
+  const correctDropZones = {
+        // British Columbia
+        "place-whistler": "drop-bc",
+        "place-vancouver-island": "drop-bc",
 
-image = document.getElementById('ship')
+        // Ontario
+        "place-cn-tower": "drop-ontario",
+        "place-niagara": "drop-ontario",
+        "place-thousand-islands": "drop-ontario",
 
-// Create the puzzle pieces
-function createPuzzlePieces(image) {
-    let index = 0;
-    for (let row = 0; row < rows; row++) {
-      for (let col = 0; col < cols; col++) {
-        const piece = document.createElement("div");
-        piece.classList.add("puzzle-piece");
-        const posX = col * 100;
-        const posY = row * 100;
+        // Alberta
+        "place-lake-louise": "drop-alberta",
+        "place-banff": "drop-alberta",
+        "place-jasper": "drop-alberta",
 
-        
-        piece.style.backgroundImage = image//`url(${imageSrc})`;
-        piece.style.backgroundPosition = `-${posX}px -${posY}px`;
-  
-        if (row === rows - 1 && col === cols - 1) {
-          piece.classList.add("empty");
-        } else {
-          piece.addEventListener("click", () => movePiece(row, col));
-        }
-  
-        puzzleContainer.appendChild(piece);
-        puzzlePieces.push({ row, col, element: piece });
-      }
-    }
-  }
-  
-  // Move the clicked piece
-  function movePiece(row, col) {
-    const targetPiece = puzzlePieces.find(piece => piece.row === row && piece.col === col);
-  
-    if (isAdjacent(row, col, emptySpot.row, emptySpot.col)) {
-      targetPiece.element.classList.add("empty");
-      const emptyPiece = puzzlePieces.find(piece => piece.row === emptySpot.row && piece.col === emptySpot.col);
-      emptyPiece.element.classList.remove("empty");
-  
-      emptySpot = { row, col };
-      checkWin();
-    }
-  }
-  
-  // Check if two spots are adjacent
-  function isAdjacent(row1, col1, row2, col2) {
-    return (Math.abs(row1 - row2) === 1 && col1 === col2) || (Math.abs(col1 - col2) === 1 && row1 === row2);
-  }
-  
-  // Check if the puzzle is solved
-  function checkWin() {
-    const isSolved = puzzlePieces.every(piece => {
-      const targetRow = Math.floor(piece.element.index / cols);
-      const targetCol = piece.element.index % cols;
-      return piece.row === targetRow && piece.col === targetCol;
+        // Newfoundland and Labrador
+        "place-gros-morne": "drop-nl",
+
+        // Quebec
+        "place-omega-park": "drop-quebec",
+        "place-montmorency": "drop-quebec"
+    };
+
+    let score = 0; // 🧠 Score tracker
+    const scoreElement = document.getElementById('score');
+
+    const draggables = document.querySelectorAll('.draggable');
+    const dropzones = document.querySelectorAll('.dropzone');
+
+    draggables.forEach(item => {
+        item.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', item.id);
+        });
     });
-  
-    if (isSolved) {
-      alert("Congratulations! You solved the puzzle!");
-    }
-  }
-  
-  // Start the game
-initializePuzzle();
+
+    dropzones.forEach(zone => {
+        zone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            zone.classList.add('over');
+        });
+
+        zone.addEventListener('dragleave', () => {
+            zone.classList.remove('over');
+        });
+
+        zone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            zone.classList.remove('over');
+
+            const draggedItemId = e.dataTransfer.getData('text/plain');
+            const draggedItem = document.getElementById(draggedItemId);
+            const dropZoneId = zone.id;
+            const messageBox = document.getElementById('message');
+
+            const isCorrect = correctDropZones[draggedItemId] === dropZoneId;
+
+            if (isCorrect) {
+                // Prevent re-scoring if item already dropped correctly
+                if (!zone.contains(draggedItem)) {
+                    score += 10;
+                    zone.appendChild(draggedItem);
+                    draggedItem.style.margin = '5px';
+                }
+                messageBox.textContent = "✅ Correct!";
+                messageBox.className = "drop-message correct";
+            } else {
+                score -= 10;
+                messageBox.textContent = "❌ Wrong province!";
+                messageBox.className = "drop-message wrong";
+            }
+
+            // Update score display
+            scoreElement.textContent = score;
+
+            // Show message
+            messageBox.style.display = "block";
+            setTimeout(() => {
+                messageBox.style.display = "none";
+            }, 2000);
+        });
+    });

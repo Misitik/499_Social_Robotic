@@ -1,52 +1,130 @@
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sliding Puzzle Game</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background-color: #f4f4f4;
-    }
-
-    .puzzle-container {
-      display: grid;
-      grid-template-columns: repeat(4, 100px);
-      grid-template-rows: repeat(4, 100px);
-      gap: 2px;
-      border: 2px solid #333;
-      position: relative;
-    }
-
-    .puzzle-piece {
-      width: 100px;
-      height: 100px;
-      background-size: 400px 400px;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-
-    .empty {
-      background-color: #fff;
-    }
-
-    .puzzle-container img {
-      display: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Discover Canada</title>
+    <link rel="stylesheet" href="{% static 'css/game3.css' %}">
 </head>
 <body>
-    
-  <img src ="{% static 'images/ship.png'%}" id="ship"  > 
-  <div class="puzzle-container" id="puzzle-container"></div>
 
-  <script src="{% static 'js/game1.js'%}"></script>
+    <!-- Score Display -->
+    <div id="score-box">🏆 Score: <span id="score">0</span></div>
+
+    <!-- Drop Feedback Message -->
+    <div id="message" class="drop-message"></div>
+
+    <!-- Game Container -->
+    <div class="game-container">
+        <div class="dropzones-grid">
+            <!-- Drop Zones -->
+            <div class="dropzone" id="drop-bc"></div>
+            <div class="dropzone" id="drop-ontario"></div>
+            <div class="dropzone" id="drop-alberta"></div>
+            <div class="dropzone" id="drop-saskatchewan"></div>
+            <div class="dropzone" id="drop-quebec"></div>
+        </div>
+
+        <!-- Draggable Places -->
+        <div class="flags-container">
+            <!-- British Columbia -->
+            <img src="{% static 'images/Whistler.png' %}" alt="Whistler" class="draggable" draggable="true" id="place-whistler">
+            <img src="{% static 'images/Vancouver_Island.png' %}" alt="Vancouver Island" class="draggable" draggable="true" id="place-vancouver-island">
+
+            <!-- Ontario -->
+            <img src="{% static 'images/Niagara.webp' %}" alt="Niagara Falls" class="draggable" draggable="true" id="place-niagara">
+            <img src="{% static 'images/Thousand_Islands_National_Park.png' %}" alt="Thousand Islands" class="draggable" draggable="true" id="place-thousand-islands">
+
+            <!-- Alberta -->
+            <img src="{% static 'images/Lake_Loiuse.webp' %}" alt="Lake Louise" class="draggable" draggable="true" id="place-lake-louise">
+            <img src="{% static 'images/Banff.webp' %}" alt="Banff" class="draggable" draggable="true" id="place-banff">
+            <img src="{% static 'images/Jasper.webp' %}" alt="Jasper" class="draggable" draggable="true" id="place-jasper">
+
+            <!-- Saskatchewan -->
+            <img src="{% static 'images/Prince_Albert_National_Park.png' %}" alt="Prince Albert National Park" class="draggable" draggable="true" id="place-prince-albert">
+
+            <!-- Quebec -->
+            <img src="{% static 'images/omega_park.png' %}" alt="Omega Park" class="draggable" draggable="true" id="place-omega-park">
+            <img src="{% static 'images/Montmorency_Park.png' %}" alt="Montmorency Falls" class="draggable" draggable="true" id="place-montmorency">
+        </div>
+    </div>
+
+    <!-- Game Logic -->
+    <script>
+        window.addEventListener("load", () => {
+            const playerName = sessionStorage.getItem("playerName") || "Player";
+            document.getElementById("score-box").innerHTML = `🏆 Score (${playerName}): <span id="score">0</span>`;
+        });
+
+        const correctDropZones = {
+            "place-whistler": "drop-bc",
+            "place-vancouver-island": "drop-bc",
+            "place-niagara": "drop-ontario",
+            "place-thousand-islands": "drop-ontario",
+            "place-lake-louise": "drop-alberta",
+            "place-banff": "drop-alberta",
+            "place-jasper": "drop-alberta",
+            "place-prince-albert": "drop-saskatchewan",
+            "place-omega-park": "drop-quebec",
+            "place-montmorency": "drop-quebec"
+        };
+
+        let score = 0;
+        const scoreElement = () => document.getElementById('score');
+
+        const draggables = document.querySelectorAll('.draggable');
+        const dropzones = document.querySelectorAll('.dropzone');
+
+        draggables.forEach(item => {
+            item.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('text/plain', item.id);
+            });
+        });
+
+        dropzones.forEach(zone => {
+            zone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                zone.classList.add('over');
+            });
+
+            zone.addEventListener('dragleave', () => {
+                zone.classList.remove('over');
+            });
+
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                zone.classList.remove('over');
+
+                const draggedItemId = e.dataTransfer.getData('text/plain');
+                const draggedItem = document.getElementById(draggedItemId);
+                const dropZoneId = zone.id;
+                const messageBox = document.getElementById('message');
+
+                const isCorrect = correctDropZones[draggedItemId] === dropZoneId;
+
+                if (isCorrect) {
+                    if (!zone.contains(draggedItem)) {
+                        score += 10;
+                        zone.appendChild(draggedItem);
+                        draggedItem.style.margin = '5px';
+                    }
+                    messageBox.textContent = "✅ Correct!";
+                    messageBox.className = "drop-message correct";
+                } else {
+                    score -= 10;
+                    messageBox.textContent = "❌ Wrong province!";
+                    messageBox.className = "drop-message wrong";
+                }
+
+                scoreElement().textContent = score;
+                messageBox.style.display = "block";
+
+                setTimeout(() => {
+                    messageBox.style.display = "none";
+                }, 2000);
+            });
+        });
+    </script>
+
 </body>
 </html>
