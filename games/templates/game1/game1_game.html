@@ -35,26 +35,26 @@
         <div class = "saturn_b star"id = Saturn></div>
         <div class = "uranus_b star"id = Uranus></div>
         <div class = "neptune_b star"id = Neptune></div>
- 
       
         <div>
             <img src = "{% static 'images/waypoint.png' %}" id = "waypoint">
             <img src ="{% static 'images/ship.png'%}" id="ship"  > 
-
             
         </div>
 
-        
     </div>
     <!--bind the data to the div, for it to get accessed later in game1.js -->
    <div id = gg value = "{{planets}}"></div>
+   <!-- Voice Agent Button -->
+<button onclick="startListening()" style="position: fixed; top: 10px; right: 10px; z-index: 1000; padding: 10px; background-color: black; color: lime; border: 2px solid lime; border-radius: 8px;">
+    🎤 Speak to Agent
+  </button>
    <div id = save value = "{{save_points}}"></div>
    <div id = user_data value = "{{user_data}}"></div>
 
     <script src = "{% static 'js/game1.js'%}"></script>
    
         <!--    Reverse URL Lookup-->
-        
    
         <div id = 'left_panel'> 
   
@@ -73,7 +73,6 @@
 
          </div>
          
-
          <div id = 'visited_display'>
 
             <div id = 'display_title'>Planets Visited</div>
@@ -101,7 +100,6 @@
         </a>
         
         <select id = "voiceSelect" style = 'visibility:hidden;'></select>
-
 
 </body>
 </html>

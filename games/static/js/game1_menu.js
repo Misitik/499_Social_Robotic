@@ -19,6 +19,18 @@ function speakText(text) {
     speakText(instructions);
   }
 
+  function showInstruction(){
+    document.getElementById('instruction').style.visibility = 'visible'
+    document.getElementById('black_screen').style.visibility = 'visible'
+  }
+
+  
+  function closeInstruction(){
+    document.getElementById('instruction').style.visibility = 'hidden'
+    document.getElementById('black_screen').style.visibility = 'hidden'
+    
+  }
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 //DATALOGGING/////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -32,6 +44,8 @@ selected_user = ''
 
     document.getElementById('black_screen').style.visibility='visible'
     document.getElementById('load_panel').style.visibility = 'visible'
+    document.getElementById('save_select').style.visibility = 'hidden'
+    document.getElementById('user_select').style.visibility = 'visible'
     get_user_saves()
 }
 
@@ -39,9 +53,9 @@ function close_saves()
 {
     document.getElementById('black_screen').style.visibility='hidden'
     document.getElementById('load_panel').style.visibility = 'hidden'
+    document.getElementById('save_select').style.visibility = 'hidden'
+    document.getElementById('user_select').style.visibility = 'hidden'
 }
-
-
 function get_user_saves()
 {
     users = JSON.parse(document.getElementById('space_users').getAttribute('value'))

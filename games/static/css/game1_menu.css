@@ -10,6 +10,8 @@ body {
     font-size: 4rem;
     color: #00ff77;
     text-shadow: 4px 4px 4px black;
+    position: relative;
+    margin: 20px;
   }
 
   p {
@@ -34,12 +36,6 @@ body {
     background-color: darkgreen;
   }
 
-  #text_background {
-    background-color: rgba(234,234,234,0.7);
-    padding: 10px;
-    border-radius: 40px;
-    margin: 50px;
-  }
 
   #load_panel{
     position: absolute;
@@ -71,4 +67,68 @@ body {
 
 #save_select{
     visibility: hidden;
+}
+
+#instruction{
+  visibility: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left:0%;
+  top:0%;
+  justify-items:center;
+}
+
+#text_background {
+  background-color: rgb(234, 234, 234);
+  padding: 10px;
+  border-radius: 40px;
+  width: 80%;
+  height: 70%;
+  justify-content:center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+
+#instruction_buttons{
+  display: flex;
+  flex-direction:row;
+  position: relative;
+  justify-items: center;
+
+}
+
+#input_box{
+  margin: 1%; 
+  border-radius: 20px; 
+  padding: 2%; 
+  text-align: center;
+  width:25%;
+  font-size:large;
+  /*background-color: rgba(234, 234, 234, 0.73);*/
+}
+
+#text_element{
+  background-color: rgba(234, 234, 234, 0.829);
+  padding: 10px;
+  position: relative;
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+
+}
+
+@font-face {
+  font-family: scFont;
+  src: url("static/starcraft.ttf") format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+#title{
+  font-family: scFont, sans-serif;
+  background-color: rgba(128, 128, 128, 0.71);
+  color: blue;
 }

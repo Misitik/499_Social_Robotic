@@ -8,42 +8,47 @@
   <title>Journey Among Stars</title>
 </head>
 <body style= 'background-image: url("{% static 'images/Instruction_bg.jpg' %}")'>
+  <h1 id = 'title'>StarCraft 3: Solar Journey </h1>
 
-  <h1>Instructions to start your journey of Solar System</h1>
-
-  <div id="text_background">
-    <p> Welcome to the game! </p>
-    <p>• Your mission is to explore the solar system.</p>
-    <p>• Click anywhere to move your spaceship.</p>
-    <p>• Visit all the planets and the Sun.</p>
-    <p>• When you reach a planet, a fun fact will appear.</p>
-    <p>• Keep exploring until you've visited them all!</p>
-  </div>
-
-  <a >
-    <button class="GFG" onclick = 'admit_user()'>🚀 Start Game</button>
-  </a>
-
-  <br><br>
 
   <div id = name_input>
     <form  >
- 
-        <h2 style = 'background-color: white; color: red; border-radius: 10px; margin: 4%; text-align: center; border-style: solid; border-width: 4px; border-color: pink; '>Your Name</h2>
-        <input type = 'text' id = input_box placeholder="Dante" name = 'userInput' style = 'margin: 5%; border-radius: 20px; padding: 2%; text-align: center;'>
-        <p style = 'font-size: 20px; margin-top: -2%; margin-left: 4%; margin-right: 4%;'>Enter your name. You can either type or speak out your name </p>
-
-
-    <p id="status">Press the start listening button and say name...</p>
-    <p id = 'result'></p>
-
+    
+    <div id = 'text_element'>
+        <h2 style = 'background-color: white; color: blue; border-radius: 10px; margin: 1%; text-align: center; border-style: solid; border-width: 4px; border-color: blue; width: 30%; font-size:60px;'>Your Name</h2>
+        <p style = 'font-size: 20px; margin: 1%;'>Enter your name. You can either type or speak out your name </p>
+        <input type = 'text' id = input_box placeholder="Dante" name = 'userInput'>
+        <p id="status">Press the start listening button and say name...</p>
+        <p id = 'result'></p>
+        <button id = 'mic' onclick = 'startListening()' class = 'GFG'style = 'margin-bottom:2%;'>Speak Thy Name </button>
+    </div>
    
     </form>
-
-  <button onclick="speakInstructions()" class="GFG">🎤 Read Instructions</button>
-  <button id = 'mic' onclick = 'startListening()' class = 'GFG'>Speak Thy Name </button>
-  <button id="load" onclick = 'load_saves()' class = 'GFG'>Load Game</button>
+  <div id = 'buttons' style = 'margin-top: 5%;'>
+      <button class="GFG" onclick = 'admit_user()'>🚀 Start Game</button>
+      <button id="load" onclick = 'load_saves()' class = 'GFG'>Load Game</button>
+      <button onclick="showInstruction()"class = "GFG">Show Instruction</button>
+  </div>
    <div id='black_screen'></div>
+
+   <div id = 'instruction'>
+    <h1>Instructions to start your journey of Solar System</h1>
+
+    <div id="text_background">
+      <p> Welcome to the game! </p>
+      <p>• Your mission is to explore the solar system.</p>
+      <p>• Click anywhere to move your spaceship.</p>
+      <p>• Visit all the planets and the Sun.</p>
+      <p>• When you reach a planet, a fun fact will appear.</p>
+      <p>• Keep exploring until you've visited them all!</p>
+    </div>
+
+    <div id = 'instruction_buttons'>
+      <button id ='close_instruction_button' onclick = 'closeInstruction()' class = "GFG" style = 'margin-right: 40px;'>Back to Menu</button>
+      <button onclick="speakInstructions()" class="GFG">🎤 Read Instructions</button>
+    </div>
+</div>
+
     <div id="load_panel">
         <h2>Past Saves</h2>
         <!--display all the users that is currently on database-->
