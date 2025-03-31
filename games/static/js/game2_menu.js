@@ -198,8 +198,6 @@ function startListening() {
         let command = event.results[0][0].transcript.trim();
         document.getElementById("status").innerText = "Recognition complete.";
         document.getElementById('input_box').value = command
-
-
     };
 
     recognition.start();

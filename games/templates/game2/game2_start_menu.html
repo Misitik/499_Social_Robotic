@@ -51,9 +51,11 @@
     </form>
 
     <button class = 'game-button' onclick = 'admit_user()'>users</button>
-    <button id="mic-button"  >Start Listening</button>
+    <button id="mic-button" onclick=" startListening()"  >Start Listening</button>
     <button id="load" onclick = 'load_saves()'>Load Game</button>
     </div>
+
+
 
     <div id = 'background'>
         <h2 style = 'background-color: white; color: red; border-radius: 10px; margin-top: -15%; text-align: center; border-style: solid; border-width: 4px; border-color: pink; '> Background</h2>
@@ -66,7 +68,21 @@
        <button id = 'background_button' >Read Background</button>
     </div>
    
-
+    <div id='black_screen'></div>
+    <div id="load_panel">
+        <h2>Past Saves</h2>
+        <!--display all the users that is currently on database-->
+        <div class = 'half_panel'>
+            <select multiple id="user_select" style = 'width:80%;'></select>
+            <button id = 'select_user_button'>select user</button>
+        </div>
+        <!-- saves for that specific users-->
+        <div class = 'half_panel' id = 'save_select'>
+            <select multiple id ='savepoints_select' style = 'width:80%;'></select>
+            <button id ='select_load_button'>select load</button>
+        </div>
+        <button id="exit_load_saves" onclick="close_saves()">Exit</button>
+    </div><!--end of black screen-->
 
 
 

@@ -66,8 +66,9 @@ class map_savepoint(models.Model):
     game_won = models.BooleanField(default=False)
     map_draged = models.JSONField(blank=True)
     map_correct = models.JSONField(blank=True)
+    current_drags = models.JSONField(blank=True)
 
-    
+
     
 
 

@@ -42,8 +42,6 @@ def save_log(request):
     return JsonResponse({'status': 'failed'}, status=400)
 
 
-
-
 @csrf_exempt
 def update_log(request, log_id):
    

@@ -17,7 +17,25 @@
                 <p>Please enter your name to begin:</p>
                 <input type="text" id="player-name" placeholder="Your Name">
                 <button id="name-submit">Continue</button>
+                <button id="load" onclick = 'load_saves()'>Load Game</button>
             </div>
+
+            <!--Loading Screen-->
+            <div id='black_screen'></div>
+            <div id="load_panel">
+                <h2>Past Saves</h2>
+                <!--display all the users that is currently on database-->
+                <div class = 'half_panel'>
+                    <select multiple id="user_select" style = 'width:80%;'></select>
+                    <button id = 'select_user_button'>select user</button>
+                </div>
+                <!-- saves for that specific users-->
+                <div class = 'half_panel' id = 'save_select'>
+                    <select multiple id ='savepoints_select' style = 'width:80%;'></select>
+                    <button id ='select_load_button'>select load</button>
+                </div>
+                <button id="exit_load_saves" onclick="close_saves()">Exit</button>
+            </div><!--end of black screen-->
 
             <!-- Learning + Start Section -->
             <div id="content-section" style="display: none;">
@@ -83,26 +101,9 @@
             </div>
         </div>
     </div>
-
-    <script>
-        const nameInput = document.getElementById("player-name");
-        const nameButton = document.getElementById("name-submit");
-        const nameSection = document.getElementById("name-section");
-        const contentSection = document.getElementById("content-section");
-        const welcomeText = document.getElementById("welcome-text");
-        const startLink = document.getElementById("start-link");
-
-        nameButton.addEventListener("click", () => {
-            const name = nameInput.value.trim();
-            if (!name) return alert("Please enter your name!");
-
-            sessionStorage.setItem("playerName", name);
-            welcomeText.textContent = `👋 Welcome, ${name}!`;
-            nameSection.style.display = "none";
-            contentSection.style.display = "block";
-            startLink.href = "{% url 'game3_play' %}";
-        });
-    </script>
+    <div id = 'map_saves' value = '{{map_saves}}'></div>
+    <div id = 'map_users' value = '{{map_users}}'></div>
+    <script src = "{% static 'js/game3_menu.js'  %}"></script>
 
 </body>
 </html>

@@ -36,14 +36,14 @@
     </div>
 
     <div> </div>
-
-
+    
+    <div id='black_screen'></div>
     <div id = 'win'  class = 'screen'>
         <h1 style = 'color:yellow;'>~ Win ~</h1>        
         <p id = 'win_message' class = 'ending_message'></p>
         <p class = 'ending_text' style = 'color:green;' >Congratulation, you know how to act properly</p>
-        <a href='{% url "home" %}'>
-            <button class = 'buttons'>Homepage</button>
+        <a >
+            <button class = 'buttons' id ='restart_button'>Homepage</button>
         </a>
         <a href='{% url "game2_play" %}'>
             <button class = 'buttons'>Restart</button>
@@ -56,12 +56,12 @@
         <a href='{% url "home" %}'>
             <button class = 'buttons'>Homepage</button>
         </a>
-        <a href='{% url "game2_play" %}'>
-            <button class = 'buttons'>Retry</button>
+        <a >
+            <button class = 'buttons' id = 'retry_button'>Retry</button>
         </a></div>
 
     
-    <select id = 'voiceSelect'></select>
+    <select id = 'voiceSelect' style = 'visibility: hidden;'></select>
 
     <audio id = 'hover'>
         <source src = "{% static 'sound/hover.mp3' %}" type="audio/mpeg">

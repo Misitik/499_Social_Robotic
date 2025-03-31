@@ -12,9 +12,9 @@ branch_name = '1_introduction'   //initial branch
 //Load and save functionalies
 ////////////////////////////////////////////////////////////////////////
 users_data = JSON.parse(document.getElementById('userdata').getAttribute('value'))
-let username = document.getElementById('userdata').getAttribute('value')
-//console.log(JSON.parse(users_data))
 
+//console.log(JSON.parse(users_data))
+let username = users_data.name
 //get the last element, which points to the save slot
 console.log(users_data)
 log_id = Number(users_data.log_id)
@@ -353,9 +353,11 @@ function dialogue_advance()
                 {
                  option_box.style.visibility = 'hidden'
                  document.getElementById('win').style.visibility = 'visible'
+                 document.getElementById('black_screen').style.visibility = 'visible'
                  document.getElementById('win_message').innerHTML = ending_message
                  if(play_ending_music === true)
                     {
+
                         datalog.game_won = true
                         update_save_point(log_id)
                         play_sound(happy_sound)
@@ -367,6 +369,7 @@ function dialogue_advance()
                 {
                  option_box.style.visibility = 'hidden'
                  document.getElementById('lose').style.visibility = 'visible'
+                 document.getElementById('black_screen').style.visibility = 'visible'
                  document.getElementById('lose_message').innerHTML = ending_message
                  if(play_ending_music === true)
                     {
@@ -513,4 +516,30 @@ document.addEventListener('mousedown', (event) => {
   });
 
 console.log('before_get_branch')
+document.getElementById('retry_button').onclick = function()
+{
+
+    document.getElementById('lose').style.visibility = 'hidden'
+    document.getElementById('black_screen').style.visibility = 'hidden'
+    scenarios = datalog.choosing_scenario
+    if(branch_name !== '1_introduction' )
+    {
+        branch_name = scenarios[scenarios.length-2]
+    }
+
+    console.log(branch_name)
+    get_branching_info()
+}
+
+document.getElementById('restart_button').onclick = function()
+{
+    document.getElementById('win').style.visibility = 'hidden'
+    document.getElementById('black_screen').style.visibility = 'hidden'
+    scenarios = datalog.choosing_scenario
+    branch_name = '1_introduction' 
+    console.log(branch_name)
+    get_branching_info()
+}
+
+
 get_branching_info()

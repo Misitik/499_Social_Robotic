@@ -241,3 +241,31 @@ document.getElementById('select_load_button').onclick = function(){
 
 
 }
+
+function startListening() {
+    if (!('webkitSpeechRecognition' in window)) {
+        alert("Not supported. Try again.");
+        return;
+    }
+
+    let recognition = new webkitSpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = "en-US";
+
+    recognition.onstart = function() {
+        document.getElementById("status").innerText = "Listening...";
+    };
+
+    // event.result[0] = [
+    //     {transcript: "The answer is right", confidence: 0.97},
+    //     {transcript: "The answer is write", confidence: 0.80},
+    // ]
+    recognition.onresult = function(event) {
+        let command = event.results[0][0].transcript.trim();
+        document.getElementById("status").innerText = "Recognition complete.";
+        document.getElementById('input_box').value = command
+    };
+
+    recognition.start();
+}

@@ -1,4 +1,95 @@
-  const correctDropZones = {
+function timer(){
+  
+  var timer = setInterval(function(){
+  datalog.time +=1
+  update_save_point(log_id)
+
+  }, 1000);
+}
+
+
+function create_save_point()
+{
+    fetch(`/api/save-log-map/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datalog)
+    })
+    .then(response => response.json())
+    .then(datalog => console.log(datalog))
+    .catch(error => console.error('Error:', error));
+}
+
+function update_save_point(log_id)
+{
+    console.log(JSON.stringify(datalog))
+    fetch(`/api/load-log-map/${log_id}/`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        
+        },
+        body: JSON.stringify(datalog)
+    })
+    .then(response => console.log(response))
+    .then(datalog => console.log(datalog))
+    .catch(error => console.error('Error:', error));
+}
+
+game_won = false
+ 
+//parse the data passed from game3.py from game3_game method
+let save_points = JSON.parse(document.getElementById("map_savepoints").getAttribute('value'))
+save_points = JSON.parse(save_points)
+
+let the_user = JSON.parse(document.getElementById("user_data").getAttribute('value'))
+console.log(the_user)
+let log_id = Number(the_user.log_id)
+
+let datalog = {}
+/**
+ * depend on the log id, it will create new data
+ * if it is -1 create a new save
+ * if it is not -1, it means we are loading a save
+ * just pass the variable from the save to the game
+ */
+if(log_id === -1){//create a new data
+    console.log('new_savepoint')
+    log = {
+        time: 0,
+        game_won:false, 
+        map_draged:[],
+        map_correct:[],
+        current_drags:[]
+    }
+    datalog = log
+    log_id = save_points.length +1
+
+    create_save_point()
+    timer()
+
+}else{//get the save's data
+ 
+    //load the saves 
+    save_spot = save_points.find(obj => obj.pk === log_id).fields
+
+    //update the variables for the game
+    username = the_user.fields.name
+    datalog = save_spot
+
+    time = datalog.time
+    timer()
+    
+
+}
+
+
+console.log(log_id)
+console.log(datalog)
+ 
+ const correctDropZones = {
         // British Columbia
         "place-whistler": "drop-bc",
         "place-vancouver-island": "drop-bc",
