@@ -24,14 +24,15 @@ function speakText(text) {
 /////////////////////////////////////////////////////////////////////////////////////////
 console.log(document.getElementById('space_saves').getAttribute('value'))
 console.log(document.getElementById('space_users').getAttribute('value'))
-
+selected_user = ''
 
   function load_saves()
 {
     //console.log(JSON.parse(document.getElementById('users').getAttribute('value')))
-    //get_user_saves()
+
     document.getElementById('black_screen').style.visibility='visible'
     document.getElementById('load_panel').style.visibility = 'visible'
+    get_user_saves()
 }
 
 function close_saves()
@@ -99,7 +100,7 @@ function update_user(user, log_id)
     .catch(error => console.error('Error:', error));
 }
 
-function go_to_game_2(user, log_id)
+function go_to_game_1(user, log_id)
 {
 
     Object.assign(user, {log_id: log_id})
@@ -169,7 +170,7 @@ function admit_user()
         console.log(new_user)
         create_user(new_user)
 
-        go_to_game_2(new_user,-1)
+        go_to_game_1(new_user,-1)
     }//else
    {
         //get the user data
@@ -183,8 +184,60 @@ function admit_user()
         new_user = the_user
         update_user(the_user, user_index)
 
-        go_to_game_2(new_user,-1)
+        go_to_game_1(new_user,-1)
     }
 
 }
 
+document.getElementById('select_user_button').onclick = function(){
+    name_to_find = selected_user
+    saves = JSON.parse(document.getElementById('space_saves').getAttribute('value'))
+    document.getElementById('save_select').style.visibility = 'visible'
+
+    saves = JSON.parse(saves)
+    save_select = document.getElementById('savepoints_select')
+    save_select.innerHTML = ''
+    user_saves = []
+    save_index = 0
+    console.log(saves)
+
+    console.log(log_ids)
+    log_ids.forEach(log_id => {
+            console.log(log_id)
+ 
+            save_point = saves.find(obj => obj.pk === log_id)
+            console.log(save_point)
+
+            let option = document.createElement('option')
+            option.value = log_id
+            option.textContent = selected_user + '  ' + save_index.toString()
+            save_index +=1
+            option.onclick = function(){
+                console.log(option.value)
+                the_log_id = option.value
+            }
+            save_select.appendChild(option)
+        
+       
+        
+    })
+}
+
+document.getElementById('select_load_button').onclick = function(){
+    users = JSON.parse(document.getElementById('space_users').getAttribute('value'))
+    users = JSON.parse(users)
+
+    the_user = ''
+
+    users.forEach(user => {
+        if (user.fields.name === selected_user)
+        {
+            the_user = user
+        }
+
+    })
+
+         go_to_game_1(the_user,the_log_id)
+
+
+}

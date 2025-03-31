@@ -1,4 +1,52 @@
-let datalog = {}
+user_name = ''
+planet_visited = [0,0,0,0,0,0,0,0,0]
+all_visited =    [1,1,1,1,1,1,1,1,1]
+planet_visited_name = []
+ 
+function recompute_visited(index)
+{
+    planet_name = ''
+    switch(index)
+    {
+        case 0:
+            planet_name = 'Sun';
+            break;
+ 
+        case 1:
+            planet_name = 'Mercury';
+            break;
+
+        case 2:
+            planet_name = 'Venus';
+            break;
+
+        case 3:
+            planet_name = 'Earth';
+            break;
+
+        case 4:
+            planet_name = 'Mars';
+            break;
+
+        case 5:
+            planet_name = 'Jupiter';
+            break;
+
+        case 6:
+            planet_name = 'Saturn';
+            break;
+
+        case 7:
+            planet_name = 'Uranus';
+            break;
+
+        case 8:
+            planet_name = 'Neptune';
+            break;
+}
+   return planet_name
+}
+
 function timer(){
   
     var timer = setInterval(function(){
@@ -47,19 +95,20 @@ let string_table = JSON.parse(document.getElementById("gg").getAttribute('value'
 table= JSON.parse(string_table)
 
 let save_points = JSON.parse(document.getElementById("save").getAttribute('value'))
-//save_points = JSON.parse(save_points)
-console.log(save_points)
+save_points = JSON.parse(save_points)
+
 
 let the_user = JSON.parse(document.getElementById("user_data").getAttribute('value'))
-console.log(user_data)
-let log_id = user_data.log_id
+console.log(the_user)
+let log_id = Number(the_user.log_id)
 
 
 
 
-if(log_id === -1)
-{//create a new data
-    datalog = {
+let datalog = {}
+if(log_id === -1){//create a new data
+    console.log('new_savepoint')
+    log = {
         stars_visited: [0,0,0,0,0,0,0,0,0], 
         past_x_position: [],
         past_y_position: [],
@@ -69,7 +118,7 @@ if(log_id === -1)
         y_pos:0,
         game_won:false
     }
-
+    datalog = log
     log_id = save_points.length +1
 
     create_save_point()
@@ -77,11 +126,33 @@ if(log_id === -1)
 
 }else{//get the save's data
  
+    //load the saves 
+    save_spot = save_points.find(obj => obj.pk === log_id).fields
+
+    //update the variables for the game
+    username = the_user.fields.name
+    datalog = save_spot
+    console.log(datalog.stars_visited)
+    console.log(datalog.stars_visited)
+    planet_visited = datalog.stars_visited
+
+    for(x = 0; x < planet_visited.length; x++)
+    {
+        if(planet_visited[x]=== 1)
+        {
+           planet_name = recompute_visited(x)
+           planet_visited_name.push(planet_name)
+        }
+    }
+    time = datalog.time
+    timer(time)
+    
+
 }
 
 
 console.log(log_id)
-
+console.log(datalog)
 
 
 ///////////////////////////DON'T MATTER///////////////////////////////////////////////////
@@ -318,10 +389,6 @@ function planet_visited_index(planet_name)
     return planet_index
 }
 
-planet_visited = [0,0,0,0,0,0,0,0,0]
-all_visited =    [1,1,1,1,1,1,1,1,1]
-planet_visited_name = []
-
 
 function collision(x, y)
 {
@@ -442,7 +509,7 @@ if(event.button === 0)
   waypoint.style.left =(event.clientX - w_w/2).toString() + 'px'
   waypoint.style.top = (event.clientY - w_h).toString() + 'px'
 
-  
+  console.log(datalog)
   datalog.clicks += 1
   datalog.past_x_position.push(target_x)
   datalog.past_y_position.push(target_y)

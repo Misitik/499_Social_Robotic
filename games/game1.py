@@ -133,7 +133,6 @@ def move_ship(request):
     user_data = request.session.get('data',[])
     return render(request, 'game1/game1_game.html', context = {'planets': json.dumps(planets), 'save_points': json.dumps(save_points), 'user_data': json.dumps(user_data)})
 
-
 def get_item(request, planet_name):
     data = {'id': 'id', 'name': planet_name, 'description': 'planet_description'}
     return JsonResponse(data)
