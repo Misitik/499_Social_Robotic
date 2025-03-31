@@ -57,6 +57,17 @@ class manner_users(models.Model):
     name = models.CharField(max_length=30)
     save_points=models.JSONField(blank=True)
 
+class map_user(models.Model):
+    name = models.CharField(max_length=30)
+    save_points=models.JSONField(blank=True)
+
+class map_savepoint(models.Model):
+    time = models.IntegerField(default=0)
+    game_won = models.BooleanField(default=False)
+    map_draged = models.JSONField(blank=True)
+    map_correct = models.JSONField(blank=True)
+
+    
     
 
 
