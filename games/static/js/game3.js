@@ -7,7 +7,6 @@ function timer(){
   }, 1000);
 }
 
-
 function create_save_point()
 {
     fetch(`/api/save-log-map/`, {
@@ -43,12 +42,17 @@ game_won = false
 //parse the data passed from game3.py from game3_game method
 let save_points = JSON.parse(document.getElementById("map_savepoints").getAttribute('value'))
 save_points = JSON.parse(save_points)
+console.log(save_points)
+let datalog = {}
 
 let the_user = JSON.parse(document.getElementById("user_data").getAttribute('value'))
 console.log(the_user)
 let log_id = Number(the_user.log_id)
+time = 0
+console.log(the_user)
+console.log(log_id)
+console.log(datalog)
 
-let datalog = {}
 /**
  * depend on the log id, it will create new data
  * if it is -1 create a new save
@@ -78,6 +82,7 @@ if(log_id === -1){//create a new data
     //update the variables for the game
     username = the_user.fields.name
     datalog = save_spot
+    
 
     time = datalog.time
     timer()
@@ -85,10 +90,6 @@ if(log_id === -1){//create a new data
 
 }
 
-
-console.log(log_id)
-console.log(datalog)
- 
  const correctDropZones = {
         // British Columbia
         "place-whistler": "drop-bc",
@@ -151,6 +152,9 @@ console.log(datalog)
                     score += 10;
                     zone.appendChild(draggedItem);
                     draggedItem.style.margin = '5px';
+                    datalog.map_correct.push('C')
+                    datalog.map_draged.push(draggedItem)
+                    datalog.curent_drags = []
                 }
                 messageBox.textContent = "✅ Correct!";
                 messageBox.className = "drop-message correct";
@@ -158,6 +162,9 @@ console.log(datalog)
                 score -= 10;
                 messageBox.textContent = "❌ Wrong province!";
                 messageBox.className = "drop-message wrong";
+                datalog.map_correct.push('W')
+                datalog.map_draged.push(draggedItem)
+                datalog.current_drags = []
             }
 
             // Update score display

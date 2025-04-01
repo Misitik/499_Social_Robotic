@@ -8,20 +8,20 @@ from rest_framework import status
 
 def game3_menu(request):
     
-    map_users = serialize('json', map_user.objects.all().values())
-    map_savepoints = serialize('json', map_savepoint.objects.all().values())
+    map_users = serialize('json', map_user.objects.all())
+    map_savepoints = serialize('json', map_savepoint.objects.all())
     return render(request, 'game3/game3_start_menu.html', context = {
         'map_users': json.dumps(map_users),
         'map_saves': json.dumps(map_savepoints)
     })
 
-
+@csrf_exempt
 def game3_game(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         request.session['data'] = data
         return redirect('/game3_game/')
-    map_savepoints = map_savepoint.objects.all().values()
+    map_savepoints = serialize('json', map_savepoint.objects.all())
     user_data = request.session.get('data',[])
     return render(request, 'game3/game3_game.html', context = {
          'map_savepoints': json.dumps(map_savepoints), 

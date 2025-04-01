@@ -99,16 +99,17 @@ title {
 
 #win_window {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    top: 30vh;
+    left: 30vw;
+    width: 40vw;
+    height: 40vh;
     background-color: rgba(0, 0, 0, 0.8); /* Optional: Adds a dark overlay */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     visibility: hidden;
+    border-radius: 30px;
 }
 
 #win_image {
@@ -421,3 +422,12 @@ title {
     background-color: purple;
 }
 
+.GFG {
+    font-size: 1.5rem;
+    padding: 15px 30px;
+    background-color: green;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+  }

@@ -3,6 +3,10 @@ planet_visited = [0,0,0,0,0,0,0,0,0]
 all_visited =    [1,1,1,1,1,1,1,1,1]
 planet_visited_name = []
  
+document.getElementById('listen_button').addEventListener('mouseover', function()
+{
+    startListening()
+})
 function recompute_visited(index)
 {
     planet_name = ''
@@ -135,15 +139,18 @@ if(log_id === -1){//create a new data
     console.log(datalog.stars_visited)
     console.log(datalog.stars_visited)
     planet_visited = datalog.stars_visited
-
-    for(x = 0; x < planet_visited.length; x++)
+    planet_visited_display = document.getElementById("display_text")
+                    for(x = 0; x < planet_visited.length; x++)
     {
         if(planet_visited[x]=== 1)
         {
            planet_name = recompute_visited(x)
            planet_visited_name.push(planet_name)
+           planet_visited_display.innerHTML =    planet_visited_display.innerHTML + `${planet_name} <br> `
+ 
         }
     }
+    console.log(planet_visited_name)
     time = datalog.time
     timer(time)
     
@@ -465,8 +472,8 @@ function collision(x, y)
                     datalog.game_won = true;
                     update_save_point(log_id)
                     console.log('won')
-
                     document.getElementById('win_window').style.visibility = 'visible';
+                    removeEventListeners()
                 }
                 
 
@@ -487,7 +494,7 @@ waypoint = document.getElementById('waypoint')
 
 
   // Using eventListener to detect if a KEY is PRESSED
-  document.addEventListener('mousedown', (event) => {
+mouse_click_event = document.addEventListener('mousedown', (event) => {
 
 
 if(event.button === 0)
@@ -535,8 +542,10 @@ const moving = setInterval(function ()
 
 
 
-
+  
   collision(x_pos, y_pos)
+
+
 
   //get the difference
   const x_difference = target_x - x_pos

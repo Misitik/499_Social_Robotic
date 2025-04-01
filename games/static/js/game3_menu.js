@@ -4,17 +4,9 @@ const nameSection = document.getElementById("name-section");
 const contentSection = document.getElementById("content-section");
 const welcomeText = document.getElementById("welcome-text");
 const startLink = document.getElementById("start-link");
-
-nameButton.addEventListener("click", () => {
-    const name = nameInput.value.trim();
-    if (!name) return alert("Please enter your name!");
-
-    sessionStorage.setItem("playerName", name);
-    welcomeText.textContent = `👋 Welcome, ${name}!`;
-    nameSection.style.display = "none";
-    contentSection.style.display = "block";
-    startLink.href = "{% url 'game3_play' %}";
-});
+let users = []
+let datalog = {}
+selected_user = ''
 
 selected_user = ''
 
@@ -24,7 +16,7 @@ selected_user = ''
 
     document.getElementById('black_screen').style.visibility='visible'
     document.getElementById('load_panel').style.visibility = 'visible'
-    //get_user_saves()
+    get_user_saves()
 }
 
 function close_saves()
@@ -60,7 +52,6 @@ function get_user_saves()
     })
 }
 
-let users = []
 
 function create_user(new_user)
 {
@@ -124,7 +115,7 @@ function go_to_game_3(user, log_id)
 function admit_user()
 {
     //get the user name
-    name = document.getElementById('input_box').value
+    name = document.getElementById('player-name').value
     console.log(name)
     user_index = 0;
     user_exist = false
@@ -164,7 +155,7 @@ function admit_user()
         create_user(new_user)
 
         go_to_game_3(new_user,-1)
-    }//else
+    }else
    {
         //get the user data
         user = {
@@ -181,6 +172,17 @@ function admit_user()
     }
 
 }
+
+nameButton.addEventListener("click", () => {
+    const name = nameInput.value.trim();
+    if (!name) return alert("Please enter your name!");
+
+    sessionStorage.setItem("playerName", name);
+    welcomeText.textContent = `👋 Welcome, ${name}!`;
+    nameSection.style.display = "none";
+    contentSection.style.display = "block";
+
+});
 
 
 document.getElementById('select_user_button').onclick = function(){
@@ -235,3 +237,10 @@ document.getElementById('select_load_button').onclick = function(){
 
 
 }
+map_users = JSON.parse(document.getElementById('map_users').getAttribute('value'))
+map_saves = JSON.parse(document.getElementById('map_saves').getAttribute('value'))
+
+map_users = JSON.parse(map_users)
+map_saves = JSON.parse(map_saves)
+console.log(map_users)
+console.log(map_saves)

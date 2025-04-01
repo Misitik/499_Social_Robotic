@@ -57,6 +57,17 @@ p {
     font-size: 2rem;
 }
 
+option {
+    background-color: gray;
+    color: red;
+    height:25%;
+    font-size: xx-large;
+    text-align:center;
+
+
+  }
+
+  
 #center_panel{
 
     display: flex;
