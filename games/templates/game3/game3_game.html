@@ -55,7 +55,9 @@
     <!-- 🔍 Game Data -->
     <div id="user_data" value="{{user_data}}"></div>
     <div id="map_savepoints" value="{{map_savepoints}}"></div>
-
+    <audio autoplay loop id = 'indi'>
+        <source src = "{% static 'sound/indi.mp3' %}" type="audio/mpeg">
+    </audio>
     <!-- 🧠 Game Logic -->
     <script src="{% static 'js/game3.js' %}"></script>
 
