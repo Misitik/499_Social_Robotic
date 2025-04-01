@@ -33,7 +33,7 @@
         So please pay attention to dialogue <br>
         and choose what to say carefully <br>
         </div>
-        <button id = 'instruction_button'>Read Instruction</button>
+        <button class = 'game-button' id = 'instruction_button'>Read Instruction</button>
     </div>
 
     <div id = name_input>
@@ -50,9 +50,9 @@
    
     </form>
 
-    <button class = 'game-button' onclick = 'admit_user()'>users</button>
-    <button id="mic-button" onclick=" startListening()"  >Start Listening</button>
-    <button id="load" onclick = 'load_saves()'>Load Game</button>
+    <button class = 'game-button' onclick = 'admit_user()'>Start</button>
+    <button class = 'game-button' id="mic-button" onclick=" startListening()"  >Start Listening</button>
+    <button class = 'game-button' id="load" onclick = 'load_saves()'>Load Game</button>
     </div>
 
 
@@ -65,12 +65,12 @@
         You went to school as usual, but communication is a real problem. 
         Be careful with what you say, else you are gonna lose friends.
        </div>
-       <button id = 'background_button' >Read Background</button>
+       <button  class = 'game-button'  id = 'background_button' >Read Background</button>
     </div>
    
     <div id='black_screen'></div>
     <div id="load_panel">
-        <h2>Past Saves</h2>
+        <h2 style = 'background-color:white; font-size:70px;'>Past Saves</h2>
         <!--display all the users that is currently on database-->
         <div class = 'half_panel'>
             <select multiple id="user_select" style = 'width:80%; height: 90%;'></select>

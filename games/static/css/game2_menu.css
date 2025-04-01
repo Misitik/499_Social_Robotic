@@ -58,16 +58,28 @@ p {
 }
 
 option {
-    background-color: gray;
-    color: red;
+    background: white;
     height:25%;
     font-size: xx-large;
     text-align:center;
-
+    color: #333;
+    transition: background 0.3s, color 0.3s;
 
   }
 
-  
+  option:hover{
+    background: #007BFF;
+    color: white;
+    font-size:40px;
+  }
+
+  select option:checked {
+    background: #0056b3;
+    color: white;
+    font-weight: bold;
+}
+
+
 #center_panel{
 
     display: flex;
@@ -89,6 +101,8 @@ option {
     border-color: pink;
     border-radius: 20px;
     color: white;
+    display:flex;
+    flex-direction: column;
 
     
 }
@@ -106,14 +120,18 @@ option {
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
-    text-transform: uppercas
+    text-transform: uppercas;
+    margin-top: 2%;
+    margin-bottom:2%;
+    margin-left:20%;
+    margin-right:20%;
  
 }
 
 /* Button Hover Effect */
 .game-button:hover {
     background: linear-gradient(to right, #e910c1, #e76ddc);
-    transform: scale(1.5);
+    transform: scale(1.2);
     border-color: #ffcc00; /* Yellow glow effect */
     box-shadow: 0px 0px 15px rgba(255, 204, 0, 0.8);
 }
@@ -141,6 +159,7 @@ option {
     visibility: hidden;
     flex-direction:column;
     display: flex;
+    justify-items: center;
 }
 
 #black_screen{
@@ -161,3 +180,14 @@ option {
 #save_select{
     visibility: hidden;
 }
+
+#exit_load_saves{
+    width: 20%;
+    left: 40%;
+    height: 10%;
+    margin: 3%;
+    font-size: 20px;
+    font-weight: bold;
+    position: relative;
+  }
+  

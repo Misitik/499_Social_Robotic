@@ -13,9 +13,10 @@ selected_user = ''
   function load_saves()
 {
     //console.log(JSON.parse(document.getElementById('users').getAttribute('value')))
-
     document.getElementById('black_screen').style.visibility='visible'
     document.getElementById('load_panel').style.visibility = 'visible'
+    document.getElementById('save_select').style.visibility = 'hidden'
+    document.getElementById('user_select').style.visibility = 'visible'
     get_user_saves()
 }
 
@@ -23,6 +24,8 @@ function close_saves()
 {
     document.getElementById('black_screen').style.visibility='hidden'
     document.getElementById('load_panel').style.visibility = 'hidden'
+    document.getElementById('save_select').style.visibility = 'hidden'
+    document.getElementById('user_select').style.visibility = 'hidden'
 }
 
 
@@ -173,6 +176,34 @@ function admit_user()
 
 }
 
+function startListening() {
+    if (!('webkitSpeechRecognition' in window)) {
+        alert("Not supported. Try again.");
+        return;
+    }
+
+    let recognition = new webkitSpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = "en-US";
+
+    recognition.onstart = function() {
+        document.getElementById("status").innerText = "Listening...";
+    };
+
+    // event.result[0] = [
+    //     {transcript: "The answer is right", confidence: 0.97},
+    //     {transcript: "The answer is write", confidence: 0.80},
+    // ]
+    recognition.onresult = function(event) {
+        let command = event.results[0][0].transcript.trim();
+        document.getElementById("status").innerText = "Recognition complete.";
+        document.getElementById('player-name').value = command
+    };
+
+    recognition.start();
+}
+
 nameButton.addEventListener("click", () => {
     const name = nameInput.value.trim();
     if (!name) return alert("Please enter your name!");
@@ -213,9 +244,7 @@ document.getElementById('select_user_button').onclick = function(){
                 the_log_id = option.value
             }
             save_select.appendChild(option)
-        
-       
-        
+                     
     })
 }
 
@@ -233,10 +262,12 @@ document.getElementById('select_load_button').onclick = function(){
 
     })
 
-        // go_to_game_3(the_user,the_log_id)
+         go_to_game_3(the_user,the_log_id)
 
 
 }
+
+
 map_users = JSON.parse(document.getElementById('map_users').getAttribute('value'))
 map_saves = JSON.parse(document.getElementById('map_saves').getAttribute('value'))
 

@@ -11,27 +11,34 @@
     <div class="overlay">
         <div class="menu-container">
 
+            <h1>National Parks Canadas</h1>
+     
+        
             <!-- Name Input Section -->
             <div id="name-section">
                 <h1>🍁 Ready to Explore Canada?</h1>
                 <p>Please enter your name to begin:</p>
                 <input type="text" id="player-name" placeholder="Your Name">
+                <p id="status">Press the start listening button and say name...</p>
+                <p id = 'result'></p>
                 <button id="name-submit">Continue</button>
                 <button id="load" onclick = 'load_saves()'>Load Game</button>
+                <button id="mic" onclick=" startListening()"  >Start Listening</button>
+
             </div>
 
             <!--Loading Screen-->
             <div id='black_screen'></div>
             <div id="load_panel">
-                <h2>Past Saves</h2>
+                <h2 style = 'background-color:white; font-size:70px;'>Past Saves</h2>
                 <!--display all the users that is currently on database-->
                 <div class = 'half_panel'>
-                    <select multiple id="user_select" style = 'width:80%;'></select>
+                    <select multiple id="user_select" style = 'width:80%; height: 90%;'></select>
                     <button id = 'select_user_button'>select user</button>
                 </div>
                 <!-- saves for that specific users-->
                 <div class = 'half_panel' id = 'save_select'>
-                    <select multiple id ='savepoints_select' style = 'width:80%;'></select>
+                    <select multiple id ='savepoints_select' style = 'width:80%; height: 90%;'></select>
                     <button id ='select_load_button'>select load</button>
                 </div>
                 <button id="exit_load_saves" onclick="close_saves()">Exit</button>

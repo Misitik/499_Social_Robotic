@@ -82,14 +82,12 @@ if(log_id === -1){//create a new data
     //update the variables for the game
     username = the_user.fields.name
     datalog = save_spot
-    
+
 
     time = datalog.time
     timer()
-    
 
 }
-
  const correctDropZones = {
         // British Columbia
         "place-whistler": "drop-bc",

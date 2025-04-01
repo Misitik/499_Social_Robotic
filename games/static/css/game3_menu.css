@@ -6,6 +6,14 @@ body, html {
     background-size: cover;
 }
 
+h1{
+    font-size:80px;
+    font-weight:bold;
+    background-color:rgba(255, 255, 255, 0.76);
+    border-radius: 20px;
+    margin: 5%;
+}
+
 /* Overlay without white bar */
 .overlay {
     width: 100%;
@@ -204,10 +212,11 @@ body, html {
     left:10%;
     top:10%;
     border-radius: 40px;
-    background-color: pink;
+    background-color: rgb(168, 245, 168);
     visibility: hidden;
     flex-direction:column;
     display: flex;
+    justify-items: center;
 }
 
 #black_screen{
@@ -227,6 +236,7 @@ body, html {
 
 #save_select{
     visibility: hidden;
+
 }
 
 #load{
@@ -243,4 +253,47 @@ body, html {
 
 #load:hover {
     background: linear-gradient(to right, #0072ff, #0057c2);
+}
+
+option {
+    background: white;
+    height:25%;
+    font-size: xx-large;
+    text-align:center;
+    color: #333;
+    transition: background 0.3s, color 0.3s;
+
+  }
+
+  option:hover{
+    background: #007BFF;
+    color: white;
+    font-size:40px;
+  }
+
+  select option:checked {
+    background: #0056b3;
+    color: white;
+    font-weight: bold;
+}
+
+#exit_load_saves{
+    width: 20%;
+    left: 40%;
+    height: 10%;
+    margin: 3%;
+    font-size: 20px;
+    font-weight: bold;
+    position: relative;
+  }
+  
+#mic{
+    padding: 12px 24px;
+    font-size: 18px;
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
 }
