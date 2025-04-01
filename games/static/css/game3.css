@@ -1,4 +1,4 @@
-/* Reset Defaults */
+/* 🔄 Reset Defaults */
 * {
     margin: 0;
     padding: 0;
@@ -11,7 +11,7 @@ html, body {
     font-family: 'Segoe UI', sans-serif;
 }
 
-/* Background */
+/* 🌄 Background */
 .game-container {
     width: 100%;
     height: 100vh;
@@ -20,7 +20,7 @@ html, body {
     background-size: cover;
 }
 
-/* Drop Zones Grid */
+/* 🧭 Drop Zones Grid */
 .dropzones-grid {
     position: absolute;
     width: 100%;
@@ -29,48 +29,30 @@ html, body {
     left: 0;
 }
 
-/* Drop Zones */
+/* 🟦 Drop Zone Styling */
 .dropzone {
     position: absolute;
     width: 150px;
     height: 100px;
-    border: 2px dashed #333;
+    border: 2px dashed #0072ff;
     background-color: transparent;
     z-index: 10;
+    border-radius: 12px;
 }
 
 .dropzone.over {
-    background-color: rgba(0, 255, 0, 0.2);
+    background-color: rgba(0, 255, 0, 0.15);
     border-color: green;
 }
 
-/* Drop Zone Positions */
-#drop-bc {
-    top: 50%;
-    left: 10%;
-}
+/* 📍 Drop Zone Positions */
+#drop-bc { top: 50%; left: 10%; }
+#drop-alberta { top: 55%; left: 20%; }
+#drop-saskatchewan { top: 60%; left: 30%; }
+#drop-ontario { top: 70%; left: 48%; }
+#drop-quebec { top: 60%; left: 62%; }
 
-#drop-alberta {
-    top: 55%;
-    left: 20%;
-}
-
-#drop-saskatchewan {
-    top: 60%;
-    left: 30%;
-}
-
-#drop-ontario {
-    top: 70%;
-    left: 48%;
-}
-
-#drop-quebec {
-    top: 60%;
-    left: 62%;
-}
-
-/* Draggable Items */
+/* 🧳 Draggable Items */
 .flags-container {
     position: fixed;
     bottom: 10px;
@@ -96,7 +78,7 @@ html, body {
     transform: scale(1.1);
 }
 
-/* Score Display */
+/* 🏆 Score Display */
 #score-box {
     position: fixed;
     top: 20px;
@@ -112,10 +94,10 @@ html, body {
     z-index: 3000;
 }
 
-/* Drop Message */
+/* ✅ Drop Feedback Message */
 .drop-message {
     position: fixed;
-    top: 75px;
+    top: 110px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 20px;
@@ -134,4 +116,101 @@ html, body {
 .drop-message.wrong {
     background-color: rgba(200, 0, 0, 0.8);
     color: white;
+}
+
+/* 🚫 Shake Animation */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+.shake {
+    animation: shake 0.5s;
+}
+
+/* 🎤 Mic Button */
+.mic-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    z-index: 2000;
+    transition: background 0.3s ease;
+}
+
+.mic-button:hover {
+    background: linear-gradient(to right, #0072ff, #0057c2);
+}
+
+/* 🎉 Win Screen Overlay */
+#win-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+/* 🥇 Win Message Box */
+.win-message {
+    background: white;
+    padding: 40px 60px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    animation: fadeInScale 0.7s ease forwards;
+}
+
+.win-message h1 {
+    font-size: 48px;
+    color: #0072ff;
+    margin-bottom: 15px;
+}
+
+.win-message p {
+    font-size: 22px;
+    margin: 10px 0;
+}
+
+.win-message button {
+    margin-top: 20px;
+    font-size: 18px;
+    padding: 12px 30px;
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.win-message button:hover {
+    background: linear-gradient(to right, #0072ff, #0057c2);
+}
+
+/* ✨ Fade-in Animation for Win Box */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }

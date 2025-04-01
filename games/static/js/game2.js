@@ -27,13 +27,8 @@ function startListening() {
     recognition.start();
 }
 
-
-
-console.log(document.getElementById('speak'))
-document.getElementById('speak').onclick = function()
-{
-    console.log('clicked')
-
+function speaken(){
+    console.log('fff')
     startListening()
     spoken = document.getElementById('spoken').innerHTML
     if(spoken === dialogue_option_1)
@@ -69,8 +64,9 @@ document.getElementById('speak').onclick = function()
     }else{
         speakText('Say it again please')
     }
-
 }
+
+console.log(document.getElementById('speak'))
 
 
 //musics

@@ -14,183 +14,42 @@ nameButton.addEventListener("click", () => {
     nameSection.style.display = "none";
     contentSection.style.display = "block";
 
+    readWelcome(); // Auto-read welcome
 });
 
-
-
-/**
- * start of datalogging
- */
-let users = []
-let datalog = {}
-selected_user = ''
-
-selected_user = ''
-
-  function load_saves()
-{
-    //console.log(JSON.parse(document.getElementById('users').getAttribute('value')))
-    document.getElementById('black_screen').style.visibility='visible'
-    document.getElementById('load_panel').style.visibility = 'visible'
-    document.getElementById('save_select').style.visibility = 'hidden'
-    document.getElementById('user_select').style.visibility = 'visible'
-    get_user_saves()
-}
-
-function close_saves()
-{
-    document.getElementById('black_screen').style.visibility='hidden'
-    document.getElementById('load_panel').style.visibility = 'hidden'
-    document.getElementById('save_select').style.visibility = 'hidden'
-    document.getElementById('user_select').style.visibility = 'hidden'
-}
-
-
-
-function get_user_saves()
-{
-    users = JSON.parse(document.getElementById('map_users').getAttribute('value'))
-    users = JSON.parse(users)
-    console.log(users)
-    user_select = document.getElementById('user_select')
-    user_select.innerHTML = ''
-
-    users.forEach(user => {
-        let option = document.createElement('option')
-        option.value = [user.fields.save_points]
-        option.textContent = user.fields.name
-        option.onclick = function(){
-            array = [option.value]
-            array = array[0].split(',').map(Number)
-            console.log(array)
-            selected_user = option.textContent
-            log_ids = array
-            console.log(log_ids)
-        }
-        user_select.appendChild(option)
-        
-    })
-}
-
-
-function create_user(new_user)
-{
-    console.log(new_user)
-    fetch(`/api/save-log-map-user/`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(new_user)
-    })
-    .then(response => response.json())
-    .then(new_user => console.log(new_user))
-    .catch(error => console.error('Error:', error));
-}
-
-function update_user(user, log_id)
-{
-    console.log(JSON.stringify(user))
-    fetch(`/api/load-log-map-user/${log_id}/`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        
-        },
-        body: JSON.stringify(user)
-    })
-    .then(response => console.log(response))
-    .then(user => console.log(user))
-    .catch(error => console.error('Error:', error));
-}
-
-function go_to_game_3(user, log_id)
-{
-
-    Object.assign(user, {log_id: log_id})
-    
-    fetch(`/game3_game/`, {
-    
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        
-        },
-        body: JSON.stringify(user)
-    })
-    .then(response => {
-        if (response.redirected)
-        {
-            window.location.href = response.url
-        }else
-        {
-            return response.text()
-        }
-    })
-    .then(user => console.log())
-    .catch(error => console.error('Error:', error));
-  
-}
-
-function admit_user()
-{
-    //get the user name
-    name = document.getElementById('player-name').value
-    console.log(name)
-    user_index = 0;
-    user_exist = false
-    the_user = {}
-    //get the data
-    console.log(document.getElementById('map_users').getAttribute('value'))
-    users = JSON.parse(document.getElementById('map_users').getAttribute('value'))
-    saves = JSON.parse(document.getElementById('map_saves').getAttribute('value'))
-    console.log(JSON.parse(users), JSON.parse(saves).length)
-
-    new_save_index = JSON.parse(saves).length + 1
-    console.log(new_save_index)
-    console.log(users)
-    users = JSON.parse(users)
-    users.forEach(user => {
-        if(user.fields.name === name)
-        {
-            console.log(user)
-            user_exist = true
-            user_index = user.pk
-            the_user = user.fields
-            
-        }
-
-    })//no problem
-
-    console.log(user_exist, user_index)
-    //check whether user exists already
-    if(user_exist === false)
-    {
-        console.log('user exists not')
-        new_user = {
-            name:name,
-            save_points:[new_save_index]
-        }
-        console.log(new_user)
-        create_user(new_user)
-
-        go_to_game_3(new_user,-1)
-    }else
-   {
-        //get the user data
-        user = {
-           name: the_user.name,
-           save_points: the_user.savepoints
-        }
-        console.log(user, the_user)
-        the_user.save_points.push(new_save_index)
-        console.log(the_user)
-        new_user = the_user
-        update_user(the_user, user_index)
-
-        go_to_game_3(new_user,-1)
+// Voice Agent Functions
+function speak(text) {
+    const synth = window.speechSynthesis;
+    if (!synth) {
+        alert("Sorry, your browser doesn't support text-to-speech.");
+        return;
     }
 
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "en-US";
+    synth.cancel(); // Stop any ongoing speech
+    synth.speak(utterance);
+}
+
+function readWelcome() {
+    const name = document.getElementById("player-name").value.trim();
+    if (!name) {
+        speak("Please enter your name first.");
+        return;
+    }
+    const welcomeMessage = `Hello ${name}, welcome to the Canadian National Parks game! Get ready to explore!`;
+    speak(welcomeMessage);
+}
+
+function readInstructions() {
+    const instructions = `
+        Here's how to play:
+        Drag each tourist place to its correct province on the map.
+        You get 10 points for every correct answer.
+        You'll lose 10 points for incorrect ones.
+        Learn here first to improve your chances!
+    `;
+    speak(instructions);
 }
 
 function startListening() {
@@ -204,77 +63,158 @@ function startListening() {
     recognition.interimResults = false;
     recognition.lang = "en-US";
 
-    recognition.onstart = function() {
+    recognition.onstart = function () {
         document.getElementById("status").innerText = "Listening...";
     };
 
-    // event.result[0] = [
-    //     {transcript: "The answer is right", confidence: 0.97},
-    //     {transcript: "The answer is write", confidence: 0.80},
-    // ]
-    recognition.onresult = function(event) {
+    recognition.onresult = function (event) {
         let command = event.results[0][0].transcript.trim();
         document.getElementById("status").innerText = "Recognition complete.";
-        document.getElementById('player-name').value = command
+        document.getElementById('player-name').value = command;
     };
 
     recognition.start();
 }
 
 
+// Save/Load Logic
+let users = [];
+let datalog = {};
+let selected_user = '';
+let log_ids = [];
+let the_log_id = -1;
 
-
-document.getElementById('select_user_button').onclick = function(){
-    name_to_find = selected_user
-    saves = JSON.parse(document.getElementById('map_saves').getAttribute('value'))
-    document.getElementById('save_select').style.visibility = 'visible'
-
-    saves = JSON.parse(saves)
-    save_select = document.getElementById('savepoints_select')
-    save_select.innerHTML = ''
-    user_saves = []
-    save_index = 0
-    console.log(saves)
-
-    console.log(log_ids)
-    log_ids.forEach(log_id => {
-            console.log(log_id)
- 
-            save_point = saves.find(obj => obj.pk === log_id)
-            console.log(save_point)
-
-            let option = document.createElement('option')
-            option.value = log_id
-            option.textContent = selected_user + '  ' + save_index.toString()
-            save_index +=1
-            option.onclick = function(){
-                console.log(option.value)
-                the_log_id = option.value
-            }
-            save_select.appendChild(option)
-                     
-    })
+function load_saves() {
+    document.getElementById('black_screen').style.visibility = 'visible';
+    document.getElementById('load_panel').style.visibility = 'visible';
+    document.getElementById('save_select').style.visibility = 'hidden';
+    document.getElementById('user_select').style.visibility = 'visible';
+    get_user_saves();
 }
 
-document.getElementById('select_load_button').onclick = function(){
-    users = JSON.parse(document.getElementById('map_users').getAttribute('value'))
-    users = JSON.parse(users)
+function close_saves() {
+    document.getElementById('black_screen').style.visibility = 'hidden';
+    document.getElementById('load_panel').style.visibility = 'hidden';
+    document.getElementById('save_select').style.visibility = 'hidden';
+    document.getElementById('user_select').style.visibility = 'hidden';
+}
 
-    the_user = ''
+function get_user_saves() {
+    users = JSON.parse(document.getElementById('map_users').getAttribute('value'));
+    users = JSON.parse(users);
+    const user_select = document.getElementById('user_select');
+    user_select.innerHTML = '';
 
     users.forEach(user => {
-        if (user.fields.name === selected_user)
-        {
-            the_user = user
-        }
-
-    })
-
-         go_to_game_3(the_user,the_log_id)
-
-
+        let option = document.createElement('option');
+        option.value = user.fields.save_points;
+        option.textContent = user.fields.name;
+        option.onclick = function () {
+            const array = option.value.split(',').map(Number);
+            selected_user = option.textContent;
+            log_ids = array;
+        };
+        user_select.appendChild(option);
+    });
 }
 
-/**
- * end of datalogging code
- */
+function create_user(new_user) {
+    fetch(`/api/save-log-map-user/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(new_user)
+    }).then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
+}
+
+function update_user(user, log_id) {
+    fetch(`/api/load-log-map-user/${log_id}/`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user)
+    }).then(response => console.log(response))
+      .catch(error => console.error('Error:', error));
+}
+
+function go_to_game_3(user, log_id) {
+    Object.assign(user, { log_id: log_id });
+
+    fetch(`/game3_game/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user)
+    }).then(response => {
+        if (response.redirected) {
+            window.location.href = response.url;
+        } else {
+            return response.text();
+        }
+    }).catch(error => console.error('Error:', error));
+}
+
+function admit_user() {
+    const name = document.getElementById('player-name').value;
+    let user_index = 0;
+    let user_exist = false;
+    let the_user = {};
+
+    users = JSON.parse(document.getElementById('map_users').getAttribute('value'));
+    saves = JSON.parse(document.getElementById('map_saves').getAttribute('value'));
+
+    const new_save_index = JSON.parse(saves).length + 1;
+    users = JSON.parse(users);
+
+    users.forEach(user => {
+        if (user.fields.name === name) {
+            user_exist = true;
+            user_index = user.pk;
+            the_user = user.fields;
+        }
+    });
+
+    if (!user_exist) {
+        const new_user = { name: name, save_points: [new_save_index] };
+        create_user(new_user);
+        go_to_game_3(new_user, -1);
+    } else {
+        the_user.save_points.push(new_save_index);
+        update_user(the_user, user_index);
+        go_to_game_3(the_user, -1);
+    }
+}
+
+document.getElementById('select_user_button').onclick = function () {
+    const saves = JSON.parse(document.getElementById('map_saves').getAttribute('value'));
+    document.getElementById('save_select').style.visibility = 'visible';
+
+    const save_select = document.getElementById('savepoints_select');
+    save_select.innerHTML = '';
+    let save_index = 0;
+
+    log_ids.forEach(log_id => {
+        const save_point = JSON.parse(saves).find(obj => obj.pk === log_id);
+        const option = document.createElement('option');
+        option.value = log_id;
+        option.textContent = selected_user + '  ' + save_index.toString();
+        save_index += 1;
+        option.onclick = function () {
+            the_log_id = option.value;
+        };
+        save_select.appendChild(option);
+    });
+};
+
+document.getElementById('select_load_button').onclick = function () {
+    const users = JSON.parse(document.getElementById('map_users').getAttribute('value'));
+    const parsed_users = JSON.parse(users);
+    let the_user = '';
+
+    parsed_users.forEach(user => {
+        if (user.fields.name === selected_user) {
+            the_user = user;
+        }
+    });
+
+    go_to_game_3(the_user, the_log_id);
+};

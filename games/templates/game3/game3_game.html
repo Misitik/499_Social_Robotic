@@ -8,16 +8,18 @@
 </head>
 <body>
 
-    <!-- Score Display -->
+    <!-- 🏆 Score Display -->
     <div id="score-box">🏆 Score: <span id="score">0</span></div>
 
-    <!-- Drop Feedback Message -->
+    <!-- ✅ Drop Feedback Message -->
     <div id="message" class="drop-message"></div>
 
-    <!-- Game Container -->
+    <!-- 🎤 Speak Button -->
+    <button id="mic-button" class="mic-button">🎤 Speak</button>
+
+    <!-- 🎮 Game Container -->
     <div class="game-container">
         <div class="dropzones-grid">
-            <!-- Drop Zones -->
             <div class="dropzone" id="drop-bc"></div>
             <div class="dropzone" id="drop-ontario"></div>
             <div class="dropzone" id="drop-alberta"></div>
@@ -25,34 +27,37 @@
             <div class="dropzone" id="drop-quebec"></div>
         </div>
 
-        <!-- Draggable Places -->
+        <!-- 🧳 Draggable Places -->
         <div class="flags-container">
-            <!-- British Columbia -->
             <img src="{% static 'images/Whistler.png' %}" alt="Whistler" class="draggable" draggable="true" id="place-whistler">
             <img src="{% static 'images/Vancouver_Island.png' %}" alt="Vancouver Island" class="draggable" draggable="true" id="place-vancouver-island">
-
-            <!-- Ontario -->
             <img src="{% static 'images/Niagara.webp' %}" alt="Niagara Falls" class="draggable" draggable="true" id="place-niagara">
             <img src="{% static 'images/Thousand_Islands_National_Park.png' %}" alt="Thousand Islands" class="draggable" draggable="true" id="place-thousand-islands">
-
-            <!-- Alberta -->
             <img src="{% static 'images/Lake_Loiuse.webp' %}" alt="Lake Louise" class="draggable" draggable="true" id="place-lake-louise">
             <img src="{% static 'images/Banff.webp' %}" alt="Banff" class="draggable" draggable="true" id="place-banff">
             <img src="{% static 'images/Jasper.webp' %}" alt="Jasper" class="draggable" draggable="true" id="place-jasper">
-
-            <!-- Saskatchewan -->
-            <img src="{% static 'images/Prince_Albert_National_Park.png' %}" alt="Prince Albert National Park" class="draggable" draggable="true" id="place-prince-albert">
-
-            <!-- Quebec -->
+            <img src="{% static 'images/Prince_Albert_National_Park.png' %}" alt="Prince Albert" class="draggable" draggable="true" id="place-prince-albert">
             <img src="{% static 'images/omega_park.png' %}" alt="Omega Park" class="draggable" draggable="true" id="place-omega-park">
             <img src="{% static 'images/Montmorency_Park.png' %}" alt="Montmorency Falls" class="draggable" draggable="true" id="place-montmorency">
         </div>
     </div>
 
-    <div id = 'user_data' value = '{{user_data}}'></div>
-    <div id = 'map_savepoints' value = '{{map_savepoints}}'></div>
-    <!-- Game Logic -->
-    <script src = "{% static 'js/game3.js' %}"></script>
+    <!-- 🎉 Win Screen -->
+    <div id="win-screen" style="display: none;">
+        <div class="win-message">
+            <h1>🎉 Congratulations!</h1>
+            <p>You placed all the tourist spots correctly.</p>
+            <p>Your Score: <span id="final-score">0</span></p>
+            <button onclick="location.reload()">🔁 Play Again</button>
+        </div>
+    </div>
+
+    <!-- 🔍 Game Data -->
+    <div id="user_data" value="{{user_data}}"></div>
+    <div id="map_savepoints" value="{{map_savepoints}}"></div>
+
+    <!-- 🧠 Game Logic -->
+    <script src="{% static 'js/game3.js' %}"></script>
 
 </body>
 </html>

@@ -11,38 +11,37 @@
     <div class="overlay">
         <div class="menu-container">
 
-            <h1>National Parks Canadas</h1>
-     
-        
+            <h1>Discover Canada</h1>
+
             <!-- Name Input Section -->
             <div id="name-section">
                 <h1>🍁 Ready to Explore Canada?</h1>
                 <p>Please enter your name to begin:</p>
                 <input type="text" id="player-name" placeholder="Your Name">
                 <p id="status">Press the start listening button and say name...</p>
-                <p id = 'result'></p>
+                <p id="result"></p>
                 <button id="name-submit">Continue</button>
-                <button id="load" onclick = 'load_saves()'>Load Game</button>
-                <button id="mic" onclick=" startListening()"  >Start Listening</button>
-
+                <button id="load" onclick="load_saves()">Load Game</button>
+                <button id="mic" onclick="startListening()">Start Listening</button>
+                <button id="read-welcome" onclick="readWelcome()">🔊 Read Welcome</button>
             </div>
 
-            <!--Loading Screen-->
+            <!-- Loading Screen -->
             <div id='black_screen'></div>
             <div id="load_panel">
-                <h2 style = 'background-color:white; font-size:70px;'>Past Saves</h2>
-                <!--display all the users that is currently on database-->
-                <div class = 'half_panel'>
-                    <select multiple id="user_select" style = 'width:80%; height: 90%;'></select>
-                    <button id = 'select_user_button'>select user</button>
+                <h2 style="background-color:white; font-size:70px;">Past Saves</h2>
+                <!-- Users -->
+                <div class="half_panel">
+                    <select multiple id="user_select" style="width:80%; height: 90%;"></select>
+                    <button id="select_user_button">select user</button>
                 </div>
-                <!-- saves for that specific users-->
-                <div class = 'half_panel' id = 'save_select'>
-                    <select multiple id ='savepoints_select' style = 'width:80%; height: 90%;'></select>
-                    <button id ='select_load_button'>select load</button>
+                <!-- Save Points -->
+                <div class="half_panel" id="save_select">
+                    <select multiple id="savepoints_select" style="width:80%; height: 90%;"></select>
+                    <button id="select_load_button">select load</button>
                 </div>
                 <button id="exit_load_saves" onclick="close_saves()">Exit</button>
-            </div><!--end of black screen-->
+            </div>
 
             <!-- Learning + Start Section -->
             <div id="content-section" style="display: none;">
@@ -59,6 +58,8 @@
                         <li>📍 Use what you’ve learned here to win!</li>
                     </ul>
                 </div>
+
+                <button class="start-button" onclick="readInstructions()">🔊 Read Instructions</button>
 
                 <!-- Learning Cards -->
                 <div class="places-grid">
@@ -104,13 +105,14 @@
                     </div>
                 </div>
 
-                <button id="start-link" class="start-button" onclick = 'admit_user()'>🎮 Start Game</button>
+                <button id="start-link" class="start-button" onclick="admit_user()">🎮 Start Game</button>
             </div>
         </div>
     </div>
-    <div id = 'map_saves' value = '{{map_saves}}'></div>
-    <div id = 'map_users' value = '{{map_users}}'></div>
-    <script src = "{% static 'js/game3_menu.js'  %}"></script>
+
+    <div id="map_saves" value="{{map_saves}}"></div>
+    <div id="map_users" value="{{map_users}}"></div>
+    <script src="{% static 'js/game3_menu.js' %}"></script>
 
 </body>
 </html>

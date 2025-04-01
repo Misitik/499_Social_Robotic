@@ -13,17 +13,14 @@ function load_saves()
     get_user_saves()
     document.getElementById('black_screen').style.visibility='visible'
     document.getElementById('load_panel').style.visibility = 'visible'
-    document.getElementById('save_select').style.visibility = 'hidden'
-    document.getElementById('user_select').style.visibility = 'visible'
 }
 
 function close_saves()
 {
     document.getElementById('black_screen').style.visibility='hidden'
     document.getElementById('load_panel').style.visibility = 'hidden'
-    document.getElementById('save_select').style.visibility = 'hidden'
-    document.getElementById('user_select').style.visibility = 'hidden'
 }
+
 
 function get_user_saves()
 {
