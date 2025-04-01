@@ -1,3 +1,77 @@
+  
+function startListening() {
+    if (!('webkitSpeechRecognition' in window)) {
+        alert("Not supported. Try again.");
+        return;
+    }
+
+    let recognition = new webkitSpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = "en-US";
+
+    recognition.onstart = function() {
+        document.getElementById("status").innerText = "Listening...";
+    };
+
+    // event.result[0] = [
+    //     {transcript: "The answer is right", confidence: 0.97},
+    //     {transcript: "The answer is write", confidence: 0.80},
+    // ]
+    recognition.onresult = function(event) {
+        let command = event.results[0][0].transcript.trim();
+        document.getElementById("status").innerText = "Recognition complete.";
+        document.getElementById('spoken').innerHTML = command
+    };
+
+    recognition.start();
+}
+
+
+
+console.log(document.getElementById('speak'))
+document.getElementById('speak').onclick = function()
+{
+
+    startListening()
+    spoken = document.getElementById('spoken').innerHTML
+    if(spoken === dialogue_option_1)
+    {
+        last_branch_name = branch_name
+        branch_name = dialogue_fields.option_1_branch
+        datalog.choosing_scenario.push(branch_name)
+        datalog.options_choosen.push(2)
+        update_save_point(log_id)
+        play_sound(option_click_sound)
+        console.log('clicked')
+        get_branching_info()
+    }else if(spoken === dialogue_option_2)
+    {
+        last_branch_name = branch_name
+        branch_name = dialogue_fields.option_2_branch
+        datalog.choosing_scenario.push(branch_name)
+        datalog.options_choosen.push(2)
+        update_save_point(log_id)
+        play_sound(option_click_sound)
+        console.log('clicked')
+        get_branching_info()
+    }else if(spoken === dialogue_option_3)
+    {
+        last_branch_name = branch_name
+        branch_name = dialogue_fields.option_3_branch
+        datalog.choosing_scenario.push(branch_name)
+        datalog.options_choosen.push(2)
+        update_save_point(log_id)
+        play_sound(option_click_sound)
+        console.log('clicked')
+        get_branching_info()
+    }else{
+        speakText('Say it again please')
+    }
+
+}
+
+
 //musics
 hover_sound = document.getElementById('hover')
 click_sound = document.getElementById('click')
@@ -6,12 +80,12 @@ classroom_sound = document.getElementById('classroom')
 happy_sound = document.getElementById('happy')
 sad_sound = document.getElementById('sad')
 play_ending_music = true
-
 branch_name = '1_introduction'   //initial branch
 ////////////////////////////////////////////////////////////////////////
 //Load and save functionalies
 ////////////////////////////////////////////////////////////////////////
 users_data = JSON.parse(document.getElementById('userdata').getAttribute('value'))
+
 
 //console.log(JSON.parse(users_data))
 let username = users_data.name
@@ -295,6 +369,8 @@ function speakText(text) {
 }
 
 
+
+
 /**
  * function that advance the dialogue 
  * also has the effect of
@@ -440,6 +516,8 @@ if(win !== true && lose !== true)//if didn't win and didn't lose, meaning there 
      * implement the correct option hint
      */
 
+    
+
     choices.forEach(choice => {
 
         choice_text = choice.querySelector('.text_pos')
@@ -515,6 +593,8 @@ document.addEventListener('mousedown', (event) => {
 
   });
 
+
+
 console.log('before_get_branch')
 document.getElementById('retry_button').onclick = function()
 {
@@ -540,6 +620,7 @@ document.getElementById('restart_button').onclick = function()
     console.log(branch_name)
     get_branching_info()
 }
+
 
 
 get_branching_info()

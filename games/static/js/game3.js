@@ -88,6 +88,9 @@ if(log_id === -1){//create a new data
     timer()
 
 }
+
+
+//Mahendar's code
  const correctDropZones = {
         // British Columbia
         "place-whistler": "drop-bc",
@@ -150,6 +153,8 @@ if(log_id === -1){//create a new data
                     score += 10;
                     zone.appendChild(draggedItem);
                     draggedItem.style.margin = '5px';
+
+                    //datalogging part
                     datalog.map_correct.push('C')
                     datalog.map_draged.push(draggedItem)
                     datalog.curent_drags = []
@@ -160,6 +165,8 @@ if(log_id === -1){//create a new data
                 score -= 10;
                 messageBox.textContent = "❌ Wrong province!";
                 messageBox.className = "drop-message wrong";
+
+                //datalogging part
                 datalog.map_correct.push('W')
                 datalog.map_draged.push(draggedItem)
                 datalog.current_drags = []

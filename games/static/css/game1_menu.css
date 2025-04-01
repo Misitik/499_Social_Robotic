@@ -153,7 +153,7 @@ body {
 
 @font-face {
   font-family: scFont;
-  src: url("static/starcraft.ttf") format('truetype');
+  src: url("starcraft.ttf") format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;

@@ -448,7 +448,7 @@ function collision(x, y)
                 //remove everything from description
                 description.innerHTML = ""
                 info_array= get_info(star.id)
-                speakText(info_array[0])
+                //speakText(info_array[0])
 
                 lines = info_array[0].split("\n")
           
