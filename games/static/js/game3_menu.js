@@ -4,6 +4,23 @@ const nameSection = document.getElementById("name-section");
 const contentSection = document.getElementById("content-section");
 const welcomeText = document.getElementById("welcome-text");
 const startLink = document.getElementById("start-link");
+
+nameButton.addEventListener("click", () => {
+    const name = nameInput.value.trim();
+    if (!name) return alert("Please enter your name!");
+
+    sessionStorage.setItem("playerName", name);
+    welcomeText.textContent = `👋 Welcome, ${name}!`;
+    nameSection.style.display = "none";
+    contentSection.style.display = "block";
+
+});
+
+
+
+/**
+ * start of datalogging
+ */
 let users = []
 let datalog = {}
 selected_user = ''
@@ -204,16 +221,7 @@ function startListening() {
     recognition.start();
 }
 
-nameButton.addEventListener("click", () => {
-    const name = nameInput.value.trim();
-    if (!name) return alert("Please enter your name!");
 
-    sessionStorage.setItem("playerName", name);
-    welcomeText.textContent = `👋 Welcome, ${name}!`;
-    nameSection.style.display = "none";
-    contentSection.style.display = "block";
-
-});
 
 
 document.getElementById('select_user_button').onclick = function(){
@@ -267,11 +275,6 @@ document.getElementById('select_load_button').onclick = function(){
 
 }
 
-
-map_users = JSON.parse(document.getElementById('map_users').getAttribute('value'))
-map_saves = JSON.parse(document.getElementById('map_saves').getAttribute('value'))
-
-map_users = JSON.parse(map_users)
-map_saves = JSON.parse(map_saves)
-console.log(map_users)
-console.log(map_saves)
+/**
+ * end of datalogging code
+ */
