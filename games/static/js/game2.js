@@ -32,6 +32,7 @@ function startListening() {
 console.log(document.getElementById('speak'))
 document.getElementById('speak').onclick = function()
 {
+    console.log('clicked')
 
     startListening()
     spoken = document.getElementById('spoken').innerHTML

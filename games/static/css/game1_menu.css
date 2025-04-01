@@ -133,13 +133,22 @@ body {
 }
 
 #text_element{
-  background-color: rgba(234, 234, 234, 0.829);
+
   padding: 10px;
   position: relative;
   display:flex;
   flex-direction: column;
   align-items:center;
 
+}
+
+#name_input{
+  background-color: rgba(234, 234, 234, 0.829);
+  padding: 10px;
+  position: relative;
+  display:flex;
+  flex-direction: column;
+  align-items:center;
 }
 #exit_load_saves{
   width: 20%;
