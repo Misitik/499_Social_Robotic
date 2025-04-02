@@ -8,8 +8,9 @@ REST API framework is needed to run the project, please run 'pip install djangor
 ## Access Database Backend
 To access django database from the administrator end, add /admin after your django default page url. The page will ask for account name and password.
 The account name is 'Admin', and the password is '123'. 
-![image](https://github.com/user-attachments/assets/17f1b329-0b0d-4799-8fa2-63979b7d0561)
-                          Project Default Page(url on top left in blue).
+![ Project Default Page(url on top left in blue).](https://github.com/user-attachments/assets/17f1b329-0b0d-4799-8fa2-63979b7d0561)
+                         
+                         
 ![image](https://github.com/user-attachments/assets/cbb9a698-d117-4f6f-9cc8-0266f36003c1)
                           Project Default Page(added admin after the url)
 
