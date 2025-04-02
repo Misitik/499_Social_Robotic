@@ -1,4 +1,4 @@
-##Environment setup
+## Environment setup
 
 The project set up using Python version 3.12.1 and Django version 5.1.4. It should be compatible with neweer versions of Python and Django.
 If it does not run, try to set up the environement to the version mentioned above.
